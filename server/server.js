@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import data from './data/CarouselData.js';
+import data from './data/Data.js';
 import cors from 'cors';
 const app = express();
 
@@ -10,6 +10,10 @@ app.use(express.json());
 
 app.get('/carousel', (req, res) => {
   res.send(data.items);
+});
+
+app.get('/blogposts', (req, res) => {
+  res.send(data.blogposts);
 });
 
 app.get('/', (req, res) => {

@@ -7,7 +7,7 @@ export default function WhatsappChat() {
           'https://api.whatsapp.com/send/?phone=919518556937&text&type=phone_number&app_absent=0'
         }
         target="_blank"
-        className="cursor-pointer w-[60px] h-auto absolute bottom-5 right-5"
+        className="cursor-pointer w-[60px] h-auto fixed bottom-4 right-4"
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"

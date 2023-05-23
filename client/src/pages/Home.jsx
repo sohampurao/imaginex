@@ -12,20 +12,25 @@ import 'swiper/css/pagination';
 // import required modules
 import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper';
 import { useEffect, useState } from 'react';
+import BlogPost from '../components/BlogPost';
 
 export default function Home() {
   const [carouselItems, setCarouselItems] = useState([]);
+  const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
     const fecthData = async () => {
-      const response = await axios.get('http://localhost:5000/carousel');
-      setCarouselItems(response.data);
+      const carousel = await axios.get('http://localhost:5000/carousel');
+      setCarouselItems(carousel.data);
+      const blogposts = await axios.get('http://localhost:5000/blogposts');
+      setBlogPosts(blogposts.data);
     };
     fecthData();
   }, []);
 
   return (
     <>
+      {/* Carousel */}
       <Swiper
         spaceBetween={30}
         effect={'fade'}
@@ -43,10 +48,9 @@ export default function Home() {
         {carouselItems.map((item) => {
           return (
             <SwiperSlide key={item._id}>
-              <div className="relative w-full h-[35rem] overflow-hidden">
-                <div className="dark-filter"></div>
-                <img src={item.image} className="block w-full" alt="..." />
-                <div className="absolute inset-x-[15%] bottom-3 py-5 text-center text-white">
+              <div className="w-full h-[35rem] overflow-hidden">
+                <img src={item.image} className="max-w-full h-auto" alt="..." />
+                <div className="absolute inset-x-[15%] bottom-3 py-5 text-center text-white hidden sm:block">
                   <h5 className="text-3xl font-medium subpixel-antialiased">
                     {item.title}
                   </h5>
@@ -57,6 +61,7 @@ export default function Home() {
           );
         })}
       </Swiper>
+      <BlogPost blogPosts={blogPosts}></BlogPost>
       <WhatsappChat></WhatsappChat>
     </>
   );

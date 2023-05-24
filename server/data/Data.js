@@ -29,6 +29,7 @@ const data = {
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+      slug: 'aquant-display-centre',
       admin: {
         image: '/images/profile/profile-picture.webp',
         fullname: 'joh doe',
@@ -53,6 +54,7 @@ const data = {
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+      slug: 'welcome-the-new-look-of-pantaloons',
       admin: {
         image: '/images/profile/profile-picture.webp',
         fullname: 'jeff bezos',
@@ -65,6 +67,7 @@ const data = {
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+      slug: 'starts-360',
       admin: {
         image: '/images/profile/profile-picture.webp',
         fullname: 'jonny lever',

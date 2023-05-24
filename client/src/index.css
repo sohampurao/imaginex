@@ -11,7 +11,8 @@ html:focus-within {
 /* Set core body defaults */
 body {
     min-height: 100vh;
-    text-rendering: optimizeSpeed;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
@@ -44,6 +45,47 @@ body {
     filter: brightness(60%);
 }
 
-.swiper-pagination-bullet-active {
-    background-color: #ffffff;
+.swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: #ffffffdd;
+}
+
+/* carousel previous and next btn */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #ffffff;
+    display: none;
+}
+
+@media (min-width: 600px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: block;
+    }
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+/* scroll-to-top btn */
+.scroll-to-top {
+    background-color: #ea4961 !important;
+    animation: scrollani 700ms infinite alternate ease-in;
+}
+
+@keyframes scrollani {
+    0% {
+        transform: translateY(0.75rem);
+    }
+
+    100% {
+        transform: none
+    }
 }

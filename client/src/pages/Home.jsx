@@ -88,7 +88,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // This hook is used to fetch  data
+  // This hook is used to fetch blog post data
   useEffect(() => {
     const fetchData = async () => {
       blogPostsDispatch({ type: 'FETCH_BLOGPOSTS_REQUEST' });
@@ -178,7 +178,7 @@ export default function Home() {
       {/* Scroll to the top btn */}
       <ScrollToTop
         smooth
-        top={700}
+        top={1500}
         component={<i className="bi bi-arrow-up"></i>}
         className="left-5 bottom-4 font-bold text-white border-0 opacity-80 hover:opacity-100"
       />

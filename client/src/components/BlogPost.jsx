@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 /* eslint-disable react/prop-types */
 export default function BlogPost(props) {
   const { blogPosts } = props;
@@ -40,10 +42,12 @@ export default function BlogPost(props) {
                   <hr className="my-2 block" />
 
                   <h1 className="blog-title | text-2xl font-serif font-medium hover:text-blue-400 cursor-pointer">
-                    {post.title}
+                    <Link to={`blogposts/slug/${post.slug}`}>{post.title}</Link>
                   </h1>
                   <div className="blog-subtitle | text-base text-neutral-600 text-justify hover:text-blue-400 cursor-pointer">
-                    {post.description}
+                    <Link to={`blogposts/slug/${post.slug}`}>
+                      {post.description}
+                    </Link>
                   </div>
                 </div>
               </article>

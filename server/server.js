@@ -12,6 +12,15 @@ app.get('/carousel', (req, res) => {
   res.send(data.items);
 });
 
+app.get('/blogposts/slug/:slug', (req, res) => {
+  const blogpost = data.blogposts.find((x) => x.slug === req.params.slug);
+  if (blogpost) {
+    res.send(blogpost);
+  } else {
+    res.status(404).send({ message: 'Post not Found' });
+  }
+});
+
 app.get('/blogposts', (req, res) => {
   res.send(data.blogposts);
 });

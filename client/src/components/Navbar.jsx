@@ -1,5 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Slide, ToastContainer } from 'react-toastify';
 
 const navigation = [
   { name: 'Our Work', href: '#', current: true },
@@ -15,6 +16,7 @@ function classNames(...classes) {
 export default function Navbar() {
   return (
     <Disclosure as="nav" className="bg-zinc-100 z-40 shadow-lg">
+      <ToastContainer transition={Slide} />
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

@@ -1,13 +1,61 @@
 import { Avatar, Badge } from 'flowbite-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /* eslint-disable react/prop-types */
+export const FormatTime = (createdAt) => {
+  const date = new Date(createdAt);
+  const now = new Date();
+
+  const seconds = Math.floor((now - date) / 1000);
+  if (seconds < 60) {
+    return `${seconds} seconds ago`;
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) {
+    return `${minutes} ${minutes == 1 ? 'minute' : 'minutes'} ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    return `${hours} ${hours == 1 ? 'hour' : 'hours'} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  return `${days} ${days == 1 ? 'day' : 'days'} ago`;
+};
+
+export const FormatDate = (createdAt) => {
+  const date = new Date(createdAt);
+  const month = date.toLocaleString('default', { month: 'long' });
+  const day = date.getDate();
+
+  return `${month} ${day}`;
+};
+
 export default function BlogPost(props) {
   const { blogPosts } = props;
+  const [formattedTimes, setFormattedTimes] = useState([]);
+
+  // this updates the date and uploaded time every seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const newFormattedTimes = blogPosts.map((post) =>
+        FormatTime(post.createdAt)
+      );
+      setFormattedTimes(newFormattedTimes);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [blogPosts]);
+
   return (
     <>
       <section className="container mx-auto mt-5  px-5 md:px-0">
-        {blogPosts.map((post) => {
+        {blogPosts.map((post, index) => {
           return (
             <>
               <article
@@ -32,8 +80,13 @@ export default function BlogPost(props) {
                           </Badge>
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
-                          <span className="date">Mar 25</span> •
-                          <span className="uploaded-time"> 1 min</span>
+                          <span className="date">
+                            {FormatDate(post.createdAt)}
+                          </span>{' '}
+                          •{' '}
+                          <span className="uploaded-time">
+                            {formattedTimes[index]}
+                          </span>
                         </div>
                       </div>
                     </Avatar>

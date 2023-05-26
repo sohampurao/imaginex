@@ -3,12 +3,18 @@ import dotenv from 'dotenv';
 import data from './data/Data.js';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import seedRouter from './routes/seedRoutes.js';
+import BlogPostRouter from './routes/BlogPostRoutes.js';
+import CarouselRouter from './routes/CarouselRoutes.js';
 
 // basic configuration
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+
+// this api responds to seed route
+app.use('/seed', seedRouter);
 
 // this connects the application to MongoDB database
 mongoose
@@ -20,22 +26,9 @@ mongoose
     console.log(error.message);
   });
 
-app.get('/carousel', (req, res) => {
-  res.send(data.items);
-});
+app.use('/blogposts', BlogPostRouter);
 
-app.get('/blogpost/slug/:slug', (req, res) => {
-  const blogpost = data.blogposts.find((x) => x.slug === req.params.slug);
-  if (blogpost) {
-    res.send(blogpost);
-  } else {
-    res.status(404).send({ message: 'Post not Found' });
-  }
-});
-
-app.get('/blogposts', (req, res) => {
-  res.send(data.blogposts);
-});
+app.use('/carousel', CarouselRouter);
 
 app.get('/', (req, res) => {
   res.send('Server is active!');

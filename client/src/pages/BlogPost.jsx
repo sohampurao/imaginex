@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Tooltip } from 'flowbite-react';
+import { FormatDate, FormatTime } from '../components/BlogPost';
 
 const blogPostReducer = (state, action) => {
   switch (action.type) {
@@ -25,6 +26,7 @@ export default function BlogPost() {
   const params = useParams();
   const { slug } = params;
   const currentURL = window.location.href;
+  const [formattedTime, setFormattedTime] = useState(null);
 
   console.log(currentURL);
   const [{ blogPost, blogPostLoading, blogPostError }, blogPostDispatch] =
@@ -40,7 +42,7 @@ export default function BlogPost() {
       blogPostDispatch({ type: 'FETCH_BLOGPOST_REQUEST' });
       try {
         const response = await axios.get(
-          `http://localhost:5000/blogpost/slug/${slug}`
+          `http://localhost:5000/blogposts/slug/${slug}`
         );
         blogPostDispatch({
           type: 'FETCH_BLOGPOST_SUCCESS',
@@ -66,6 +68,18 @@ export default function BlogPost() {
         toast.error(error);
       });
   };
+
+  // this updates the date and uploaded time every seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const FormattedTime = FormatTime(blogPost.createdAt);
+      setFormattedTime(FormattedTime);
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [blogPost]);
+
   return (
     <>
       {blogPostLoading ? (
@@ -98,9 +112,11 @@ export default function BlogPost() {
                     </span>
                   </li>
                   <li>
-                    <span className="date">Mar 25</span>
+                    <span className="date">
+                      {FormatDate(blogPost.createdAt)}
+                    </span>
                     {' • '}
-                    <span className="uploaded-time"> 1 min</span>
+                    <span className="uploaded-time">{formattedTime}</span>
                   </li>
                 </ul>
               </div>

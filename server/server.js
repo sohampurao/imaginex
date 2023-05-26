@@ -7,12 +7,14 @@ import seedRouter from './routes/seedRoutes.js';
 import BlogPostRouter from './routes/BlogPostRoutes.js';
 import CarouselRouter from './routes/CarouselRoutes.js';
 import AdminRouter from './routes/AdminRoutes.js';
+import expressAsyncHandler from 'express-async-handler';
 
 // basic configuration
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // this api responds to seed route
 app.use('/seed', seedRouter);
@@ -32,6 +34,10 @@ app.use('/blogposts', BlogPostRouter);
 app.use('/carousel', CarouselRouter);
 
 app.use('/admins', AdminRouter);
+
+app.use((error, req, res, next) => {
+  res.status(500).send({ message: error.message });
+});
 
 app.get('/', (req, res) => {
   res.send('Server is active!');

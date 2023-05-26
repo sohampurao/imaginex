@@ -4,21 +4,21 @@ const saltRounds = 10;
 const data = {
   admins: [
     {
-      fristName: 'test',
+      firstName: 'test',
       lastName: 'admin',
       email: 'test@gmail.com',
       password: bcrypt.hashSync('1234', saltRounds),
       isAdmin: true,
     },
     {
-      fristName: 'john',
+      firstName: 'john',
       lastName: 'doe',
       email: 'john@gmail.com',
       password: bcrypt.hashSync('1234', saltRounds),
       isAdmin: true,
     },
     {
-      fristName: 'sample',
+      firstName: 'sample',
       lastName: 'admin',
       email: 'sample@gmail.com',
       password: bcrypt.hashSync('1234', saltRounds),

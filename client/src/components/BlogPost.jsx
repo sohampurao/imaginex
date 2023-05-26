@@ -1,3 +1,4 @@
+import { Avatar, Badge } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
 /* eslint-disable react/prop-types */
@@ -20,32 +21,31 @@ export default function BlogPost(props) {
                 ></iframe>
                 <div className="blog-body | container p-5">
                   <div className="profile | flex gap-2 items-center">
-                    <img
-                      src="/images/profile/profile-picture.webp"
-                      alt="profile picture"
-                      className="w-10 rounded-full"
-                    />
-                    <ul className="profile-details | list-none text-xs text-neutral-600 font-extralight">
-                      <li>
-                        <span className="fullname">{post.admin.fullname}</span>{' '}
-                        <span className="type | font-semibold">
-                          {post.admin ? 'Admin' : 'Unknown'}
-                        </span>
-                      </li>
-                      <li>
-                        <span className="date">Mar 25</span> •
-                        <span className="uploaded-time"> 1 min</span>
-                      </li>
-                    </ul>
+                    <Avatar img={post.admin.image} rounded={true}>
+                      <div className="space-y-1 font-medium dark:text-white">
+                        <div className="user-profile | flex  items-center gap-2">
+                          <span>{post.admin.fullname}</span>
+                          <Badge color="success">
+                            {post.admin.isAdmin
+                              ? ' ' + 'Admin'
+                              : ' ' + 'Unknown'}
+                          </Badge>
+                        </div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="date">Mar 25</span> •
+                          <span className="uploaded-time"> 1 min</span>
+                        </div>
+                      </div>
+                    </Avatar>
                   </div>
 
                   <hr className="my-2 block" />
 
                   <h1 className="blog-title | text-2xl font-serif font-medium hover:text-blue-400 cursor-pointer">
-                    <Link to={`blogposts/slug/${post.slug}`}>{post.title}</Link>
+                    <Link to={`blogpost/slug/${post.slug}`}>{post.title}</Link>
                   </h1>
                   <div className="blog-subtitle | text-base text-neutral-600 text-justify hover:text-blue-400 cursor-pointer">
-                    <Link to={`blogposts/slug/${post.slug}`}>
+                    <Link to={`blogpost/slug/${post.slug}`}>
                       {post.description}
                     </Link>
                   </div>

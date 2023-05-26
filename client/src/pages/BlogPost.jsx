@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Tooltip } from 'flowbite-react';
 
 const blogPostReducer = (state, action) => {
   switch (action.type) {
@@ -39,7 +40,7 @@ export default function BlogPost() {
       blogPostDispatch({ type: 'FETCH_BLOGPOST_REQUEST' });
       try {
         const response = await axios.get(
-          `http://localhost:5000/blogposts/slug/${slug}`
+          `http://localhost:5000/blogpost/slug/${slug}`
         );
         blogPostDispatch({
           type: 'FETCH_BLOGPOST_SUCCESS',
@@ -128,7 +129,12 @@ export default function BlogPost() {
                       to={`https://www.facebook.com/sharer/sharer.php?u=http://localhost:5173/blogposts/slug/${currentURL}`}
                       target="_blank"
                     >
-                      <i className="bi bi-facebook"></i>
+                      <Tooltip
+                        content="Share on Facebook"
+                        animation="duration-300"
+                      >
+                        <i className="bi bi-facebook"></i>
+                      </Tooltip>
                     </Link>
                   </li>
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
@@ -136,7 +142,12 @@ export default function BlogPost() {
                       to={`https://twitter.com/intent/tweet?url=http://localhost:5173/blogposts/slug/${currentURL}&text=Check out this amazing content!`}
                       target="_blank"
                     >
-                      <i className="bi bi-twitter"></i>
+                      <Tooltip
+                        content="Share on Twitter"
+                        animation="duration-300"
+                      >
+                        <i className="bi bi-twitter"></i>
+                      </Tooltip>
                     </Link>
                   </li>
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
@@ -144,14 +155,21 @@ export default function BlogPost() {
                       to={`https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:5173/blogposts/slug/${currentURL}`}
                       target="_blank"
                     >
-                      <i className="bi bi-linkedin"></i>
+                      <Tooltip
+                        content="Share on LinkedIn"
+                        animation="duration-300"
+                      >
+                        <i className="bi bi-linkedin"></i>
+                      </Tooltip>
                     </Link>
                   </li>
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
-                    <i
-                      className="bi bi-link-45deg"
-                      onClick={copyToClipboard}
-                    ></i>
+                    <Tooltip content="Copy Link" animation="duration-300">
+                      <i
+                        className="bi bi-link-45deg"
+                        onClick={copyToClipboard}
+                      ></i>
+                    </Tooltip>
                   </li>
                 </ul>
                 <div className="category | font-sans font-semibold cursor-pointer hover:text-blue-400">

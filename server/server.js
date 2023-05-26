@@ -2,17 +2,29 @@ import express from 'express';
 import dotenv from 'dotenv';
 import data from './data/Data.js';
 import cors from 'cors';
-const app = express();
+import mongoose from 'mongoose';
 
+// basic configuration
+const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+
+// this connects the application to MongoDB database
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => {
+    console.log('connected to DB');
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
 
 app.get('/carousel', (req, res) => {
   res.send(data.items);
 });
 
-app.get('/blogposts/slug/:slug', (req, res) => {
+app.get('/blogpost/slug/:slug', (req, res) => {
   const blogpost = data.blogposts.find((x) => x.slug === req.params.slug);
   if (blogpost) {
     res.send(blogpost);

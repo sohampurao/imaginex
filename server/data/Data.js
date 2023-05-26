@@ -1,4 +1,30 @@
+import bcrypt from 'bcrypt';
+const saltRounds = 10;
+
 const data = {
+  admins: [
+    {
+      fristName: 'test',
+      lastName: 'admin',
+      email: 'test@gmail.com',
+      password: bcrypt.hashSync('1234', saltRounds),
+      isAdmin: true,
+    },
+    {
+      fristName: 'john',
+      lastName: 'doe',
+      email: 'john@gmail.com',
+      password: bcrypt.hashSync('1234', saltRounds),
+      isAdmin: true,
+    },
+    {
+      fristName: 'sample',
+      lastName: 'admin',
+      email: 'sample@gmail.com',
+      password: bcrypt.hashSync('1234', saltRounds),
+      isAdmin: true,
+    },
+  ],
   items: [
     {
       image: '/images/carousel-image1.jpg',
@@ -28,8 +54,9 @@ const data = {
       slug: 'aquant-display-centre',
       category: 'Real Estate',
       admin: {
+        firstName: 'joh',
+        lastName: 'doe',
         image: '/images/profile/profile-picture.webp',
-        fullname: 'joh doe',
         isAdmin: true,
       },
     },
@@ -41,8 +68,9 @@ const data = {
       slug: 'welcome-the-new-look-of-pantaloons',
       category: 'sample Flats',
       admin: {
+        firstName: 'elon',
+        lastName: 'musk',
         image: '/images/profile/profile-picture.webp',
-        fullname: 'elon musk',
         isAdmin: true,
       },
     },
@@ -54,8 +82,9 @@ const data = {
       category: 'Resale Homes',
       slug: 'starts-360',
       admin: {
+        firstName: 'jeff',
+        lastName: 'bezos',
         image: '/images/profile/profile-picture.webp',
-        fullname: 'jeff bezos',
         isAdmin: true,
       },
     },
@@ -67,8 +96,9 @@ const data = {
       slug: 'blobar',
       category: 'Showrooms & Experience Centers',
       admin: {
+        firstName: 'jonny',
+        lastName: 'liver',
         image: '/images/profile/profile-picture.webp',
-        fullname: 'jonny lever',
         isAdmin: true,
       },
     },

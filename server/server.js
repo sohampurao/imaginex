@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import BlogPostRouter from './routes/BlogPostRoutes.js';
 import CarouselRouter from './routes/CarouselRoutes.js';
+import AdminRouter from './routes/AdminRoutes.js';
 
 // basic configuration
 const app = express();
@@ -29,6 +30,8 @@ mongoose
 app.use('/blogposts', BlogPostRouter);
 
 app.use('/carousel', CarouselRouter);
+
+app.use('/admins', AdminRouter);
 
 app.get('/', (req, res) => {
   res.send('Server is active!');

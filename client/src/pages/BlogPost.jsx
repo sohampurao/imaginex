@@ -99,7 +99,7 @@ export default function BlogPost() {
                 <ul className="profile-details | flex items-center gap-2 list-none text-sm text-neutral-600 font-extralight">
                   <li>
                     <span className="fullname">
-                      {blogPost.admin.fullname}
+                      {blogPost.admin.firstName + ' ' + blogPost.admin.lastName}
                       {' • '}
                     </span>
                   </li>

@@ -72,7 +72,9 @@ export default function BlogPost(props) {
                     <Avatar img={post.admin.image} rounded={true}>
                       <div className="space-y-1 font-medium dark:text-white">
                         <div className="user-profile | flex  items-center gap-2">
-                          <span>{post.admin.fullname}</span>
+                          <span>
+                            {post.admin.firstName + ' ' + post.admin.lastName}
+                          </span>
                           <Badge color="success">
                             {post.admin.isAdmin
                               ? ' ' + 'Admin'

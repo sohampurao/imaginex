@@ -16,7 +16,8 @@ AdminRouter.post(
           _id: admin._id,
           firstName: admin.firstName,
           lastName: admin.lastName,
-          email: admin.isAdmin,
+          profileImage: admin.profileImage,
+          email: admin.email,
           isAdmin: admin.isAdmin,
           token: generateToken(admin),
         });

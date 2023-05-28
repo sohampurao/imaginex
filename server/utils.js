@@ -5,6 +5,7 @@ export const generateToken = (admin) => {
       _id: admin._id,
       firstName: admin.firstName,
       lastName: admin.lastName,
+      profileImage: admin.profileImage,
       email: admin.isAdmin,
       isAdmin: admin.isAdmin,
     },

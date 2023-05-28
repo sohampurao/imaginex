@@ -1,8 +1,10 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Slide, ToastContainer } from 'react-toastify';
-import { Avatar, Tooltip } from 'flowbite-react';
+import { Avatar, Badge, Dropdown, Tooltip } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Store } from '../Store';
 
 const navigation = [
   { name: 'Our Work', href: '#', current: true },
@@ -16,6 +18,14 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { adminInfo } = state;
+
+  const signOutHandler = () => {
+    ctxDispatch({ type: 'ADMIN_SIGNOUT' });
+    localStorage.removeItem('adminInfo');
+    console.log('signout!');
+  };
   return (
     <>
       <ToastContainer transition={Slide} />
@@ -25,52 +35,67 @@ export default function Navbar() {
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="block sm:ml-6 sm:hidden">
-                  <Tooltip
-                    content="Admin Login"
-                    animation="duration-150"
-                    arrow={false}
-                    style="light"
-                  >
-                    <Link to="/signin">
-                      <Avatar
-                        alt="User settings"
-                        img="/images/profile/admin.png"
-                        rounded={true}
-                        bordered={true}
-                      />
-                    </Link>
-                  </Tooltip>
-                  {/* <Dropdown
-                    arrowIcon={false}
-                    inline={true}
-                    label={
-                      <Tooltip
-                        content="Admin Login"
-                        animation="duration-150"
-                        arrow={false}
-                        style="light"
-                      >
+                  {adminInfo ? (
+                    <Dropdown
+                      arrowIcon={false}
+                      inline={true}
+                      label={
+                        <Avatar
+                          alt="User settings"
+                          img={`${
+                            adminInfo.profileImage
+                              ? adminInfo.profileImage
+                              : '/images/profile/profile-picture.webp'
+                          }`}
+                          rounded={true}
+                          bordered={true}
+                        />
+                      }
+                    >
+                      <Dropdown.Header>
+                        <span className="full-name | text-sm flex items-center gap-2 capitalize py-1">
+                          {adminInfo.firstName + ' ' + adminInfo.lastName}
+                          <Badge color="success">
+                            {adminInfo.isAdmin ? (
+                              <>
+                                <span>Admin</span>
+                                <img
+                                  src="/images/profile/crown.png"
+                                  className="float-right align-middle h-4 ms-[2px]"
+                                />
+                              </>
+                            ) : (
+                              'Unknown'
+                            )}
+                          </Badge>
+                        </span>
+                        <span className="email | block truncate text-sm font-medium py-1">
+                          {adminInfo.email}
+                        </span>
+                      </Dropdown.Header>
+                      <Dropdown.Item>Dashboard</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item onClick={signOutHandler}>
+                        Sign out
+                      </Dropdown.Item>
+                    </Dropdown>
+                  ) : (
+                    <Tooltip
+                      content="Admin Login"
+                      animation="duration-150"
+                      arrow={false}
+                      style="light"
+                    >
+                      <Link to="/signin">
                         <Avatar
                           alt="User settings"
                           img="/images/profile/admin.png"
                           rounded={true}
                           bordered={true}
                         />
-                      </Tooltip>
-                    }
-                  >
-                    <Dropdown.Header>
-                      <span className="full-name | text-sm flex items-center gap-2 capitalize py-1">
-                        soham purao <Badge color="success">admin</Badge>
-                      </span>
-                      <span className="email | block truncate text-sm font-medium py-1">
-                        sohampurao1@gmail.com
-                      </span>
-                    </Dropdown.Header>
-                    <Dropdown.Item>Dashboard</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
-                  </Dropdown> */}
+                      </Link>
+                    </Tooltip>
+                  )}
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
@@ -107,46 +132,67 @@ export default function Navbar() {
                           {item.name}
                         </a>
                       ))}
-                      <Tooltip
-                        content="Admin Login"
-                        animation="duration-150"
-                        arrow={false}
-                        style="light"
-                        placement="bottom-end"
-                      >
-                        <Link to="/signin">
-                          <Avatar
-                            alt="User settings"
-                            img="/images/profile/admin.png"
-                            rounded={true}
-                            bordered={true}
-                          />
-                        </Link>
-                      </Tooltip>
-                      {/* <Dropdown
-                        arrowIcon={false}
-                        inline={true}
-                        label={
-                          <Avatar
-                            alt="User settings"
-                            img="/images/profile/profile-picture.webp"
-                            rounded={true}
-                            bordered={true}
-                          />
-                        }
-                      >
-                        <Dropdown.Header>
-                          <div className="full-name | text-sm flex items-center gap-2 capitalize py-1">
-                            soham purao <Badge color="success">admin</Badge>
-                          </div>
-                          <div className="email | block truncate text-sm font-medium py-1">
-                            sohampurao1@gmail.com
-                          </div>
-                        </Dropdown.Header>
-                        <Dropdown.Item>Dashboard</Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item>Sign out</Dropdown.Item>
-                      </Dropdown> */}
+                      {adminInfo ? (
+                        <Dropdown
+                          arrowIcon={false}
+                          inline={true}
+                          label={
+                            <Avatar
+                              alt="User settings"
+                              img={`${
+                                adminInfo.profileImage
+                                  ? adminInfo.profileImage
+                                  : '/images/profile/profile-picture.webp'
+                              }`}
+                              rounded={true}
+                              bordered={true}
+                            />
+                          }
+                        >
+                          <Dropdown.Header>
+                            <span className="full-name | text-sm gap-2 capitalize py-1">
+                              {adminInfo.firstName + ' ' + adminInfo.lastName}
+                              <Badge color="success" className="w-[75px]">
+                                {adminInfo.isAdmin ? (
+                                  <>
+                                    <span>Admin</span>
+                                    <img
+                                      src="/images/profile/crown.png"
+                                      className="float-right align-middle h-4 ms-[2px]"
+                                    />
+                                  </>
+                                ) : (
+                                  'Unknown'
+                                )}
+                              </Badge>
+                            </span>
+                            <span className="email | block truncate text-sm font-medium py-1">
+                              {adminInfo.email}
+                            </span>
+                          </Dropdown.Header>
+                          <Dropdown.Item>Dashboard</Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item onClick={signOutHandler}>
+                            Sign out
+                          </Dropdown.Item>
+                        </Dropdown>
+                      ) : (
+                        <Tooltip
+                          content="Admin Login"
+                          animation="duration-150"
+                          arrow={false}
+                          style="light"
+                        >
+                          <Link to="/signin">
+                            <Avatar
+                              alt="User settings"
+                              img="/images/profile/admin.png"
+                              rounded={true}
+                              bordered={true}
+                            />
+                          </Link>
+                        </Tooltip>
+                      )}
                     </div>
                   </div>
                 </div>

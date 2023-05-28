@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Tooltip } from 'flowbite-react';
-import { FormatDate, FormatTime } from '../components/BlogPost';
+import { Badge, Tooltip } from 'flowbite-react';
+import { FormatDate, FormatTime } from '../utils';
 
 const blogPostReducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +28,6 @@ export default function BlogPost() {
   const currentURL = window.location.href;
   const [formattedTime, setFormattedTime] = useState(null);
 
-  console.log(currentURL);
   const [{ blogPost, blogPostLoading, blogPostError }, blogPostDispatch] =
     useReducer(blogPostReducer, {
       blogPost: [],
@@ -92,7 +91,7 @@ export default function BlogPost() {
             <div className="blog-body | container p-5">
               <div className="profile | flex gap-2 items-center">
                 <img
-                  src="/images/profile/profile-picture.webp"
+                  src={blogPost.admin.image}
                   alt="profile picture"
                   className="w-10 rounded-full"
                 />
@@ -100,22 +99,34 @@ export default function BlogPost() {
                   <li>
                     <span className="fullname">
                       {blogPost.admin.firstName + ' ' + blogPost.admin.lastName}
-                      {' • '}
+                      <div className="inline-block mx-1">•</div>
                     </span>
                   </li>
                   <li>
                     <span className="type">
-                      <span className=" font-semibold">
-                        {blogPost.admin ? 'Admin' : 'Unknown'}
+                      <span className="flex items-center font-semibold">
+                        <Badge color="success">
+                          {blogPost.admin.isAdmin ? (
+                            <>
+                              <span>Admin</span>
+                              <img
+                                src="/images/profile/crown.png"
+                                className="float-right align-middle h-4 ms-[2px]"
+                              />
+                            </>
+                          ) : (
+                            'Unknown'
+                          )}
+                        </Badge>
+                        <div className="inline-block mx-1">•</div>
                       </span>
-                      {' • '}
                     </span>
                   </li>
                   <li>
                     <span className="date">
                       {FormatDate(blogPost.createdAt)}
                     </span>
-                    {' • '}
+                    <div className="inline-block mx-1">•</div>
                     <span className="uploaded-time">{formattedTime}</span>
                   </li>
                 </ul>

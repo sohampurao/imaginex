@@ -1,41 +1,10 @@
 import { Avatar, Badge } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FormatDate, FormatTime } from '../utils';
 
 /* eslint-disable react/prop-types */
-export const FormatTime = (createdAt) => {
-  const date = new Date(createdAt);
-  const now = new Date();
-
-  const seconds = Math.floor((now - date) / 1000);
-  if (seconds < 60) {
-    return `${seconds} seconds ago`;
-  }
-
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) {
-    return `${minutes} ${minutes == 1 ? 'minute' : 'minutes'} ago`;
-  }
-
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) {
-    return `${hours} ${hours == 1 ? 'hour' : 'hours'} ago`;
-  }
-
-  const days = Math.floor(hours / 24);
-  return `${days} ${days == 1 ? 'day' : 'days'} ago`;
-};
-
-export const FormatDate = (createdAt) => {
-  const date = new Date(createdAt);
-  const month = date.toLocaleString('default', { month: 'long' });
-  const day = date.getDate();
-
-  return `${month} ${day}`;
-};
-
-export default function BlogPost(props) {
-  const { blogPosts } = props;
+export default function BlogPost({ blogPosts }) {
   const [formattedTimes, setFormattedTimes] = useState([]);
 
   // this updates the date and uploaded time every seconds
@@ -51,7 +20,6 @@ export default function BlogPost(props) {
       clearInterval(intervalId);
     };
   }, [blogPosts]);
-
   return (
     <>
       <section className="container mx-auto mt-5  px-5 md:px-0">
@@ -59,8 +27,8 @@ export default function BlogPost(props) {
           return (
             <>
               <article
-                className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5"
                 key={post._id}
+                className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5"
               >
                 <iframe
                   className="matterport-iframe | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto "
@@ -76,9 +44,17 @@ export default function BlogPost(props) {
                             {post.admin.firstName + ' ' + post.admin.lastName}
                           </span>
                           <Badge color="success">
-                            {post.admin.isAdmin
-                              ? ' ' + 'Admin'
-                              : ' ' + 'Unknown'}
+                            {post.admin.isAdmin ? (
+                              <>
+                                <span>Admin</span>
+                                <img
+                                  src="/images/profile/crown.png"
+                                  className="float-right align-middle h-4 ms-[2px]"
+                                />
+                              </>
+                            ) : (
+                              'Unknown'
+                            )}
                           </Badge>
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">

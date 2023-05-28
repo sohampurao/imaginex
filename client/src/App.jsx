@@ -2,7 +2,8 @@ import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
-import Signin from './pages/Signin';
+import SignIn from './pages/SignIn';
+import AddAdmin from './pages/AddAdmin';
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
             element={<BlogPost></BlogPost>}
           ></Route>
 
-          {/* signin page */}
-          <Route path="/signin" element={<Signin></Signin>}></Route>
+          {/* Sign-In page */}
+          <Route path="/signin" element={<SignIn></SignIn>}></Route>
+          {/* Add-Admin page */}
+          <Route path="/addadmin" element={<AddAdmin></AddAdmin>}></Route>
         </Routes>
       </BrowserRouter>
     </>

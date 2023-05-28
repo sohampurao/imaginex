@@ -38,7 +38,7 @@ export default function Signin() {
     <>
       <div className="container mx-auto flex justify-center">
         <form
-          className="flex flex-col gap-4 mt-20 w-[300px] sm:w-[500px]"
+          className="flex flex-col gap-4 mt-10 w-[300px] sm:w-[500px]"
           onSubmit={onSubmitHandler}
         >
           <div className="signin-title | text-2xl font-semibold font-serif text-center">

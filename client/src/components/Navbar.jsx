@@ -75,8 +75,12 @@ export default function Navbar() {
                       </Dropdown.Header>
                       <Dropdown.Item>Dashboard</Dropdown.Item>
                       <Dropdown.Divider />
+                      <Link to={'/addadmin'}>
+                        <Dropdown.Item>Add Admin</Dropdown.Item>
+                      </Link>
+                      <Dropdown.Divider />
                       <Dropdown.Item onClick={signOutHandler}>
-                        Sign out
+                        <i className="bi bi-box-arrow-right me-2"></i>Sign out
                       </Dropdown.Item>
                     </Dropdown>
                   ) : (
@@ -171,6 +175,10 @@ export default function Navbar() {
                             </span>
                           </Dropdown.Header>
                           <Dropdown.Item>Dashboard</Dropdown.Item>
+                          <Link to={'/addadmin'}>
+                            <Dropdown.Item>Add Admin</Dropdown.Item>
+                          </Link>
+                          <Dropdown.Divider />
                           <Dropdown.Divider />
                           <Dropdown.Item onClick={signOutHandler}>
                             Sign out

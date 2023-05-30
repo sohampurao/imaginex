@@ -1,6 +1,6 @@
 import { Avatar, Badge } from 'flowbite-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FormatDate, FormatTime } from '../utils';
 
 /* eslint-disable react/prop-types */
@@ -27,7 +27,7 @@ export default function BlogPost({ blogPosts }) {
           return (
             <>
               <article
-                key={post._id}
+                key={index}
                 className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5"
               >
                 <iframe
@@ -73,12 +73,14 @@ export default function BlogPost({ blogPosts }) {
                   <hr className="my-2 block" />
 
                   <h1 className="blog-title | text-2xl font-serif font-medium hover:text-blue-400 cursor-pointer">
-                    <Link to={`blogpost/slug/${post.slug}`}>{post.title}</Link>
+                    <NavLink to={`/blogpost/slug/${post.slug}`}>
+                      {post.title}
+                    </NavLink>
                   </h1>
                   <div className="blog-subtitle | text-base text-neutral-600 text-justify hover:text-blue-400 cursor-pointer">
-                    <Link to={`blogpost/slug/${post.slug}`}>
+                    <NavLink to={`/blogpost/slug/${post.slug}`}>
                       {post.description}
-                    </Link>
+                    </NavLink>
                   </div>
                 </div>
               </article>

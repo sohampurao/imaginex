@@ -31,7 +31,7 @@ export default function AddAdmin() {
       toast.warning('Password and Confirm password must be same!');
     } else {
       try {
-        await axios.post('http://localhost:5000/admins/signup', {
+        await axios.post('http://localhost:5000/admins/addadmin', {
           firstName,
           lastName,
           // profileImage,

@@ -72,7 +72,7 @@ const data = {
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
       slug: 'welcome-the-new-look-of-pantaloons',
-      category: 'sample Flats',
+      category: 'Sample Flats',
       admin: {
         firstName: 'elon',
         lastName: 'musk',
@@ -100,7 +100,7 @@ const data = {
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
       slug: 'blobar',
-      category: 'Showrooms & Experience Centers',
+      category: 'Showrooms and Experience Centers',
       admin: {
         firstName: 'jonny',
         lastName: 'liver',

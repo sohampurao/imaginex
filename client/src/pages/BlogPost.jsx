@@ -199,8 +199,10 @@ export default function BlogPost() {
                     </Tooltip>
                   </li>
                 </ul>
-                <div className="category | font-sans font-semibold cursor-pointer hover:text-blue-400">
-                  Real Estate
+                <div className="category | font-sans font-semibold cursor-pointer hover:text-blue-400 capitalize">
+                  <Link to={`/virtualtours?category=${blogPost.category}`}>
+                    {blogPost.category}
+                  </Link>
                 </div>
               </div>
               <hr className="my-2 block" />

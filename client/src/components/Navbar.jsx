@@ -2,15 +2,16 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Slide, ToastContainer } from 'react-toastify';
 import { Avatar, Badge, Dropdown, Tooltip } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { Store } from '../Store';
 
 const navigation = [
-  { name: 'Our Work', href: '#', current: true },
-  { name: 'Features', href: '#', current: false },
-  { name: 'About Us', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
+  { name: 'Our Work', to: '/ourwork' },
+  { name: 'Features', to: '/features' },
+  { name: 'Virtual Tours', to: '/virtualtours' },
+  { name: 'Contact', to: '/contact' },
+  { name: 'About Us', to: '#' },
 ];
 
 function classNames(...classes) {
@@ -122,19 +123,11 @@ export default function Navbar() {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4 items-center">
                       {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? 'bg-gray-600 text-white'
-                              : 'text-neutral-600 hover:bg-zinc-300',
-                            'rounded-md px-3 py-2 text-sm font-medium'
-                          )}
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </a>
+                        <div className="nav-item" key={item.name}>
+                          <NavLink to={item.to} className="header-nav">
+                            {item.name}
+                          </NavLink>
+                        </div>
                       ))}
                       {adminInfo ? (
                         <Dropdown
@@ -205,6 +198,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
+              {/* </div> */}
             </div>
 
             <Disclosure.Panel className="sm:hidden">
@@ -213,7 +207,7 @@ export default function Navbar() {
                   <Disclosure.Button
                     key={item.name}
                     as="a"
-                    href={item.href}
+                    href={item.to}
                     className={classNames(
                       item.current
                         ? 'bg-gray-600 text-white'

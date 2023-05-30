@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 html:focus-within {
     scroll-behavior: smooth;
@@ -18,6 +22,45 @@ body {
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: white;
+}
+
+/* Navbar */
+.header-nav {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(82 82 82);
+    transition: color 300ms ease-in;
+}
+
+.header-nav.active {
+    font-weight: 600;
+    color: rgb(28, 100, 242);
+}
+
+.nav-item {
+    position: relative;
+}
+
+.header-nav::after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    background-color: rgb(28, 100, 242);
+    border-radius: 1000vmax;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 300ms ease-in;
+}
+
+.nav-item:hover .header-nav::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.header-nav:hover {
+    color: rgb(28, 100, 242);
 }
 
 /* Carousel */
@@ -88,4 +131,21 @@ body {
     100% {
         transform: none
     }
+}
+
+/* category tabs */
+.tab-item {
+    position: relative;
+}
+
+.tab-item-active::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #1c64f2;
+    bottom: 0;
+    left: 0;
+    border-radius: 0.375rem
 }

@@ -6,7 +6,6 @@ import BlogPost from '../components/BlogPost';
 import logger from 'use-reducer-logger';
 import axios from 'axios';
 import Preloader from '../components/Preloader';
-import ScrollToTop from 'react-scroll-to-top';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -174,14 +173,6 @@ export default function Home() {
           )}
         </>
       )}
-
-      {/* Scroll to the top btn */}
-      <ScrollToTop
-        smooth
-        top={1500}
-        component={<i className="bi bi-arrow-up"></i>}
-        className="left-5 bottom-4 font-bold text-white border-0 opacity-80 hover:opacity-100"
-      />
 
       {/* WhatsApp chat link icon */}
       <WhatsappChat></WhatsappChat>

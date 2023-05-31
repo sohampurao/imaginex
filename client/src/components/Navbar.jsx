@@ -1,17 +1,18 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Slide, ToastContainer } from 'react-toastify';
-import { Avatar, Badge, Dropdown, Tooltip } from 'flowbite-react';
+import { Avatar } from 'flowbite-react';
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { Store } from '../Store';
+import Dashboard from './Dashboard';
 
 const navigation = [
   { name: 'Our Work', to: '/ourwork' },
   { name: 'Features', to: '/features' },
   { name: 'Virtual Tours', to: '/virtualtours' },
   { name: 'Contact', to: '/contact' },
-  { name: 'About Us', to: '#' },
+  { name: 'About Us', to: '/aboutus' },
 ];
 
 function classNames(...classes) {
@@ -29,6 +30,7 @@ export default function Navbar() {
   };
   return (
     <>
+      <Dashboard signOut={signOutHandler}></Dashboard>
       <ToastContainer transition={Slide} />
       <Disclosure as="nav" className="bg-zinc-100 z-40 shadow-lg">
         {({ open }) => (
@@ -36,71 +38,20 @@ export default function Navbar() {
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="block sm:ml-6 sm:hidden">
-                  {adminInfo ? (
-                    <Dropdown
-                      arrowIcon={false}
-                      inline={true}
-                      label={
-                        <Avatar
-                          alt="User settings"
-                          img={`${
-                            adminInfo.profileImage
-                              ? adminInfo.profileImage
-                              : '/images/profile/profile-picture.webp'
-                          }`}
-                          rounded={true}
-                          bordered={true}
-                        />
-                      }
-                    >
-                      <Dropdown.Header>
-                        <span className="full-name | text-sm flex items-center gap-2 capitalize py-1">
-                          {adminInfo.firstName + ' ' + adminInfo.lastName}
-                          <Badge color="success">
-                            {adminInfo.isAdmin ? (
-                              <>
-                                <span>Admin</span>
-                                <img
-                                  src="/images/profile/crown.png"
-                                  className="float-right align-middle h-4 ms-[2px]"
-                                />
-                              </>
-                            ) : (
-                              'Unknown'
-                            )}
-                          </Badge>
-                        </span>
-                        <span className="email | block truncate text-sm font-medium py-1">
-                          {adminInfo.email}
-                        </span>
-                      </Dropdown.Header>
-                      <Dropdown.Item>Dashboard</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Link to={'/addadmin'}>
-                        <Dropdown.Item>Add Admin</Dropdown.Item>
-                      </Link>
-                      <Dropdown.Divider />
-                      <Dropdown.Item onClick={signOutHandler}>
-                        <i className="bi bi-box-arrow-right me-2"></i>Sign out
-                      </Dropdown.Item>
-                    </Dropdown>
-                  ) : (
-                    <Tooltip
-                      content="Admin Login"
-                      animation="duration-150"
-                      arrow={false}
-                      style="light"
-                    >
-                      <Link to="/signin">
-                        <Avatar
-                          alt="User settings"
-                          img="/images/profile/admin.png"
-                          rounded={true}
-                          bordered={true}
-                        />
-                      </Link>
-                    </Tooltip>
-                  )}
+                  <Avatar
+                    data-drawer-target="drawer-navigation"
+                    data-drawer-show="drawer-navigation"
+                    aria-controls="drawer-navigation"
+                    className="cursor-pointer"
+                    alt="Admin Profile"
+                    img={
+                      adminInfo
+                        ? adminInfo.profileImage
+                        : '/images/profile/admin.png'
+                    }
+                    rounded={true}
+                    bordered={true}
+                  />
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
@@ -129,76 +80,26 @@ export default function Navbar() {
                           </NavLink>
                         </div>
                       ))}
-                      {adminInfo ? (
-                        <Dropdown
-                          arrowIcon={false}
-                          inline={true}
-                          label={
-                            <Avatar
-                              alt="User settings"
-                              img={`${
-                                adminInfo.profileImage
-                                  ? adminInfo.profileImage
-                                  : '/images/profile/profile-picture.webp'
-                              }`}
-                              rounded={true}
-                              bordered={true}
-                            />
-                          }
-                        >
-                          <Dropdown.Header>
-                            <span className="full-name | text-sm gap-2 capitalize py-1">
-                              {adminInfo.firstName + ' ' + adminInfo.lastName}
-                              <Badge color="success" className="w-[75px]">
-                                {adminInfo.isAdmin ? (
-                                  <>
-                                    <span>Admin</span>
-                                    <img
-                                      src="/images/profile/crown.png"
-                                      className="float-right align-middle h-4 ms-[2px]"
-                                    />
-                                  </>
-                                ) : (
-                                  'Unknown'
-                                )}
-                              </Badge>
-                            </span>
-                            <span className="email | block truncate text-sm font-medium py-1">
-                              {adminInfo.email}
-                            </span>
-                          </Dropdown.Header>
-                          <Dropdown.Item>Dashboard</Dropdown.Item>
-                          <Link to={'/addadmin'}>
-                            <Dropdown.Item>Add Admin</Dropdown.Item>
-                          </Link>
-                          <Dropdown.Divider />
-                          <Dropdown.Divider />
-                          <Dropdown.Item onClick={signOutHandler}>
-                            Sign out
-                          </Dropdown.Item>
-                        </Dropdown>
-                      ) : (
-                        <Tooltip
-                          content="Admin Login"
-                          animation="duration-150"
-                          arrow={false}
-                          style="light"
-                        >
-                          <Link to="/signin">
-                            <Avatar
-                              alt="User settings"
-                              img="/images/profile/admin.png"
-                              rounded={true}
-                              bordered={true}
-                            />
-                          </Link>
-                        </Tooltip>
-                      )}
+
+                      <Avatar
+                        data-drawer-target="drawer-navigation"
+                        data-drawer-show="drawer-navigation"
+                        aria-controls="drawer-navigation"
+                        // data-drawer-backdrop="false"
+                        className="cursor-pointer"
+                        alt="Admin Profile"
+                        img={
+                          adminInfo
+                            ? adminInfo.profileImage
+                            : '/images/profile/admin.png'
+                        }
+                        rounded={true}
+                        bordered={true}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
-              {/* </div> */}
             </div>
 
             <Disclosure.Panel className="sm:hidden">

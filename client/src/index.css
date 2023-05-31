@@ -133,9 +133,10 @@ body {
     }
 }
 
-/* category tabs */
+/* category tabs (virtual tours) */
 .tab-item {
     position: relative;
+    transition: all 350ms ease-in;
 }
 
 .tab-item-active::after {
@@ -147,5 +148,5 @@ body {
     background-color: #1c64f2;
     bottom: 0;
     left: 0;
-    border-radius: 0.375rem
+    transition: all 350ms ease-in;
 }

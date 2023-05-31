@@ -22,7 +22,6 @@ export default function Signin() {
       });
       ctxDispatch({ type: 'ADMIN_SIGNIN', payload: data });
       localStorage.setItem('adminInfo', JSON.stringify(data));
-      navigate('/dashboard');
     } catch (error) {
       toast.error(getError(error));
     }

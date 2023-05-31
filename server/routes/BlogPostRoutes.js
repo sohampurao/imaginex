@@ -1,6 +1,7 @@
 import express from 'express';
 import BlogPost from '../models/BlogPostModel.js';
 import expressAsyncHandler from 'express-async-handler';
+import { isAdmin, isAuth } from '../utils.js';
 
 const BlogPostRouter = express.Router();
 
@@ -8,6 +9,16 @@ BlogPostRouter.get('/', async (req, res) => {
   const BlogPosts = await BlogPost.find();
   res.send(BlogPosts);
 });
+
+BlogPostRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const blogposts = await BlogPost.find();
+    res.send(blogposts);
+  })
+);
 
 BlogPostRouter.get(
   '/virtualtours',

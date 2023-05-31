@@ -9,6 +9,7 @@ import PageNotFound from './pages/PageNotFound';
 import ScrollToTop from 'react-scroll-to-top';
 import Dashboard from './components/Dashboard';
 import AdminRoute from './components/AdminRoute';
+import BlogPostsList from './pages/admin/BlogPostsList';
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
           {/* Sign-In page */}
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
 
+          {/* ----- ADMIN ROUTES ----- */}
+
           {/* Add-Admin page */}
           <Route
             path="/addadmin"
@@ -53,6 +56,16 @@ function App() {
             element={
               <AdminRoute>
                 <Dashboard></Dashboard>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* BlogPostList */}
+          <Route
+            path="/blogpostslist"
+            element={
+              <AdminRoute>
+                <BlogPostsList></BlogPostsList>
               </AdminRoute>
             }
           ></Route>

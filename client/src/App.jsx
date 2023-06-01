@@ -10,6 +10,7 @@ import ScrollToTop from 'react-scroll-to-top';
 import Dashboard from './components/Dashboard';
 import AdminRoute from './components/AdminRoute';
 import BlogPostsList from './pages/admin/BlogPostsList';
+import CarouselEdit from './pages/admin/CarouselEdit';
 
 function App() {
   return (
@@ -56,6 +57,16 @@ function App() {
             element={
               <AdminRoute>
                 <Dashboard></Dashboard>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* BlogPostList */}
+          <Route
+            path="/carouseledit"
+            element={
+              <AdminRoute>
+                <CarouselEdit />
               </AdminRoute>
             }
           ></Route>

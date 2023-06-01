@@ -32,7 +32,10 @@ export default function Navbar() {
     <>
       <Dashboard signOut={signOutHandler}></Dashboard>
       <ToastContainer transition={Slide} />
-      <Disclosure as="nav" className="bg-zinc-100 z-40 shadow-lg">
+      <Disclosure
+        as="nav"
+        className="bg-zinc-100 z-40 shadow-lg fixed top-0 rigth-0 w-full"
+      >
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

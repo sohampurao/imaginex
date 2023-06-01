@@ -5,6 +5,7 @@ import { Store } from '../../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../../utils';
 import ActionBtn from '../../components/ActionBtn';
+import logger from 'use-reducer-logger';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -14,6 +15,12 @@ const reducer = (state, action) => {
       return { ...state, loading: false, carouselItems: action.payload };
     case 'CAROUSEL_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'CAROUSEL_CREATE_REQUEST':
+      return { ...state, loadingCreate: true };
+    case 'CAROUSEL_CREATE_SUCCESS':
+      return { ...state, loadingCreate: false };
+    case 'CAROUSEL_CREATE_FAILED':
+      return { ...state, loadingCreate: false, errorCreate: action.payload };
     default:
       return state;
   }
@@ -21,7 +28,10 @@ const reducer = (state, action) => {
 export default function CarouselEdit() {
   const { state } = useContext(Store);
   const { adminInfo } = state;
-  const [{ carouselItems, loading, error }, dispatch] = useReducer(reducer, {
+  const [
+    { carouselItems, loading, error, loadingCreate, errorCreate },
+    dispatch,
+  ] = useReducer(logger(reducer), {
     loading: true,
     error: '',
   });
@@ -44,6 +54,27 @@ export default function CarouselEdit() {
     };
     fetchData();
   }, [adminInfo]);
+
+  const createHandler = async () => {
+    if (window.confirm('Are you sure you want to create new Carousel Item?')) {
+      try {
+        dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
+        await axios.post(
+          'http://localhost:5000/carousel',
+          { authorization: `Bearer ${adminInfo.token}` },
+          {
+            headers: { authorization: `Bearer ${adminInfo.token}` },
+          }
+        );
+        toast.success('Carousel Item created succussfully!');
+        dispatch({ type: 'CAROUSEL_CREATE_SUCCESS' });
+      } catch (error) {
+        toast.error(getError(error));
+        dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: error });
+      }
+    }
+  };
+
   return (
     <>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
@@ -52,8 +83,17 @@ export default function CarouselEdit() {
         </div>
 
         <div className="create-btn-container | flex justify-end mx-auto max-w-4xl my-2">
-          <ActionBtn type="create" value="Create" />
+          <ActionBtn type="create" value="Create" onCLick={createHandler} />
         </div>
+        {loadingCreate ? (
+          <div className="text-center">
+            <Spinner aria-label="Center-aligned spinner example" />
+          </div>
+        ) : errorCreate ? (
+          <div>{errorCreate}</div>
+        ) : (
+          ''
+        )}
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />

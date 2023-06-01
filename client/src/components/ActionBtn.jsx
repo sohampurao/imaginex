@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom';
-
-export default function ActionBtn({ type, value, to, icon }) {
+export default function ActionBtn({ type, value, icon, onCLick }) {
   const editClasses =
     'text-white bg-indigo-600 ring-indigo-300 ring-offset-indigo-200 hover:ring-offset-indigo-500';
   const deleteClasses =
@@ -10,8 +8,9 @@ export default function ActionBtn({ type, value, to, icon }) {
     'text-white bg-yellow-300 ring-yellow-200 ring-offset-rose-100 hover:ring-offset-yellow-300';
   return (
     <>
-      <Link
-        to={to | '#'}
+      <button
+        type="button"
+        onClick={onCLick}
         className={`${
           type == 'edit'
             ? editClasses
@@ -27,7 +26,7 @@ export default function ActionBtn({ type, value, to, icon }) {
         <span className="relative z-20 flex items-center text-sm capitalize gap-1">
           <span>{value}</span> {icon ? <span>{icon}</span> : ''}
         </span>
-      </Link>
+      </button>
     </>
   );
 }

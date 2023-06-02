@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Badge, Tooltip } from 'flowbite-react';
+import { Avatar, Badge, Tooltip } from 'flowbite-react';
 import { FormatDate, FormatTime } from '../utils';
 
 const blogPostReducer = (state, action) => {
@@ -90,11 +90,11 @@ export default function BlogPost() {
           <article className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">
             <div className="blog-body | container p-5">
               <div className="profile | flex gap-2 items-center">
-                <img
-                  src={blogPost.admin.image}
-                  alt="profile picture"
-                  className="w-10 rounded-full"
-                />
+                <Avatar
+                  img={blogPost.admin.image}
+                  alt="Admin Profile pic"
+                  rounded={true}
+                ></Avatar>
                 <ul className="profile-details | flex items-center gap-2 list-none text-sm text-neutral-600 font-extralight">
                   <li>
                     <span className="fullname">

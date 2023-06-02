@@ -21,7 +21,7 @@ body {
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 }
 
 /* Navbar */
@@ -115,6 +115,13 @@ body {
 .swiper-button-prev::after {
     font-size: 2.5rem;
     font-weight: 600;
+}
+
+/* blog post */
+@media (min-width: 768px) {
+    .blog-post-item:nth-child(even) {
+        flex-flow: row-reverse;
+    }
 }
 
 /* scroll-to-top btn */

@@ -34,7 +34,7 @@ export default function Navbar() {
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-zinc-100 z-40 shadow-lg fixed top-0 rigth-0 w-full"
+        className="bg-zinc-100 z-40 shadow-lg sticky top-0 rigth-0 w-full"
       >
         {({ open }) => (
           <>

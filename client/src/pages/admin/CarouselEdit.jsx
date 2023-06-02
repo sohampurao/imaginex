@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Card, Spinner } from 'flowbite-react';
-import { useContext, useEffect, useReducer } from 'react';
+import { Button, Card, Modal, Spinner } from 'flowbite-react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { Store } from '../../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../../utils';
@@ -26,6 +26,7 @@ const reducer = (state, action) => {
   }
 };
 export default function CarouselEdit() {
+  const [openModel, setOpenModel] = useState(null);
   const { state } = useContext(Store);
   const { adminInfo } = state;
   const [
@@ -56,22 +57,21 @@ export default function CarouselEdit() {
   }, [adminInfo]);
 
   const createHandler = async () => {
-    if (window.confirm('Are you sure you want to create new Carousel Item?')) {
-      try {
-        dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
-        await axios.post(
-          'http://localhost:5000/carousel',
-          { authorization: `Bearer ${adminInfo.token}` },
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
-        toast.success('Carousel Item created succussfully!');
-        dispatch({ type: 'CAROUSEL_CREATE_SUCCESS' });
-      } catch (error) {
-        toast.error(getError(error));
-        dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: error });
-      }
+    setOpenModel(false);
+    try {
+      dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
+      await axios.post(
+        'http://localhost:5000/carousel',
+        { authorization: `Bearer ${adminInfo.token}` },
+        {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        }
+      );
+      toast.success('Carousel Item created succussfully!');
+      dispatch({ type: 'CAROUSEL_CREATE_SUCCESS' });
+    } catch (error) {
+      toast.error(getError(error));
+      dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: error });
     }
   };
 
@@ -83,8 +83,28 @@ export default function CarouselEdit() {
         </div>
 
         <div className="create-btn-container | flex justify-end mx-auto max-w-4xl my-2">
-          <ActionBtn type="create" value="Create" onCLick={createHandler} />
+          <ActionBtn
+            type="create"
+            value="Create"
+            onCLick={() => setOpenModel(true)}
+          />
         </div>
+        <Modal show={openModel} onClose={() => setOpenModel(false)}>
+          <Modal.Header>Add CarouselItem Confirmation</Modal.Header>
+          <Modal.Body>
+            <div className="space-y-6">
+              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                Are you sure you want to add Carousel Item?
+              </p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={createHandler}>Yess!</Button>
+            <Button color="gray" onClick={() => setOpenModel(false)}>
+              <p>Cancel</p>
+            </Button>
+          </Modal.Footer>
+        </Modal>
         {loadingCreate ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />

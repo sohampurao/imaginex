@@ -10,6 +10,30 @@ BlogPostRouter.get('/', async (req, res) => {
   res.send(BlogPosts);
 });
 
+BlogPostRouter.post(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const admin = req.body.adminInfo;
+    const newBlogPost = new BlogPost({
+      path: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+      title: 'This is the sample title',
+      description: 'This is the sample discription',
+      slug: 'slug-' + Date.now(),
+      category: 'Sample Flats',
+      admin: {
+        firstName: admin.firstName,
+        lastName: admin.lastName,
+        image: admin.profileImage,
+        isAdmin: admin.isAdmin,
+      },
+    });
+    const blogPost = await newBlogPost.save();
+    res.send({ message: 'New Blog Post is created!', blogPost });
+  })
+);
+
 BlogPostRouter.get(
   '/admin',
   isAuth,

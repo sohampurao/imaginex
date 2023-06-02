@@ -22,7 +22,7 @@ CarouselRouter.post(
       subtitle: 'This is Sample Subtitle',
     });
     const carouselItem = await newCarouselItem.save();
-    res.send({ message: 'New Carousel Item is Creadted!', carouselItem });
+    res.send({ message: 'New Carousel Item is Created!', carouselItem });
   })
 );
 

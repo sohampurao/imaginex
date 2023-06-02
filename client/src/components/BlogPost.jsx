@@ -2,6 +2,7 @@ import { Avatar, Badge } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FormatDate, FormatTime } from '../utils';
+import '../index.css';
 
 /* eslint-disable react/prop-types */
 export default function BlogPost({ blogPosts }) {
@@ -28,14 +29,17 @@ export default function BlogPost({ blogPosts }) {
             <>
               <article
                 key={index}
-                className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5"
+                className="blog-post-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row"
               >
-                <iframe
-                  className="matterport-iframe | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto "
-                  src={post.path}
-                  allowFullScreen
-                ></iframe>
-                <div className="blog-body | container p-5">
+                <div className="blog-post-display | w-full">
+                  <iframe
+                    className="matterport-iframe | w-full h-[250px] sm:h-[350px] md:h-[300px]"
+                    src={post.path}
+                    allowFullScreen
+                  ></iframe>
+                </div>
+
+                <div className="blog-text | p-5 w-full">
                   <div className="profile | flex gap-2 items-center">
                     <Avatar img={post.admin.image} rounded={true}>
                       <div className="space-y-1 font-medium dark:text-white">

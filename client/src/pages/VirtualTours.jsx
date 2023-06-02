@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import BlogPost from '../components/BlogPost';
 import logger from 'use-reducer-logger';
+import AlertBox from '../components/AlertBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -100,7 +101,7 @@ export default function VirtualTours() {
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (
-          <div>{error}</div>
+          <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
             <BlogPost blogPosts={blogPosts}></BlogPost>

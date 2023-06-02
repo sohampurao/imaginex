@@ -10,6 +10,20 @@ CarouselRouter.get('/', async (req, res) => {
   res.send(CarouselItems);
 });
 
+CarouselRouter.get(
+  '/admin/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const carouselItemId = req.params.id;
+    const carouselItem = await Carousel.findById(carouselItemId);
+    if (carouselItem) {
+      res.send({ carouselItem });
+    }
+    res.status(404).send({ message: 'Carousel Item not found' });
+  })
+);
+
 CarouselRouter.post(
   '/',
   isAuth,

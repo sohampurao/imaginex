@@ -2,11 +2,12 @@ import { Button, Modal, Spinner, Table } from 'flowbite-react';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { FormatDate, getError } from '../../utils';
-import { Store } from '../../Store';
+import { FormatDate, getError } from '../../../utils';
+import { Store } from '../../../Store';
 import logger from 'use-reducer-logger';
-import ActionBtn from '../../components/ActionBtn';
+import ActionBtn from '../../../components/ActionBtn';
 import { useNavigate } from 'react-router-dom';
+import AlertBox from '../../../components/AlertBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -59,7 +60,7 @@ export default function BlogPostsList() {
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         toast.error(getError(error));
-        dispatch({ type: 'FETCH_FAILED', payload: error.message });
+        dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };
     fetchData();
@@ -84,7 +85,7 @@ export default function BlogPostsList() {
       navigate(`/blogpost/${data.blogPost._id}`);
     } catch (error) {
       toast.error(getError(error));
-      dispatch({ type: 'CREATE_BLOGPOST_FAILED', payload: error });
+      dispatch({ type: 'CREATE_BLOGPOST_FAILED', payload: getError(error) });
     }
   };
   return (
@@ -122,7 +123,7 @@ export default function BlogPostsList() {
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : errorCreate ? (
-          console.log(errorCreate)
+          <AlertBox variant="failure">{errorCreate}</AlertBox>
         ) : (
           ''
         )}
@@ -131,7 +132,7 @@ export default function BlogPostsList() {
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (
-          <div>{error}</div>
+          <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
             <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">

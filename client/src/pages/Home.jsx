@@ -15,6 +15,8 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { EffectFade, Navigation, Pagination, Autoplay, Keyboard } from 'swiper';
+import { getError } from '../utils';
+import AlertBox from '../components/AlertBox';
 
 const carouselReducer = (state, action) => {
   switch (action.type) {
@@ -80,7 +82,7 @@ export default function Home() {
       } catch (error) {
         carouselDispatch({
           type: 'FETCH_CAROUSEL_FAIL',
-          payload: carouselError.message,
+          payload: getError(error),
         });
       }
     };
@@ -100,7 +102,7 @@ export default function Home() {
       } catch (error) {
         blogPostsDispatch({
           type: 'FETCH_BLOGPOSTS_FAIL',
-          payload: error.message,
+          payload: getError(error),
         });
       }
     };
@@ -115,7 +117,7 @@ export default function Home() {
       ) : (
         <>
           {carouselError ? (
-            <div>{carouselError}</div>
+            <AlertBox variant="failure">{carouselError}</AlertBox>
           ) : (
             <>
               <Swiper
@@ -167,7 +169,7 @@ export default function Home() {
 
           {/* blog posts */}
           {blogPostsError ? (
-            <div> {blogPostsError} </div>
+            <AlertBox variant="failure">{blogPostsError}</AlertBox>
           ) : (
             <BlogPost blogPosts={blogPosts}></BlogPost>
           )}

@@ -5,7 +5,8 @@ import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Avatar, Badge, Tooltip } from 'flowbite-react';
-import { FormatDate, FormatTime } from '../utils';
+import { FormatDate, FormatTime, getError } from '../utils';
+import AlertBox from '../components/AlertBox';
 
 const blogPostReducer = (state, action) => {
   switch (action.type) {
@@ -48,9 +49,10 @@ export default function BlogPost() {
           payload: response.data,
         });
       } catch (error) {
+        toast.error(getError(error));
         blogPostDispatch({
           type: 'FETCH_BLOGPOST_FAIL',
-          payload: error.message,
+          payload: getError(error),
         });
       }
     };
@@ -84,7 +86,7 @@ export default function BlogPost() {
       {blogPostLoading ? (
         <Preloader />
       ) : blogPostError ? (
-        <div>{blogPostError}</div>
+        <AlertBox variant="failure">{blogPostError}</AlertBox>
       ) : (
         <section className="container mx-auto mt-5  px-5 md:px-0">
           <article className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">

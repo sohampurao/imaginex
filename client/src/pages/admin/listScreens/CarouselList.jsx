@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Button, Card, Modal, Spinner } from 'flowbite-react';
 import { useContext, useEffect, useReducer, useState } from 'react';
-import { Store } from '../../Store';
 import { toast } from 'react-toastify';
-import { getError } from '../../utils';
-import ActionBtn from '../../components/ActionBtn';
+import ActionBtn from '../../../components/ActionBtn';
 import logger from 'use-reducer-logger';
+import { useNavigate } from 'react-router-dom';
+import { Store } from '../../../Store';
+import { getError } from '../../../utils';
+import AlertBox from '../../../components/AlertBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +27,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function CarouselEdit() {
+export default function CarouselList() {
+  const navigate = useNavigate();
   const [openModel, setOpenModel] = useState(null);
   const { state } = useContext(Store);
   const { adminInfo } = state;
@@ -50,7 +53,7 @@ export default function CarouselEdit() {
         dispatch({ type: 'CAROUSEL_SUCCESS', payload: data });
       } catch (error) {
         toast.error(getError(error));
-        dispatch({ type: 'CAROUSEL_FAILED', payload: error });
+        dispatch({ type: 'CAROUSEL_FAILED', payload: getError(error) });
       }
     };
     fetchData();
@@ -60,7 +63,7 @@ export default function CarouselEdit() {
     setOpenModel(false);
     try {
       dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
-      await axios.post(
+      const { data } = await axios.post(
         'http://localhost:5000/carousel',
         { authorization: `Bearer ${adminInfo.token}` },
         {
@@ -69,9 +72,10 @@ export default function CarouselEdit() {
       );
       toast.success('Carousel Item created succussfully!');
       dispatch({ type: 'CAROUSEL_CREATE_SUCCESS' });
+      navigate(`/carousel/${data.carouselItem._id}`);
     } catch (error) {
       toast.error(getError(error));
-      dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: error });
+      dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: getError(error) });
     }
   };
 
@@ -110,7 +114,7 @@ export default function CarouselEdit() {
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : errorCreate ? (
-          <div>{errorCreate}</div>
+          <AlertBox variant="failure">{errorCreate}</AlertBox>
         ) : (
           ''
         )}
@@ -119,7 +123,7 @@ export default function CarouselEdit() {
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (
-          <div>{error}</div>
+          <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
             {carouselItems.map((item) => {

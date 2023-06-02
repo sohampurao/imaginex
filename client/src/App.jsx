@@ -9,8 +9,9 @@ import PageNotFound from './pages/PageNotFound';
 import ScrollToTop from 'react-scroll-to-top';
 import Dashboard from './components/Dashboard';
 import AdminRoute from './components/AdminRoute';
-import BlogPostsList from './pages/admin/BlogPostsList';
-import CarouselEdit from './pages/admin/CarouselEdit';
+import BlogPostsList from './pages/admin/listScreens/BlogPostsList';
+import CarouselList from './pages/admin/listScreens/CarouselList';
+import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
 
 function App() {
   return (
@@ -61,9 +62,19 @@ function App() {
             }
           ></Route>
 
-          {/* BlogPostList */}
+          {/* CarouselList */}
           <Route
-            path="/carouseledit"
+            path="/carousellist"
+            element={
+              <AdminRoute>
+                <CarouselList />
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* CarouselEdit */}
+          <Route
+            path="/carousel/:id"
             element={
               <AdminRoute>
                 <CarouselEdit />

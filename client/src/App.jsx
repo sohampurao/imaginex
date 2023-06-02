@@ -12,6 +12,7 @@ import AdminRoute from './components/AdminRoute';
 import BlogPostsList from './pages/admin/listScreens/BlogPostsList';
 import CarouselList from './pages/admin/listScreens/CarouselList';
 import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
+import BlogPostEdit from './pages/admin/editScreens/BlogPostEdit';
 
 function App() {
   return (
@@ -88,6 +89,16 @@ function App() {
             element={
               <AdminRoute>
                 <BlogPostsList></BlogPostsList>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* BlogPostEdit */}
+          <Route
+            path="/blogposts/:id"
+            element={
+              <AdminRoute>
+                <BlogPostEdit></BlogPostEdit>
               </AdminRoute>
             }
           ></Route>

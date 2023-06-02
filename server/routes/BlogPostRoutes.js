@@ -10,6 +10,20 @@ BlogPostRouter.get('/', async (req, res) => {
   res.send(BlogPosts);
 });
 
+BlogPostRouter.get(
+  '/edit/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const blogPostId = req.params.id;
+    const blogPost = await BlogPost.findById(blogPostId);
+    if (blogPost) {
+      res.send({ blogPost });
+    }
+    res.status(404).send({ message: 'BlogPost not found' });
+  })
+);
+
 BlogPostRouter.post(
   '/',
   isAuth,

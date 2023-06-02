@@ -82,7 +82,7 @@ export default function BlogPostsList() {
       );
       toast.success('Blogpost created successfully!');
       dispatch({ type: 'CREATE_BLOGPOST_SUCCESS' });
-      navigate(`/blogpost/${data.blogPost._id}`);
+      navigate(`/blogposts/${data.blogPost._id}`);
     } catch (error) {
       toast.error(getError(error));
       dispatch({ type: 'CREATE_BLOGPOST_FAILED', payload: getError(error) });

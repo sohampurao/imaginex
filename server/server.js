@@ -8,6 +8,7 @@ import BlogPostRouter from './routes/BlogPostRoutes.js';
 import CarouselRouter from './routes/CarouselRoutes.js';
 import AdminRouter from './routes/AdminRoutes.js';
 import expressAsyncHandler from 'express-async-handler';
+import uploadRouter from './routes/UploadRoutes.js';
 
 // basic configuration
 const app = express();
@@ -34,6 +35,8 @@ app.use('/blogposts', BlogPostRouter);
 app.use('/carousel', CarouselRouter);
 
 app.use('/admins', AdminRouter);
+
+app.use('/upload', uploadRouter);
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });

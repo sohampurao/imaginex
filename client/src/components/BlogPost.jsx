@@ -8,7 +8,7 @@ import '../index.css';
 export default function BlogPost({ blogPosts }) {
   const [formattedTimes, setFormattedTimes] = useState([]);
 
-  // this updates the date and uploaded time every seconds
+  // this updates the uploaded time every seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
       const newFormattedTimes = blogPosts.map((post) =>
@@ -56,7 +56,7 @@ export default function BlogPost({ blogPosts }) {
 
                 <div className="blog-text | p-5 w-full">
                   <div className="profile | flex gap-2 items-center">
-                    <Avatar img={post.admin.image} rounded={true}>
+                    <Avatar img={post.admin.profileImage} rounded={true}>
                       <div className="space-y-1 font-medium dark:text-white">
                         <div className="user-profile | flex  items-center gap-2">
                           <span>

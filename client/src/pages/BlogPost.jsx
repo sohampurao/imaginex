@@ -93,7 +93,7 @@ export default function BlogPost() {
             <div className="blog-body | container p-5">
               <div className="profile | flex gap-2 items-center">
                 <Avatar
-                  img={blogPost.admin.image}
+                  img={blogPost.admin.profileImage}
                   alt="Admin Profile pic"
                   rounded={true}
                 ></Avatar>
@@ -144,11 +144,29 @@ export default function BlogPost() {
               </div>
             </div>
 
-            <iframe
-              className="matterport-iframe | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto "
-              src={blogPost.path}
-              allowFullScreen
-            ></iframe>
+            <div className="blog-post-display | w-full">
+              {blogPost.mediaType == 'image' && (
+                <img
+                  src={blogPost.path}
+                  alt=""
+                  className="blogblogPost.image | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto"
+                />
+              )}
+              {blogPost.mediaType == 'video' && (
+                <video className="w-full h-auto max-w-full" controls autoPlay>
+                  <source src={blogPost.path} type="video/mp4" />
+                </video>
+              )}
+
+              {blogPost.mediaType == 'matterport' && (
+                <iframe
+                  className="matterport-iframe | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto"
+                  src={blogPost.path}
+                  allowFullScreen
+                ></iframe>
+              )}
+            </div>
+
             <div className="container p-5">
               <hr className="my-2 block" />
               <div className="blogpost-footer | flex justify-between items-center px-1">

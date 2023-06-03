@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   FileInput,
   Label,
@@ -10,8 +11,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useReducer } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
-import { getError } from '../../../utils';
-import { useParams } from 'react-router-dom';
+import { FormatDate, FormatTime, getError } from '../../../utils';
+import { useNavigate, useParams } from 'react-router-dom';
 import AlertBox from '../../../components/AlertBox';
 import logger from 'use-reducer-logger';
 import { toast } from 'react-toastify';
@@ -35,23 +36,40 @@ const reducer = (state, action) => {
   }
 };
 export default function CarouselEdit() {
+  const navigate = useNavigate();
   const params = useParams();
   const { id: carouselItemId } = params;
 
+  const [carouselItem, setCarouselItem] = useState({});
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
 
   const { state } = useContext(Store);
   const { adminInfo } = state;
+  const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
   const [{ loading, error, loadingCreate, errorUpdate }, dispatch] = useReducer(
     logger(reducer),
     {
       loading: true,
       error: '',
+      loadingCreate: false,
+      errorUpdate: '',
     }
   );
+
+  // this updates the uploaded time every seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const formattedTime = FormatTime(carouselItem.updatedAt);
+      setFormattedUpdateTime(formattedTime);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [carouselItem]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,12 +81,11 @@ export default function CarouselEdit() {
             headers: { authorization: `Bearer ${adminInfo.token}` },
           }
         );
+        setCarouselItem(data.carouselItem);
+        setTitle(data.carouselItem.title);
+        setSubtitle(data.carouselItem.subtitle);
+        setImage(data.carouselItem.image);
         dispatch({ type: 'FETCH_SUCCESS' });
-        const { carouselItem } = data;
-        setTitle(carouselItem.title);
-        console.log(carouselItem.title);
-        setSubtitle(carouselItem.subtitle);
-        setImage(carouselItem.image);
       } catch (error) {
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
@@ -93,6 +110,7 @@ export default function CarouselEdit() {
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
       toast.success('Carousel Item updated succssfully');
+      navigate('/carousellist');
     } catch (error) {
       dispatch({ type: 'UPDATE_FAILED', payload: error });
     }
@@ -115,6 +133,20 @@ export default function CarouselEdit() {
           >
             <div className="signin-title | text-xl font-semibold font-serif text-center">
               Edit Carousel Item
+            </div>
+            <div className="updated-status">
+              {carouselItem.createdAt !== carouselItem.updatedAt ? (
+                <Badge
+                  color="success"
+                  className="mx-auto flex justify-center p-5 text-neutral-600 text-base w-[250px]"
+                >
+                  <span>Updated at: {FormatDate(carouselItem.updatedAt)}</span>
+                  <span className="mx-[5px] inline-block">||</span>
+                  <span>{formattedUpdateTime}</span>
+                </Badge>
+              ) : (
+                ''
+              )}
             </div>
             <div className="carousel-img | ">
               <img

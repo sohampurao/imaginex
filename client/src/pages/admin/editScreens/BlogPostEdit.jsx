@@ -2,7 +2,7 @@ import { useContext, useEffect, useReducer, useState } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
 import { FormatDate, FormatTime, getError } from '../../../utils';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   Badge,
@@ -38,23 +38,42 @@ const reducer = (state, action) => {
 };
 
 export default function BlogPostEdit() {
+  const navigate = useNavigate();
   const params = useParams();
 
   const { id: blogPostId } = params;
   const { state } = useContext(Store);
   const { adminInfo } = state;
 
-  const [path, setPath] = useState('');
   const [blogPost, setBlogPost] = useState({});
+  const [path, setPath] = useState('');
   const [mediaType, setMediaType] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
-  const [{ loading, error }, dispatch] = useReducer(logger(reducer), {
-    loading: true,
-    error: '',
-  });
+  const [{ loading, error, loadingUpdate, errorUpdate }, dispatch] = useReducer(
+    logger(reducer),
+    {
+      loading: true,
+      error: '',
+      loadingUpdate: false,
+      errorUpdate: '',
+    }
+  );
+
+  // this updates the uploaded time every seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const formattedTime = FormatTime(blogPost.updatedAt);
+      setFormattedUpdateTime(formattedTime);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [blogPost]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +91,6 @@ export default function BlogPostEdit() {
         setTitle(data.blogPost.title);
         setCategory(data.blogPost.category);
         setDescription(data.blogPost.description);
-
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (error) {
         toast.error(getError(error));
@@ -107,6 +125,7 @@ export default function BlogPostEdit() {
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
       toast.success('Blog Post updated successfully!');
+      navigate('/blogpostslist');
     } catch (error) {
       dispatch({ type: 'UPDATE_FAILED', payload: getError(error) });
     }
@@ -127,6 +146,8 @@ export default function BlogPostEdit() {
             </div>
           ) : error ? (
             <AlertBox variant="failure">{error}</AlertBox>
+          ) : errorUpdate ? (
+            <AlertBox variant="failure">{errorUpdate}</AlertBox>
           ) : (
             <>
               <div className="updated-status">
@@ -137,7 +158,7 @@ export default function BlogPostEdit() {
                   >
                     <span>Updated at: {FormatDate(blogPost.updatedAt)}</span>
                     <span className="mx-[5px] inline-block">||</span>
-                    <span>{FormatTime(blogPost.updatedAt)}</span>
+                    <span>{formattedUpdateTime}</span>
                   </Badge>
                 ) : (
                   ''
@@ -290,7 +311,16 @@ export default function BlogPostEdit() {
                   <option>Showrooms and Experience Centers</option>
                 </Select>
               </div>
-              <Button type="submit">Save</Button>
+              <Button type="submit">
+                {loadingUpdate ? (
+                  <>
+                    <Spinner aria-label="Spinner button example" />
+                    <span className="pl-3">Updating...</span>
+                  </>
+                ) : (
+                  'Update'
+                )}
+              </Button>
             </>
           )}
         </form>

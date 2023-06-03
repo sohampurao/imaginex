@@ -73,7 +73,7 @@ export default function BlogPostEdit() {
           // onSubmit={submitHandler}
         >
           <div className="signin-title | text-xl font-semibold font-serif text-center">
-            Edit BlogPost
+            Edit Blog Post
           </div>
           {loading ? (
             <div className="text-center">
@@ -86,7 +86,7 @@ export default function BlogPostEdit() {
               <div className="carousel-img | ">
                 <iframe
                   className="matterport-iframe | w-full h-[300px]"
-                  src={path}
+                  src={path || 'https://my.matterport.com/show/?m=XYZ46qV7SaP'}
                   allowFullScreen
                 ></iframe>
               </div>

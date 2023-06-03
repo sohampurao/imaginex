@@ -24,6 +24,24 @@ CarouselRouter.get(
   })
 );
 
+CarouselRouter.put(
+  '/update/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const carouselItemId = req.params.id;
+    const carouselItem = await Carousel.findById(carouselItemId);
+    if (carouselItem) {
+      carouselItem.image = req.body.image;
+      carouselItem.title = req.body.title;
+      carouselItem.subtitle = req.body.subtitle;
+      await carouselItem.save();
+      res.send({ message: 'Carousel Item Updated' });
+    }
+    res.status(404).send({ message: 'Carousel Item Not Found' });
+  })
+);
+
 CarouselRouter.post(
   '/',
   isAuth,

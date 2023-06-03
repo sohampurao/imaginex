@@ -14,6 +14,7 @@ import { getError } from '../../../utils';
 import { useParams } from 'react-router-dom';
 import AlertBox from '../../../components/AlertBox';
 import logger from 'use-reducer-logger';
+import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +24,12 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case 'FETCH_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'UPDATE_REQUEST':
+      return { ...state, loadingCreate: true };
+    case 'UPDATE_SUCCESS':
+      return { ...state, loadingCreate: false };
+    case 'UPDATE_FAILED':
+      return { ...state, loadingCreate: false, errorUpdate: action.payload };
     default:
       return state;
   }
@@ -38,10 +45,13 @@ export default function CarouselEdit() {
   const { state } = useContext(Store);
   const { adminInfo } = state;
 
-  const [{ loading, error }, dispatch] = useReducer(logger(reducer), {
-    loading: true,
-    error: '',
-  });
+  const [{ loading, error, loadingCreate, errorUpdate }, dispatch] = useReducer(
+    logger(reducer),
+    {
+      loading: true,
+      error: '',
+    }
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,8 +76,26 @@ export default function CarouselEdit() {
     fetchData();
   }, [adminInfo, carouselItemId]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      dispatch({ type: 'UPDATE_REQUEST' });
+      await axios.put(
+        `http://localhost:5000/carousel/update/${carouselItemId}`,
+        {
+          image,
+          title,
+          subtitle,
+        },
+        {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        }
+      );
+      dispatch({ type: 'UPDATE_SUCCESS' });
+      toast.success('Carousel Item updated succssfully');
+    } catch (error) {
+      dispatch({ type: 'UPDATE_FAILED', payload: error });
+    }
   };
   return (
     <>
@@ -77,6 +105,8 @@ export default function CarouselEdit() {
         </div>
       ) : error ? (
         <AlertBox variant="failure">{error}</AlertBox>
+      ) : errorUpdate ? (
+        <AlertBox variant="failure">{errorUpdate}</AlertBox>
       ) : (
         <div className="container mx-auto flex justify-center pb-5">
           <form
@@ -100,7 +130,7 @@ export default function CarouselEdit() {
               <FileInput
                 id="image"
                 type="file"
-                required={true}
+                // required={true}
                 helperText="*4000×2000 image size is recommended"
               />
             </div>
@@ -132,7 +162,16 @@ export default function CarouselEdit() {
                 }}
               />
             </div>
-            <Button type="submit">Save</Button>
+            <Button type="submit">
+              {loadingCreate ? (
+                <>
+                  <Spinner aria-label="Spinner button example" />
+                  <span className="pl-3">Updating...</span>
+                </>
+              ) : (
+                'Update'
+              )}
+            </Button>
           </form>
         </div>
       )}

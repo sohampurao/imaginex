@@ -4,7 +4,7 @@ import { useContext, useEffect, useReducer, useState } from 'react';
 import { toast } from 'react-toastify';
 import ActionBtn from '../../../components/ActionBtn';
 import logger from 'use-reducer-logger';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../../Store';
 import { getError } from '../../../utils';
 import AlertBox from '../../../components/AlertBox';
@@ -146,11 +146,13 @@ export default function CarouselList() {
                       value="delete"
                       icon={<i className="bi bi-trash3-fill"></i>}
                     />
-                    <ActionBtn
-                      type="edit"
-                      value="edit"
-                      icon={<i className="bi bi-pencil-square"></i>}
-                    />
+                    <Link to={`/carousel/${item._id}`}>
+                      <ActionBtn
+                        type="edit"
+                        value="edit"
+                        icon={<i className="bi bi-pencil-square"></i>}
+                      />
+                    </Link>
                   </div>
                 </Card>
               );

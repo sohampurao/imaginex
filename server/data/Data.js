@@ -54,6 +54,7 @@ const data = {
   blogposts: [
     {
       path: 'https://my.matterport.com/show/?m=p7gSLGcPg2x',
+      mediaType: 'matterport',
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
@@ -68,6 +69,7 @@ const data = {
     },
     {
       path: 'https://my.matterport.com/show/?m=J2hb12qVgeb',
+      mediaType: 'matterport',
       title: 'Lorem ipsum dolor sit amet',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
@@ -82,6 +84,7 @@ const data = {
     },
     {
       path: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+      mediaType: 'matterport',
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
@@ -96,6 +99,7 @@ const data = {
     },
     {
       path: 'https://my.matterport.com/show/?m=aPWgFkpVrEX',
+      mediaType: 'matterport',
       title: 'Lorem ipsum dolor sit amet.',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',

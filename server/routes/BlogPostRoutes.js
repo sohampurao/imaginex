@@ -32,6 +32,7 @@ BlogPostRouter.post(
     const admin = req.body.adminInfo;
     const newBlogPost = new BlogPost({
       path: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+      mediaType: 'matterport',
       title: 'This is the sample title',
       description: 'This is the sample discription',
       slug: 'slug-' + Date.now(),

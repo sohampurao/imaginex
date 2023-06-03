@@ -6,7 +6,7 @@ import { FormatDate, getError } from '../../../utils';
 import { Store } from '../../../Store';
 import logger from 'use-reducer-logger';
 import ActionBtn from '../../../components/ActionBtn';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AlertBox from '../../../components/AlertBox';
 
 const reducer = (state, action) => {
@@ -92,7 +92,7 @@ export default function BlogPostsList() {
     <>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-5">
         <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          Edit Carousel
+          Blog Posts
         </div>
         <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
           <Button
@@ -167,11 +167,13 @@ export default function BlogPostsList() {
                             sizeReset="p-3 rounded-lg"
                             icon={<i className="bi bi-trash3-fill"></i>}
                           />
-                          <ActionBtn
-                            type="edit"
-                            sizeReset="p-3 rounded-lg"
-                            icon={<i className="bi bi-pencil-square"></i>}
-                          />
+                          <Link to={`/blogposts/${post._id}`}>
+                            <ActionBtn
+                              type="edit"
+                              sizeReset="p-3 rounded-lg"
+                              icon={<i className="bi bi-pencil-square"></i>}
+                            />
+                          </Link>
                         </Table.Cell>
                       </Table.Row>
                     );

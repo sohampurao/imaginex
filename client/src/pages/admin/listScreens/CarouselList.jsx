@@ -83,15 +83,16 @@ export default function CarouselList() {
     <>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          Edit Carousel
+          Carousel
         </div>
 
         <div className="create-btn-container | flex justify-end mx-auto max-w-4xl my-2">
-          <ActionBtn
-            type="create"
-            value="Create"
-            onCLick={() => setOpenModel(true)}
-          />
+          <Button
+            gradientDuoTone="pinkToOrange"
+            onClick={() => setOpenModel(true)}
+          >
+            Create
+          </Button>
         </div>
         <Modal show={openModel} onClose={() => setOpenModel(false)}>
           <Modal.Header>Add CarouselItem Confirmation</Modal.Header>

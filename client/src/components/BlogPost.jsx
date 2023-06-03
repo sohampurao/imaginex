@@ -96,7 +96,13 @@ export default function BlogPost({ blogPosts }) {
                       {post.title}
                     </NavLink>
                   </h1>
-                  <div className="blog-subtitle | text-base text-neutral-600 text-justify">
+                  <div
+                    className={`blog-subtitle | text-base text-neutral-600 text-justify ${
+                      post.description.length <= 200
+                        ? 'hover:text-blue-400 cursor-pointer'
+                        : ''
+                    }`}
+                  >
                     {post.description.length >= 200 ? (
                       <>
                         <div>
@@ -110,7 +116,9 @@ export default function BlogPost({ blogPosts }) {
                         </div>
                       </>
                     ) : (
-                      post.description
+                      <Link to={`/blogpost/slug/${post.slug}`}>
+                        {post.description}
+                      </Link>
                     )}
                   </div>
                 </div>

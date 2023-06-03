@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   Button,
+  FileInput,
   Label,
+  Radio,
   Select,
   Spinner,
   TextInput,
@@ -34,6 +36,7 @@ export default function BlogPostEdit() {
   const { state } = useContext(Store);
   const { adminInfo } = state;
   const [path, setPath] = useState('');
+  const [mediaType, setMediaType] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -54,6 +57,7 @@ export default function BlogPostEdit() {
           }
         );
         setPath(data.blogPost.path);
+        setMediaType(data.blogPost.mediaType);
         setTitle(data.blogPost.title);
         setCategory(data.blogPost.category);
         setDescription(data.blogPost.description);
@@ -83,25 +87,77 @@ export default function BlogPostEdit() {
             <AlertBox variant="failure">{error}</AlertBox>
           ) : (
             <>
-              <div className="carousel-img | ">
+              <div className="carousel-img">
                 <iframe
                   className="matterport-iframe | w-full h-[300px]"
-                  src={path || 'https://my.matterport.com/show/?m=XYZ46qV7SaP'}
+                  src={path}
                   allowFullScreen
                 ></iframe>
               </div>
               <div>
+                <fieldset className="flex max-w-md gap-4" id="radio">
+                  <legend className="mb-4">Choose media type</legend>
+                  <div className="flex items-center gap-2">
+                    <Radio
+                      defaultChecked
+                      id="matterport"
+                      name="mediaType"
+                      value="matterport"
+                      onChange={(e) => setMediaType(e.target.value)}
+                    />
+                    <Label htmlFor="matterport">Matterport</Label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Radio
+                      id="image"
+                      name="mediaType"
+                      value="image"
+                      onChange={(e) => setMediaType(e.target.value)}
+                    />
+                    <Label htmlFor="image">Image</Label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Radio
+                      id="video"
+                      name="mediaType"
+                      value="video"
+                      onChange={(e) => setMediaType(e.target.value)}
+                    />
+                    <Label htmlFor="video">Video</Label>
+                  </div>
+                </fieldset>
+              </div>
+              <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="path" value="Path" />
+                  <Label
+                    htmlFor="media"
+                    value={
+                      mediaType == 'matterport'
+                        ? 'Enter Path'
+                        : mediaType == 'image'
+                        ? 'Upload Image'
+                        : mediaType == 'video'
+                        ? 'Upload Video'
+                        : 'Path'
+                    }
+                  />
                 </div>
-                <TextInput
-                  id="path"
-                  type="url"
-                  required={true}
-                  placeholder="paste URL"
-                  value={path}
-                  onChange={(e) => setPath(e.target.value)}
-                />
+                {mediaType == 'matterport' ? (
+                  <TextInput
+                    id="media"
+                    type="text"
+                    required={true}
+                    placeholder="Write title..."
+                    value={path}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                ) : (
+                  <FileInput
+                    id="media"
+                    type="file"
+                    // required={true}
+                  />
+                )}
               </div>
               <div>
                 <div className="mb-2 block">

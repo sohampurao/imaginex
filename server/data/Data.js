@@ -53,11 +53,11 @@ const data = {
   ],
   blogposts: [
     {
-      path: 'https://my.matterport.com/show/?m=p7gSLGcPg2x',
-      mediaType: 'matterport',
+      path: '/images/house.jpg',
+      mediaType: 'image',
       title: 'Lorem ipsum dolor sit amet.',
       description:
-        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+        'Lorem ipsum Lorem ipsum dolor sit amet consectetur, provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
       slug: 'aquant-display-centre',
       category: 'Real Estate',
       admin: {
@@ -68,8 +68,8 @@ const data = {
       },
     },
     {
-      path: 'https://my.matterport.com/show/?m=J2hb12qVgeb',
-      mediaType: 'matterport',
+      path: '/videos/sample-video.mp4',
+      mediaType: 'video',
       title: 'Lorem ipsum dolor sit amet',
       description:
         'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',

@@ -24,6 +24,30 @@ BlogPostRouter.get(
   })
 );
 
+BlogPostRouter.put(
+  '/update/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const blogPostId = req.params.id;
+    const blogPost = await BlogPost.findById(blogPostId);
+    if (blogPost) {
+      (blogPost.path = req.body.path),
+        (blogPost.title = req.body.title),
+        (blogPost.mediaType = req.body.mediaType),
+        (blogPost.description = req.body.description),
+        (blogPost.category = req.body.category),
+        (blogPost.admin.firstName = req.body.adminInfo.firstName);
+      blogPost.admin.lastName = req.body.adminInfo.lastName;
+      blogPost.admin.profileImage = req.body.adminInfo.profileImage;
+      blogPost.admin.isAdmin = req.body.adminInfo.isAdmin;
+      await blogPost.save();
+      res.send({ message: 'Blog Post Updated!' });
+    }
+    res.status(404).send({ message: 'Blog Post Not Found' });
+  })
+);
+
 BlogPostRouter.post(
   '/',
   isAuth,

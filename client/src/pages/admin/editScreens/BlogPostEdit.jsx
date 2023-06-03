@@ -1,10 +1,11 @@
 import { useContext, useEffect, useReducer, useState } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
-import { getError } from '../../../utils';
+import { FormatDate, FormatTime, getError } from '../../../utils';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
+  Badge,
   Button,
   FileInput,
   Label,
@@ -25,6 +26,12 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case 'FETCH_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'UPDATE_REQUEST':
+      return { ...state, loadingUpdate: true };
+    case 'UPDATE_SUCCESS':
+      return { ...state, loadingUpdate: false };
+    case 'UPDATE_FAILED':
+      return { ...state, loadingUpdate: false, errorUpdate: action.payload };
     default:
       return state;
   }
@@ -32,10 +39,13 @@ const reducer = (state, action) => {
 
 export default function BlogPostEdit() {
   const params = useParams();
+
   const { id: blogPostId } = params;
   const { state } = useContext(Store);
   const { adminInfo } = state;
+
   const [path, setPath] = useState('');
+  const [blogPost, setBlogPost] = useState({});
   const [mediaType, setMediaType] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -56,11 +66,13 @@ export default function BlogPostEdit() {
             headers: { authorization: `Bearer ${adminInfo.token}` },
           }
         );
+        setBlogPost(data.blogPost);
         setPath(data.blogPost.path);
         setMediaType(data.blogPost.mediaType);
         setTitle(data.blogPost.title);
         setCategory(data.blogPost.category);
         setDescription(data.blogPost.description);
+
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (error) {
         toast.error(getError(error));
@@ -69,12 +81,42 @@ export default function BlogPostEdit() {
     };
     fetchData();
   }, [adminInfo, blogPostId]);
+
+  const handleVideoError = (event) => {
+    event.target.src =
+      'https://placehold.co/550x300.mp4?text=Im+placeholder+replace+me!'; // Replace with your fallback video URL
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch({ type: 'UPDATE_REQUEST' });
+      await axios.put(
+        `http://localhost:5000/blogposts/update/${blogPostId}`,
+        {
+          path,
+          mediaType,
+          title,
+          description,
+          category,
+          adminInfo,
+        },
+        {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        }
+      );
+      dispatch({ type: 'UPDATE_SUCCESS' });
+      toast.success('Blog Post updated successfully!');
+    } catch (error) {
+      dispatch({ type: 'UPDATE_FAILED', payload: getError(error) });
+    }
+  };
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">
         <form
           className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] shadow p-4 rounded-lg"
-          // onSubmit={submitHandler}
+          onSubmit={submitHandler}
         >
           <div className="signin-title | text-xl font-semibold font-serif text-center">
             Edit Blog Post
@@ -87,19 +129,62 @@ export default function BlogPostEdit() {
             <AlertBox variant="failure">{error}</AlertBox>
           ) : (
             <>
+              <div className="updated-status">
+                {blogPost.createdAt !== blogPost.updatedAt ? (
+                  <Badge
+                    color="success"
+                    className="mx-auto flex justify-center p-5 text-neutral-600 text-base w-[250px]"
+                  >
+                    <span>Updated at: {FormatDate(blogPost.updatedAt)}</span>
+                    <span className="mx-[5px] inline-block">||</span>
+                    <span>{FormatTime(blogPost.updatedAt)}</span>
+                  </Badge>
+                ) : (
+                  ''
+                )}
+              </div>
               <div className="carousel-img">
-                <iframe
-                  className="matterport-iframe | w-full h-[300px]"
-                  src={path}
-                  allowFullScreen
-                ></iframe>
+                {mediaType == 'image' && (
+                  <img
+                    src={path}
+                    alt="Blog Post"
+                    className="blogpost-image | w-full h-[300px]"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        'https://placehold.co/500x300?text=Im+placeholder+replace+me!'; // Replace with your fallback video URL
+                    }}
+                  />
+                )}
+                {mediaType == 'video' && (
+                  <video
+                    className="w-full h-[300px]"
+                    controls
+                    onError={handleVideoError}
+                  >
+                    <source src={path} type="video/mp4" />
+                    <source
+                      src="https://placehold.co/500x300.mp4?text=Im+placeholder+replace+me!"
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+
+                {mediaType == 'matterport' && (
+                  <iframe
+                    className="matterport-iframe |  w-full h-[300px]"
+                    src={path}
+                    allowFullScreen
+                  ></iframe>
+                )}
               </div>
               <div>
                 <fieldset className="flex max-w-md gap-4" id="radio">
                   <legend className="mb-4">Choose media type</legend>
                   <div className="flex items-center gap-2">
                     <Radio
-                      defaultChecked
+                      defaultChecked={mediaType == 'matterport'}
                       id="matterport"
                       name="mediaType"
                       value="matterport"
@@ -109,6 +194,7 @@ export default function BlogPostEdit() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Radio
+                      defaultChecked={mediaType == 'image'}
                       id="image"
                       name="mediaType"
                       value="image"
@@ -118,6 +204,7 @@ export default function BlogPostEdit() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Radio
+                      defaultChecked={mediaType == 'video'}
                       id="video"
                       name="mediaType"
                       value="video"

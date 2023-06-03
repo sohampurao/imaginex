@@ -11,7 +11,7 @@ const BlogPostSchema = new mongoose.Schema(
     admin: {
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
-      image: { type: String, required: true },
+      profileImage: { type: String, required: true },
       isAdmin: { type: Boolean, required: true },
     },
   },

@@ -19,8 +19,9 @@ BlogPostRouter.get(
     const blogPost = await BlogPost.findById(blogPostId);
     if (blogPost) {
       res.send({ blogPost });
+    } else {
+      res.status(404).send({ message: 'BlogPost not found' });
     }
-    res.status(404).send({ message: 'BlogPost not found' });
   })
 );
 
@@ -43,8 +44,24 @@ BlogPostRouter.put(
       blogPost.admin.isAdmin = req.body.adminInfo.isAdmin;
       await blogPost.save();
       res.send({ message: 'Blog Post Updated!' });
+    } else {
+      res.status(404).send({ message: 'Blog Post Not Found' });
     }
-    res.status(404).send({ message: 'Blog Post Not Found' });
+  })
+);
+
+BlogPostRouter.delete(
+  '/delete/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const blogPost = await BlogPost.findById(req.params.id);
+    if (blogPost) {
+      await blogPost.deleteOne();
+      res.send({ message: 'Blogpost item deleted' });
+    } else {
+      res.status(404).send({ message: 'Blogpost item not found' });
+    }
   })
 );
 
@@ -64,7 +81,7 @@ BlogPostRouter.post(
       admin: {
         firstName: admin.firstName,
         lastName: admin.lastName,
-        image: admin.profileImage,
+        profileImage: admin.profileImage,
         isAdmin: admin.isAdmin,
       },
     });

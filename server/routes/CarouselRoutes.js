@@ -18,9 +18,10 @@ CarouselRouter.get(
     const carouselItemId = req.params.id;
     const carouselItem = await Carousel.findById(carouselItemId);
     if (carouselItem) {
-      res.send({ carouselItem });
+      return res.send({ carouselItem });
+    } else {
+      return res.status(404).send({ message: 'Carousel Item not found' });
     }
-    res.status(404).send({ message: 'Carousel Item not found' });
   })
 );
 
@@ -37,8 +38,24 @@ CarouselRouter.put(
       carouselItem.subtitle = req.body.subtitle;
       await carouselItem.save();
       res.send({ message: 'Carousel Item Updated' });
+    } else {
+      res.status(404).send({ message: 'Carousel Item Not Found' });
     }
-    res.status(404).send({ message: 'Carousel Item Not Found' });
+  })
+);
+
+CarouselRouter.delete(
+  '/delete/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const carouselItem = await Carousel.findById(req.params.id);
+    if (carouselItem) {
+      await carouselItem.deleteOne();
+      res.send({ message: 'Carousel item deleted' });
+    } else {
+      res.status(404).send({ message: 'Carousel item not found' });
+    }
   })
 );
 
@@ -64,7 +81,7 @@ CarouselRouter.get(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const CarouselItems = await Carousel.find();
-    res.send(CarouselItems);
+    return res.send(CarouselItems);
   })
 );
 

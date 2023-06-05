@@ -23,6 +23,23 @@ const reducer = (state, action) => {
       return { ...state, loadingCreate: false };
     case 'CAROUSEL_CREATE_FAILED':
       return { ...state, loadingCreate: false, errorCreate: action.payload };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, successDelete: false };
+    case 'DELETE_SUCCESS':
+      return { ...state, loadingDelete: false, successDelete: true };
+    case 'DELETE_FAILED':
+      return {
+        ...state,
+        loadingDelete: false,
+        errorDelete: action.payload,
+        success: false,
+      };
+    case 'DELETE_RESET':
+      return {
+        ...state,
+        loadingDelete: false,
+        success: false,
+      };
     default:
       return state;
   }
@@ -33,11 +50,19 @@ export default function CarouselList() {
   const { state } = useContext(Store);
   const { adminInfo } = state;
   const [
-    { carouselItems, loading, error, loadingCreate, errorCreate },
+    {
+      carouselItems,
+      loading,
+      error,
+      loadingCreate,
+      errorCreate,
+      successDelete,
+    },
     dispatch,
   ] = useReducer(logger(reducer), {
     loading: true,
     error: '',
+    errorDelete: '',
   });
 
   useEffect(() => {
@@ -57,7 +82,11 @@ export default function CarouselList() {
       }
     };
     fetchData();
-  }, [adminInfo]);
+    if (successDelete) {
+      fetchData();
+      dispatch({ type: 'DELETE_RESET' });
+    }
+  }, [adminInfo, successDelete]);
 
   const createHandler = async () => {
     setOpenModel(false);
@@ -77,6 +106,28 @@ export default function CarouselList() {
       toast.error(getError(error));
       dispatch({ type: 'CAROUSEL_CREATE_FAILED', payload: getError(error) });
     }
+  };
+
+  const deleteHandler = async (item, index) => {
+    if (
+      window.confirm(
+        `Are you sure you want to detele slide ${index} : ${item.title}`
+      )
+    )
+      try {
+        dispatch({ type: 'DELETE_REQUEST' });
+        await axios.delete(
+          `http://localhost:5000/carousel/delete/${item._id}`,
+          {
+            headers: { authorization: `Bearer ${adminInfo.token}` },
+          }
+        );
+        dispatch({ type: 'DELETE_SUCCESS' });
+        toast.success('Carousel item deleted successfully');
+      } catch (error) {
+        toast.error(getError(error));
+        dispatch({ type: 'DELETE_FAILED', payload: error });
+      }
   };
 
   return (
@@ -127,7 +178,7 @@ export default function CarouselList() {
           <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
-            {carouselItems.map((item) => {
+            {carouselItems.map((item, index) => {
               return (
                 <Card
                   key={item._id}
@@ -143,6 +194,7 @@ export default function CarouselList() {
                   </p>
                   <div className="action-btns | flex justify-center gap-10 pt-3">
                     <ActionBtn
+                      onCLick={() => deleteHandler(item, index)}
                       type="delete"
                       value="delete"
                       icon={<i className="bi bi-trash3-fill"></i>}

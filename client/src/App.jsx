@@ -13,6 +13,7 @@ import BlogPostsList from './pages/admin/listScreens/BlogPostsList';
 import CarouselList from './pages/admin/listScreens/CarouselList';
 import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
 import BlogPostEdit from './pages/admin/editScreens/BlogPostEdit';
+import AdminList from './pages/admin/listScreens/AdminList';
 
 function App() {
   return (
@@ -99,6 +100,16 @@ function App() {
             element={
               <AdminRoute>
                 <BlogPostEdit></BlogPostEdit>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* adminlist */}
+          <Route
+            path="/adminlist"
+            element={
+              <AdminRoute>
+                <AdminList />
               </AdminRoute>
             }
           ></Route>

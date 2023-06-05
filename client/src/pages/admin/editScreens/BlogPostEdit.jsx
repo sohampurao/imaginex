@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
 import { FormatDate, FormatTime, getError } from '../../../utils';
@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import {
   Badge,
   Button,
-  FileInput,
   Label,
   Radio,
   Select,
@@ -124,12 +123,35 @@ export default function BlogPostEdit() {
         }
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success('Blog Post updated successfully!');
+      toast.success('Blogpost saved successfully!');
       navigate('/blogpostslist');
     } catch (error) {
       dispatch({ type: 'UPDATE_FAILED', payload: getError(error) });
     }
   };
+
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: 'dazvnvkca',
+        uploadPreset: 'pgu2ly6f',
+      },
+      function (error, result) {
+        if (result.event == 'success') {
+          setPath(result.info.secure_url);
+          console.log(path);
+        }
+        if (error) {
+          toast.error(getError(error));
+        }
+      }
+    );
+  }, [path]);
+  const text = 'https://my.matterport.com/show/?m=';
+  console.log(text.length);
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">
@@ -192,13 +214,21 @@ export default function BlogPostEdit() {
                   </video>
                 )}
 
-                {mediaType == 'matterport' && (
-                  <iframe
-                    className="matterport-iframe |  w-full h-[300px]"
-                    src={path}
-                    allowFullScreen
-                  ></iframe>
-                )}
+                {mediaType == 'matterport' &&
+                  (path.slice(0, 34) !==
+                  'https://my.matterport.com/show/?m=' ? (
+                    <img
+                      className="blogpost-image | w-full h-[300px]"
+                      src="https://placehold.co/500x300?text=Im+placeholder+replace+me!"
+                      alt="place hodler"
+                    />
+                  ) : (
+                    <iframe
+                      className="matterport-iframe |  w-full h-[300px]"
+                      src={path}
+                      allowFullScreen
+                    ></iframe>
+                  ))}
               </div>
               <div>
                 <fieldset className="flex max-w-md gap-4" id="radio">
@@ -231,40 +261,41 @@ export default function BlogPostEdit() {
                       value="video"
                       onChange={(e) => setMediaType(e.target.value)}
                     />
-                    <Label htmlFor="video">Video</Label>
+                    <Label htmlFor="matterport">Video</Label>
                   </div>
                 </fieldset>
               </div>
               <div>
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="media"
-                    value={
-                      mediaType == 'matterport'
-                        ? 'Enter Path'
-                        : mediaType == 'image'
-                        ? 'Upload Image'
-                        : mediaType == 'video'
-                        ? 'Upload Video'
-                        : 'Path'
-                    }
-                  />
-                </div>
-                {mediaType == 'matterport' ? (
+                {mediaType == 'matterport' && (
+                  <div className="mb-2 block">
+                    <Label htmlFor="media" value={'Enter Path'} />
+                  </div>
+                )}
+                {mediaType == 'matterport' && (
                   <TextInput
                     id="media"
                     type="text"
                     required={true}
-                    placeholder="Write title..."
+                    placeholder="Enter matterport..."
                     value={path}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) => setPath(e.target.value)}
+                    helperText="Replace the path given the input box."
                   />
-                ) : (
-                  <FileInput
-                    id="media"
-                    type="file"
-                    // required={true}
-                  />
+                )}
+                {(mediaType == 'image' || mediaType == 'video') && (
+                  <div>
+                    <Button
+                      type="button"
+                      gradientDuoTone="purpleToPink"
+                      className="w-full font-semibold"
+                      onClick={() => widgetRef.current.open()}
+                    >
+                      <i className="bi bi-cloud-arrow-up-fill"></i>{' '}
+                      <span className="ms-2">
+                        Upload {mediaType == 'image' ? 'Image' : 'Video'}
+                      </span>
+                    </Button>
+                  </div>
                 )}
               </div>
               <div>
@@ -311,14 +342,14 @@ export default function BlogPostEdit() {
                   <option>Showrooms and Experience Centers</option>
                 </Select>
               </div>
-              <Button type="submit">
+              <Button type="submit" disabled={loadingUpdate}>
                 {loadingUpdate ? (
                   <>
                     <Spinner aria-label="Spinner button example" />
-                    <span className="pl-3">Updating...</span>
+                    <span className="pl-3">Saving...</span>
                   </>
                 ) : (
-                  'Update'
+                  'Save'
                 )}
               </Button>
             </>

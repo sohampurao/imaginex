@@ -30,6 +30,23 @@ const reducer = (state, action) => {
       };
     case 'CREATE_BLOGPOST_FAILED':
       return { ...state, loadingCreate: false, errorCreate: action.payload };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true, successDelete: false };
+    case 'DELETE_SUCCESS':
+      return { ...state, loadingDelete: false, successDelete: true };
+    case 'DELETE_FAILED':
+      return {
+        ...state,
+        loadingDelete: false,
+        errorDelete: action.payload,
+        successDelete: false,
+      };
+    case 'DELETE_RESET':
+      return {
+        ...state,
+        loadingDelete: false,
+        success: false,
+      };
     default:
       return state;
   }
@@ -41,11 +58,13 @@ export default function BlogPostsList() {
   const { adminInfo } = state;
   const navigate = useNavigate();
 
-  const [{ blogPosts, loading, error, loadingCreate, errorCreate }, dispatch] =
-    useReducer(logger(reducer), {
-      loading: true,
-      error: '',
-    });
+  const [
+    { blogPosts, loading, error, loadingCreate, errorCreate, successDelete },
+    dispatch,
+  ] = useReducer(logger(reducer), {
+    loading: true,
+    error: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,7 +83,11 @@ export default function BlogPostsList() {
       }
     };
     fetchData();
-  }, [adminInfo]);
+    if (successDelete) {
+      fetchData();
+      dispatch({ type: 'DELETE_RESET' });
+    }
+  }, [adminInfo, successDelete]);
 
   const createHandler = async () => {
     setOpenModel(false);
@@ -87,6 +110,24 @@ export default function BlogPostsList() {
       toast.error(getError(error));
       dispatch({ type: 'CREATE_BLOGPOST_FAILED', payload: getError(error) });
     }
+  };
+
+  const deleteHandler = async (post) => {
+    if (window.confirm(`Are you sure you want to Detele: ${post.title}`))
+      try {
+        dispatch({ type: 'DELETE_REQUEST' });
+        await axios.delete(
+          `http://localhost:5000/blogposts/delete/${post._id}`,
+          {
+            headers: { authorization: `Bearer ${adminInfo.token}` },
+          }
+        );
+        dispatch({ type: 'DELETE_SUCCESS' });
+        toast.success('Blogpost deleted successfully');
+      } catch (error) {
+        toast.error(getError(error));
+        dispatch({ type: 'DELETE_FAILED', payload: error });
+      }
   };
   return (
     <>
@@ -166,6 +207,9 @@ export default function BlogPostsList() {
                             type="delete"
                             sizeReset="p-3 rounded-lg"
                             icon={<i className="bi bi-trash3-fill"></i>}
+                            onCLick={() => {
+                              deleteHandler(post);
+                            }}
                           />
                           <Link to={`/blogposts/${post._id}`}>
                             <ActionBtn

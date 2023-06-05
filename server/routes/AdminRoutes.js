@@ -2,9 +2,35 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Admin from '../models/AdminModel.js';
 import bcrypt from 'bcryptjs';
-import { generateToken } from '../utils.js';
+import { generateToken, isAdmin, isAuth } from '../utils.js';
 
 const AdminRouter = express.Router();
+
+AdminRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const admins = await Admin.find({});
+    res.send(admins);
+  })
+);
+
+AdminRouter.delete(
+  '/delete/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const adminId = req.params.id;
+    const admin = await Admin.findById(adminId);
+    if (admin) {
+      await admin.deleteOne();
+      res.send('Admin deleted successfully');
+    } else {
+      res.status(404).send({ message: 'Admin not found' });
+    }
+  })
+);
 
 AdminRouter.post(
   '/signin',

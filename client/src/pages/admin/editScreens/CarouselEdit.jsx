@@ -1,13 +1,12 @@
 import {
   Badge,
   Button,
-  FileInput,
   Label,
   Spinner,
   TextInput,
   Textarea,
 } from 'flowbite-react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { useReducer } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
@@ -28,19 +27,24 @@ const reducer = (state, action) => {
     case 'UPDATE_REQUEST':
       return { ...state, loadingCreate: true };
     case 'UPDATE_SUCCESS':
-      return { ...state, loadingCreate: false };
+      return { ...state, loadingCreate: false, updateSuccess: true };
     case 'UPDATE_FAILED':
-      return { ...state, loadingCreate: false, errorUpdate: action.payload };
-    case 'UPLOAD_REQUEST':
-      return { ...state, loadingUpload: true, errorUpload: '' };
-    case 'UPLOAD_SUCCESS':
-      return { ...state, loadingUpload: false, errorUpload: '' };
-    case 'UPLOAD_FAILED':
-      return { ...state, loadingUpload: false, errorUpload: action.payload };
+      return {
+        ...state,
+        loadingCreate: false,
+        errorUpdate: action.payload,
+      };
+    case 'UPDATE_RESET':
+      return {
+        ...state,
+        loadingCreate: false,
+        errorUpdate: action.payload,
+      };
     default:
       return state;
   }
 };
+
 export default function CarouselEdit() {
   const navigate = useNavigate();
   const params = useParams();
@@ -56,7 +60,14 @@ export default function CarouselEdit() {
   const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
   const [
-    { loading, error, loadingCreate, errorUpdate, loadingUpload },
+    {
+      loading,
+      error,
+      loadingCreate,
+      loadingUpdate,
+      errorUpdate,
+      updateSuccess,
+    },
     dispatch,
   ] = useReducer(logger(reducer), {
     loading: true,
@@ -97,7 +108,7 @@ export default function CarouselEdit() {
       }
     };
     fetchData();
-  }, [adminInfo, carouselItemId]);
+  }, [adminInfo, carouselItemId, updateSuccess]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -115,38 +126,34 @@ export default function CarouselEdit() {
         }
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success('Carousel Item updated succssfully');
+      toast.success('Carousel Item saved successfully');
       navigate('/carousellist');
     } catch (error) {
+      toast.error(getError(error));
       dispatch({ type: 'UPDATE_FAILED', payload: error });
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append('file', file);
-    try {
-      dispatch({ type: 'UPLOAD_REQUEST' });
-      const { data } = await axios.post(
-        'http://localhost:5000/upload',
-        bodyFormData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${adminInfo.token}`,
-          },
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: 'dazvnvkca',
+        uploadPreset: 'pgu2ly6f',
+      },
+      function (error, result) {
+        if (result.event == 'success') {
+          setImage(result.info.secure_url);
         }
-      );
-      dispatch({ type: 'UPLOAD_SUCCESS' });
+        if (error) {
+          toast.error(getError(error));
+        }
+      }
+    );
+  }, [image]);
 
-      toast.success('Image uploaded successfully');
-      setImage(data.secure_url);
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
-    }
-  };
   return (
     <>
       {loading ? (
@@ -188,21 +195,15 @@ export default function CarouselEdit() {
               />
             </div>
             <div>
-              <div className="mb-2 block">
-                <Label htmlFor="image" value="Upload Image" />
-              </div>
-              <FileInput
-                id="image"
-                type="file"
-                required={true}
-                onChange={uploadFileHandler}
-                helperText="*4000×2000 image size is recommended"
-              />
-              {loadingUpload && (
-                <div className="text-center">
-                  <Spinner aria-label="Center-aligned spinner example" />
-                </div>
-              )}
+              <Button
+                type="button"
+                gradientDuoTone="purpleToPink"
+                className="w-full font-semibold"
+                onClick={() => widgetRef.current.open()}
+              >
+                <i className="bi bi-cloud-arrow-up-fill"></i>{' '}
+                <span className="ms-2">Upload Image</span>
+              </Button>
             </div>
             <div>
               <div className="mb-2 block">
@@ -232,14 +233,14 @@ export default function CarouselEdit() {
                 }}
               />
             </div>
-            <Button type="submit">
+            <Button type="submit" disabled={loadingUpdate}>
               {loadingCreate ? (
                 <>
                   <Spinner aria-label="Spinner button example" />
-                  <span className="pl-3">Updating...</span>
+                  <span className="pl-3">Saving...</span>
                 </>
               ) : (
-                'Update'
+                'Save'
               )}
             </Button>
           </form>

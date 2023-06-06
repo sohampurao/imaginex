@@ -32,6 +32,25 @@ AdminRouter.delete(
   })
 );
 
+AdminRouter.put(
+  `/update/:id`,
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const adminId = req.params.id;
+    const admin = await Admin.findById(adminId);
+    if (admin) {
+      (admin.firstName = req.body.firstName),
+        (admin.lastName = req.body.lastName),
+        (admin.email = req.body.email),
+        await admin.save();
+      return res.send({ message: 'Admin updated successfully' });
+    } else {
+      res.send({ message: 'Admin Not Found' });
+    }
+  })
+);
+
 AdminRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -76,4 +95,20 @@ AdminRouter.post(
     });
   })
 );
+
+AdminRouter.get(
+  '/edit/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const adminId = req.params.id;
+    const admin = await Admin.findById(adminId);
+    if (admin) {
+      res.send(admin);
+    } else {
+      res.status(404).send({ message: 'Admin not Found' });
+    }
+  })
+);
+
 export default AdminRouter;

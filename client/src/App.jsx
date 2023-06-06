@@ -14,6 +14,7 @@ import CarouselList from './pages/admin/listScreens/CarouselList';
 import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
 import BlogPostEdit from './pages/admin/editScreens/BlogPostEdit';
 import AdminList from './pages/admin/listScreens/AdminList';
+import AdminEdit from './pages/admin/editScreens/AdminEdit';
 
 function App() {
   return (
@@ -110,6 +111,16 @@ function App() {
             element={
               <AdminRoute>
                 <AdminList />
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* adminedit */}
+          <Route
+            path="/admin/:id"
+            element={
+              <AdminRoute>
+                <AdminEdit />
               </AdminRoute>
             }
           ></Route>

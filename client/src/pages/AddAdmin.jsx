@@ -1,15 +1,20 @@
 import { Button, Label, TextInput } from 'flowbite-react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getError } from '../utils';
+import {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_UPLOAD_PRESET,
+  getError,
+} from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddAdmin() {
+  const navigate = useNavigate();
+  const [profileImage, setProfileImage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
@@ -34,28 +39,73 @@ export default function AddAdmin() {
         await axios.post('http://localhost:5000/admins/addadmin', {
           firstName,
           lastName,
-          // profileImage,
+          profileImage,
           email,
           password,
         });
         toast.success(
           `${firstName} ${lastName} is successfully added as a admin.`
         );
+        navigate('/addlist');
       } catch (error) {
         toast.error(getError(error));
       }
     }
   };
 
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: CLOUDINARY_CLOUD_NAME,
+        uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+      },
+      function (error, result) {
+        if (result.event == 'success') {
+          setProfileImage(result.info.secure_url);
+        }
+        if (error) {
+          toast.error(getError(error));
+        }
+      }
+    );
+  }, [profileImage]);
+
   return (
     <>
-      <div className="container mx-auto flex justify-center">
+      <div className="container mx-auto flex justify-center pb-5">
         <form
-          className="flex flex-col gap-4 mt-10 w-[300px] sm:w-[500px]"
+          className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] shadow p-4 rounded-lg"
           onSubmit={onSubmitHandler}
         >
           <div className="signin-title | text-2xl font-semibold font-serif text-center">
             Add Admin
+          </div>
+          <div className="profile-image-container | flex flex-col justify-center items-center">
+            <div className="profile-holder | h-40 w-40 rounded-full bg-white overflow-hidden flex flex-col justify-center">
+              <img
+                src={
+                  profileImage
+                    ? profileImage
+                    : '/images/profile/default-profile-picture.webp'
+                }
+                alt={'Profile Image'}
+                className="h-52 w-auto"
+              />
+            </div>
+          </div>
+          <div>
+            <Button
+              type="button"
+              gradientDuoTone="purpleToPink"
+              className="w-full font-semibold"
+              onClick={() => widgetRef.current.open()}
+            >
+              <i className="bi bi-cloud-arrow-up-fill"></i>{' '}
+              <span className="ms-2">Upload Profile Image</span>
+            </Button>
           </div>
           <div>
             <div className="mb-2 block">
@@ -64,7 +114,7 @@ export default function AddAdmin() {
             <TextInput
               id="firstName"
               type="text"
-              placeholder="enter your first name"
+              placeholder="enter first name"
               required={true}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -77,7 +127,7 @@ export default function AddAdmin() {
             <TextInput
               id="lastName"
               type="text"
-              placeholder="enter your last name"
+              placeholder="enter last name"
               required={true}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}

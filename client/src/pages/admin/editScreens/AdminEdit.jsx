@@ -1,10 +1,16 @@
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { Store } from '../../../Store';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Badge, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import AlertBox from '../../../components/AlertBox';
-import { FormatDate, FormatTime, getError } from '../../../utils';
+import {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_UPLOAD_PRESET,
+  FormatDate,
+  FormatTime,
+  getError,
+} from '../../../utils';
 import logger from 'use-reducer-logger';
 import { toast } from 'react-toastify';
 
@@ -47,6 +53,8 @@ export default function AdminEdit() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
   useEffect(() => {
@@ -83,6 +91,26 @@ export default function AdminEdit() {
     };
   }, [admin]);
 
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: CLOUDINARY_CLOUD_NAME,
+        uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+      },
+      function (error, result) {
+        if (result.event == 'success') {
+          setProfileImage(result.info.secure_url);
+        }
+        if (error) {
+          toast.error(getError(error));
+        }
+      }
+    );
+  }, [profileImage]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -90,18 +118,21 @@ export default function AdminEdit() {
       await axios.put(
         `http://localhost:5000/admins/update/${adminId}`,
         {
+          profileImage,
           firstName,
           lastName,
           email,
+          password,
         },
         {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         }
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success(`${firstName + ' ' + lastName} updated successfully`);
+      toast.success(`${firstName + ' ' + lastName} saved successfully.`);
       navigate('/adminlist');
     } catch (error) {
+      toast.error(getError(error));
       dispatch({ type: 'UPDATE_SUCCESS', payload: error });
     }
   };
@@ -148,6 +179,19 @@ export default function AdminEdit() {
                   ''
                 )}
               </div>
+
+              <div>
+                <Button
+                  type="button"
+                  gradientDuoTone="purpleToPink"
+                  className="w-full font-semibold"
+                  onClick={() => widgetRef.current.open()}
+                >
+                  <span className="me-2">Change Profile Image</span>{' '}
+                  <i className="bi bi-image"></i>
+                </Button>
+              </div>
+
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="firstName" value="First Name" />
@@ -187,6 +231,19 @@ export default function AdminEdit() {
                   placeholder="example@mail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="password" value="password" />
+                </div>
+                <TextInput
+                  id="password"
+                  type="password"
+                  required={true}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
 

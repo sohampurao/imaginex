@@ -6,7 +6,7 @@ import { Store } from '../Store';
 import { useNavigate } from 'react-router-dom';
 import { getError } from '../utils';
 
-export default function Signin() {
+export default function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

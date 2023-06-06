@@ -4,6 +4,10 @@ export const getError = (error) => {
     : error.message;
 };
 
+// cloudinary config
+export const CLOUDINARY_CLOUD_NAME = 'dazvnvkca';
+export const CLOUDINARY_UPLOAD_PRESET = 'pgu2ly6f';
+
 export const FormatTime = (createdAt) => {
   const date = new Date(createdAt);
   const now = new Date();

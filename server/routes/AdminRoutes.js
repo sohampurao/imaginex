@@ -40,13 +40,33 @@ AdminRouter.put(
     const adminId = req.params.id;
     const admin = await Admin.findById(adminId);
     if (admin) {
-      (admin.firstName = req.body.firstName),
-        (admin.lastName = req.body.lastName),
-        (admin.email = req.body.email),
-        await admin.save();
-      return res.send({ message: 'Admin updated successfully' });
+      if (bcrypt.compareSync(req.body.password, admin.password)) {
+        (admin.profileImage = req.body.profileImage),
+          (admin.firstName = req.body.firstName),
+          (admin.lastName = req.body.lastName),
+          (admin.email = req.body.email),
+          await admin.save();
+        return res.send({ message: 'Admin updated successfully' });
+      } else {
+        return res.status(401).send({ message: 'Invaild email or password' });
+      }
     } else {
       res.send({ message: 'Admin Not Found' });
+    }
+  })
+);
+
+AdminRouter.get(
+  '/edit/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const adminId = req.params.id;
+    const admin = await Admin.findById(adminId);
+    if (admin) {
+      return res.send(admin);
+    } else {
+      return res.status(404).send({ message: 'Admin not Found' });
     }
   })
 );
@@ -59,9 +79,9 @@ AdminRouter.post(
       if (bcrypt.compareSync(req.body.password, admin.password)) {
         res.send({
           _id: admin._id,
+          profileImage: admin.profileImage,
           firstName: admin.firstName,
           lastName: admin.lastName,
-          profileImage: admin.profileImage,
           email: admin.email,
           isAdmin: admin.isAdmin,
           token: generateToken(admin),
@@ -78,6 +98,7 @@ AdminRouter.post(
   '/addadmin',
   expressAsyncHandler(async (req, res) => {
     const newAdmin = new Admin({
+      profileImage: req.body.profileImage,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
@@ -86,28 +107,13 @@ AdminRouter.post(
     const admin = await newAdmin.save();
     res.send({
       _id: admin._id,
+      profileImage: admin.profileImage,
       firstName: admin.firstName,
       lastName: admin.lastName,
-      // profileImage: admin.profileImage,
       email: admin.email,
       isAdmin: admin.isAdmin,
       token: generateToken(admin),
     });
-  })
-);
-
-AdminRouter.get(
-  '/edit/:id',
-  isAuth,
-  isAdmin,
-  expressAsyncHandler(async (req, res) => {
-    const adminId = req.params.id;
-    const admin = await Admin.findById(adminId);
-    if (admin) {
-      res.send(admin);
-    } else {
-      res.status(404).send({ message: 'Admin not Found' });
-    }
   })
 );
 

@@ -31,7 +31,7 @@ export default function BlogPost({ blogPosts }) {
                 key={index}
                 className="blog-post-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row"
               >
-                <div className="blog-post-display | w-full">
+                <div className="blog-post-display | w-6/12">
                   {post.mediaType == 'image' && (
                     <img
                       src={post.path}
@@ -40,7 +40,10 @@ export default function BlogPost({ blogPosts }) {
                     />
                   )}
                   {post.mediaType == 'video' && (
-                    <video className="w-full h-auto max-w-full" controls>
+                    <video
+                      className="blogpost-video | w-full h-auto max-w-full"
+                      controls
+                    >
                       <source src={post.path} type="video/mp4" />
                     </video>
                   )}
@@ -54,7 +57,7 @@ export default function BlogPost({ blogPosts }) {
                   )}
                 </div>
 
-                <div className="blog-text | p-5 w-full">
+                <div className="blog-text | p-5 w-6/12">
                   <div className="profile | flex gap-2 items-center">
                     <Avatar img={post.admin.profileImage} rounded={true}>
                       <div className="space-y-1 font-medium dark:text-white">

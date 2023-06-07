@@ -52,15 +52,15 @@ export default function Features() {
                     <img
                       src={feature.image}
                       alt=""
-                      className="feature-image | w-full h-[250px] sm:h-[350px] md:h-[300px]"
+                      className="feature-image | w-full max-w-full h-[250px] sm:h-[350px] object-cover"
                     />
                   </div>
 
-                  <div className="feature-text | lg:relative p-5 md:w-6/12">
+                  <div className="feature-text | lg:relative p-5 md:w-6/12 md:max-md:w-6/12">
                     <div className="bullet-box | lg:absolute lg:text-2xl lg:p-3 p-2 inline-block lg:right-full top-0 lg:me-2  bg-black text-white transition-colors hover:text-neutral-400">
                       <i className="fab fa-connectdevelop"></i>
                     </div>
-                    <h1 className="feature-title | inline-block ms-2 text-2xl font-serif font-medium mb-3">
+                    <h1 className="feature-title | inline-block ms-2 lg:ms-0 text-2xl font-serif font-medium mb-3">
                       {feature.title}
                     </h1>
                     <div className="feature-subtitle | text-base text-neutral-600 text-justify">

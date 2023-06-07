@@ -1,34 +1,29 @@
+import axios from 'axios';
 import { Button, Modal, Spinner, Table } from 'flowbite-react';
 import { useContext, useEffect, useReducer, useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import AlertBox from '../../../components/AlertBox';
 import { FormatDate, getError } from '../../../utils';
-import { Store } from '../../../Store';
-import logger from 'use-reducer-logger';
 import ActionBtn from '../../../components/ActionBtn';
 import { Link, useNavigate } from 'react-router-dom';
-import AlertBox from '../../../components/AlertBox';
+import { Store } from '../../../Store';
+import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return {
-        ...state,
-        loading: false,
-        blogPosts: action.payload,
-      };
+      return { ...state, loading: false, features: action.payload };
     case 'FETCH_FAILED':
       return { ...state, loading: false, error: action.payload };
-    case 'CREATE_BLOGPOST_REQUEST':
+    case 'CREATE_REQUEST':
       return { ...state, loadingCreate: true };
-    case 'CREATE_BLOGPOST_SUCCESS':
+    case 'CREATE_SUCCESS':
       return {
         ...state,
         loadingCreate: false,
       };
-    case 'CREATE_BLOGPOST_FAILED':
+    case 'CREATE_FAILED':
       return { ...state, loadingCreate: false, errorCreate: action.payload };
     case 'DELETE_REQUEST':
       return { ...state, loadingDelete: true, successDelete: false };
@@ -47,33 +42,31 @@ const reducer = (state, action) => {
         loadingDelete: false,
         successDelete: false,
       };
-    default:
-      return state;
   }
 };
 
-export default function BlogPostsList() {
+export default function FeaturesList() {
+  const navigate = useNavigate();
   const [openModel, setOpenModel] = useState(null);
+
   const { state } = useContext(Store);
   const { adminInfo } = state;
-  const navigate = useNavigate();
 
   const [
-    { blogPosts, loading, error, loadingCreate, errorCreate, successDelete },
+    { loading, features, error, successDelete, loadingCreate, errorCreate },
     dispatch,
-  ] = useReducer(logger(reducer), {
+  ] = useReducer(reducer, {
     loading: true,
     error: '',
   });
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const { data } = await axios.get('/api/blogposts');
+        dispatch({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get('/api/features');
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
-        toast.error(getError(error));
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };
@@ -82,64 +75,67 @@ export default function BlogPostsList() {
       fetchData();
       dispatch({ type: 'DELETE_RESET' });
     }
-  }, [adminInfo, successDelete]);
+  }, [successDelete]);
 
   const createHandler = async () => {
-    setOpenModel(false);
     try {
-      dispatch({ type: 'CREATE_BLOGPOST_REQUEST' });
+      dispatch({ type: 'CREATE_REQUEST' });
       const { data } = await axios.post(
-        '/api/blogposts',
-        {
-          adminInfo,
-        },
+        '/api/features',
+        { adminInfo },
         {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         }
       );
-      toast.success('Blogpost created successfully!');
-      dispatch({ type: 'CREATE_BLOGPOST_SUCCESS' });
-      navigate(`/blogposts/${data.blogPost._id}`);
+      dispatch({ type: 'CREATE_SUCCESS' });
+      toast.success('New sample feature created successfully.');
+      navigate(`/features/${data._id}`);
     } catch (error) {
-      toast.error(getError(error));
-      dispatch({ type: 'CREATE_BLOGPOST_FAILED', payload: getError(error) });
+      dispatch({ type: 'CREATE_FAILED', payload: getError(error) });
     }
   };
 
-  const deleteHandler = async (post) => {
-    if (window.confirm(`Are you sure you want to Detele: ${post.title}`))
+  const deleteHandler = async (feature) => {
+    if (window.confirm(`Are you sure you want to Detele: ${feature.title}`))
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(`/api/blogposts/${post._id}`, {
+        await axios.delete(`/api/features/${feature._id}`, {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         });
         dispatch({ type: 'DELETE_SUCCESS' });
-        toast.success('Blogpost deleted successfully');
+        toast.success('Feature deleted successfully.');
       } catch (error) {
-        toast.error(getError(error));
-        dispatch({ type: 'DELETE_FAILED', payload: error });
+        dispatch({ type: 'DELETE_FAILED', payload: getError(error) });
       }
   };
   return (
     <>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-5">
         <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          Blog Posts
+          Features
         </div>
         <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
           <Button
             gradientDuoTone="pinkToOrange"
+            disabled={loadingCreate}
             onClick={() => setOpenModel(true)}
           >
-            Create
+            {loadingCreate ? (
+              <>
+                <Spinner aria-label="Spinner button example" />
+                <span className="pl-3">Creating...</span>
+              </>
+            ) : (
+              'Create'
+            )}
           </Button>
         </div>
         <Modal show={openModel} onClose={() => setOpenModel(false)}>
-          <Modal.Header>Add Blogpost Confirmation</Modal.Header>
+          <Modal.Header>Add Feature Confirmation</Modal.Header>
           <Modal.Body>
             <div className="space-y-6">
               <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Are you sure you want to add Blog Post?
+                Are you sure you want to create new feature?
               </p>
             </div>
           </Modal.Body>
@@ -150,59 +146,52 @@ export default function BlogPostsList() {
             </Button>
           </Modal.Footer>
         </Modal>
-        {loadingCreate ? (
-          <div className="text-center">
-            <Spinner aria-label="Center-aligned spinner example" />
-          </div>
-        ) : errorCreate ? (
-          <AlertBox variant="failure">{errorCreate}</AlertBox>
-        ) : (
-          ''
-        )}
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (
           <AlertBox variant="failure">{error}</AlertBox>
+        ) : errorCreate ? (
+          <AlertBox variant="failure">{errorCreate}</AlertBox>
         ) : (
           <>
             <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
-                  <Table.HeadCell>Post Title</Table.HeadCell>
+                  <Table.HeadCell>Title</Table.HeadCell>
                   <Table.HeadCell>Admin</Table.HeadCell>
-                  <Table.HeadCell>Category</Table.HeadCell>
                   <Table.HeadCell>Date</Table.HeadCell>
                   <Table.HeadCell>
                     <span className="sr-only">Edit</span>
                   </Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                  {blogPosts.map((post) => {
+                  {features.map((feature) => {
                     return (
                       <Table.Row
-                        key={post._id}
+                        key={feature._id}
                         className="bg-white dark:border-gray-700 dark:bg-gray-800"
                       >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                          {post.title}
+                          {feature.title}
                         </Table.Cell>
                         <Table.Cell>
-                          {post.admin.firstName + ' ' + post.admin.lastName}
+                          {feature.admin.firstName +
+                            ' ' +
+                            feature.admin.lastName}
                         </Table.Cell>
-                        <Table.Cell>{post.category}</Table.Cell>
-                        <Table.Cell>{FormatDate(post.createdAt)}</Table.Cell>
+                        <Table.Cell>{FormatDate(feature.createdAt)}</Table.Cell>
                         <Table.Cell className="flex flex-wrap gap-3">
                           <ActionBtn
                             type="delete"
                             sizeReset="p-3 rounded-lg"
                             icon={<i className="bi bi-trash3-fill"></i>}
                             onCLick={() => {
-                              deleteHandler(post);
+                              deleteHandler(feature);
                             }}
                           />
-                          <Link to={`/blogposts/${post._id}`}>
+                          <Link to={`/features/${feature._id}`}>
                             <ActionBtn
                               type="edit"
                               sizeReset="p-3 rounded-lg"

@@ -11,7 +11,7 @@ BlogPostRouter.get('/', async (req, res) => {
 });
 
 BlogPostRouter.get(
-  '/edit/:id',
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -25,8 +25,38 @@ BlogPostRouter.get(
   })
 );
 
+BlogPostRouter.get('/slug/:slug', async (req, res) => {
+  const blogpost = await BlogPost.findOne({ slug: req.params.slug });
+  if (blogpost) {
+    res.send(blogpost);
+  } else {
+    res.status(404).send({ message: 'Post not Found' });
+  }
+});
+
+BlogPostRouter.get(
+  '/search/virtualtours',
+  expressAsyncHandler(async (req, res) => {
+    const { query } = req;
+    const category = query.category || '';
+    const categoryFilter = category && category !== 'all' ? { category } : {};
+    const blogPosts = await BlogPost.find({
+      ...categoryFilter,
+    });
+    res.send(blogPosts);
+  })
+);
+
+BlogPostRouter.get(
+  '/search/categories',
+  expressAsyncHandler(async (req, res) => {
+    const categories = await BlogPost.find().distinct('category');
+    res.send(categories);
+  })
+);
+
 BlogPostRouter.put(
-  '/update/:id',
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -46,21 +76,6 @@ BlogPostRouter.put(
       res.send({ message: 'Blog Post Updated!' });
     } else {
       res.status(404).send({ message: 'Blog Post Not Found' });
-    }
-  })
-);
-
-BlogPostRouter.delete(
-  '/delete/:id',
-  isAuth,
-  isAdmin,
-  expressAsyncHandler(async (req, res) => {
-    const blogPost = await BlogPost.findById(req.params.id);
-    if (blogPost) {
-      await blogPost.deleteOne();
-      res.send({ message: 'Blogpost item deleted' });
-    } else {
-      res.status(404).send({ message: 'Blogpost item not found' });
     }
   })
 );
@@ -90,44 +105,19 @@ BlogPostRouter.post(
   })
 );
 
-BlogPostRouter.get(
-  '/admin',
+BlogPostRouter.delete(
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const blogposts = await BlogPost.find();
-    res.send(blogposts);
+    const blogPost = await BlogPost.findById(req.params.id);
+    if (blogPost) {
+      await blogPost.deleteOne();
+      res.send({ message: 'Blogpost item deleted' });
+    } else {
+      res.status(404).send({ message: 'Blogpost item not found' });
+    }
   })
 );
-
-BlogPostRouter.get(
-  '/virtualtours',
-  expressAsyncHandler(async (req, res) => {
-    const { query } = req;
-    const category = query.category || '';
-    const categoryFilter = category && category !== 'all' ? { category } : {};
-    const blogPosts = await BlogPost.find({
-      ...categoryFilter,
-    });
-    res.send(blogPosts);
-  })
-);
-
-BlogPostRouter.get(
-  '/categories',
-  expressAsyncHandler(async (req, res) => {
-    const categories = await BlogPost.find().distinct('category');
-    res.send(categories);
-  })
-);
-
-BlogPostRouter.get('/slug/:slug', async (req, res) => {
-  const blogpost = await BlogPost.findOne({ slug: req.params.slug });
-  if (blogpost) {
-    res.send(blogpost);
-  } else {
-    res.status(404).send({ message: 'Post not Found' });
-  }
-});
 
 export default BlogPostRouter;

@@ -16,7 +16,7 @@ export default function SignIn() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('http://localhost:5000/admins/signin', {
+      const { data } = await axios.post('/api/admins/signin', {
         email,
         password,
       });

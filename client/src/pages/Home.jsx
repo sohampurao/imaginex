@@ -74,7 +74,7 @@ export default function Home() {
     const fetchData = async () => {
       carouselDispatch({ type: 'FETCH_CAROUSEL_REQUEST' });
       try {
-        const carousel = await axios.get('http://localhost:5000/carousel');
+        const carousel = await axios.get('/api/carousel');
         carouselDispatch({
           type: 'FETCH_CAROUSEL_SUCCESS',
           payload: carousel.data,
@@ -94,7 +94,7 @@ export default function Home() {
     const fetchData = async () => {
       blogPostsDispatch({ type: 'FETCH_BLOGPOSTS_REQUEST' });
       try {
-        const response = await axios.get('http://localhost:5000/blogposts');
+        const response = await axios.get('/api/blogposts');
         blogPostsDispatch({
           type: 'FETCH_BLOGPOSTS_SUCCESS',
           payload: response.data,

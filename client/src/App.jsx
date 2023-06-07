@@ -32,10 +32,7 @@ function App() {
           <Route index path="/" element={<Home></Home>}></Route>
 
           {/* blog post page */}
-          <Route
-            path="/blogpost/slug/:slug"
-            element={<BlogPost></BlogPost>}
-          ></Route>
+          <Route path="/blogpost/:slug" element={<BlogPost></BlogPost>}></Route>
 
           {/* Virtual Tours*/}
           <Route path="/virtualtours" element={<VirtualTours />}></Route>

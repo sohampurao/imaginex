@@ -16,24 +16,23 @@ AdminRouter.get(
   })
 );
 
-AdminRouter.delete(
-  '/delete/:id',
+AdminRouter.get(
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const adminId = req.params.id;
     const admin = await Admin.findById(adminId);
     if (admin) {
-      await admin.deleteOne();
-      res.send('Admin deleted successfully');
+      return res.send(admin);
     } else {
-      res.status(404).send({ message: 'Admin not found' });
+      return res.status(404).send({ message: 'Admin not Found.' });
     }
   })
 );
 
 AdminRouter.put(
-  `/update/:id`,
+  `/:id`,
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -46,9 +45,9 @@ AdminRouter.put(
           (admin.lastName = req.body.lastName),
           (admin.email = req.body.email),
           await admin.save();
-        return res.send({ message: 'Admin updated successfully' });
+        return res.send({ message: 'Admin updated successfully.' });
       } else {
-        return res.status(401).send({ message: 'Invaild email or password' });
+        return res.status(401).send({ message: 'Invaild email or password.' });
       }
     } else {
       res.send({ message: 'Admin Not Found' });
@@ -56,17 +55,18 @@ AdminRouter.put(
   })
 );
 
-AdminRouter.get(
-  '/edit/:id',
+AdminRouter.delete(
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const adminId = req.params.id;
     const admin = await Admin.findById(adminId);
     if (admin) {
-      return res.send(admin);
+      await admin.deleteOne();
+      res.send('Admin deleted successfully');
     } else {
-      return res.status(404).send({ message: 'Admin not Found' });
+      res.status(404).send({ message: 'Admin not found' });
     }
   })
 );

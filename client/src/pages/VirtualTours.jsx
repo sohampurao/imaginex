@@ -42,7 +42,7 @@ export default function VirtualTours() {
     try {
       const fetchData = async () => {
         const { data } = await axios.get(
-          `http://localhost:5000/blogposts/virtualtours?&category=${category}`
+          `/api/blogposts/search/virtualtours?&category=${category}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       };
@@ -56,9 +56,7 @@ export default function VirtualTours() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(
-          'http://localhost:5000/blogposts/categories'
-        );
+        const { data } = await axios.get('/api/blogposts/search/categories');
         setCategories(data);
       } catch (error) {
         toast.error(getError(error));

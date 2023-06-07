@@ -63,7 +63,7 @@ const data = {
       admin: {
         firstName: 'joh',
         lastName: 'doe',
-        image: '/images/profile/default-profile-picture.webp',
+        profileImage: '/images/profile/default-profile-picture.webp',
         isAdmin: true,
       },
     },
@@ -78,7 +78,7 @@ const data = {
       admin: {
         firstName: 'elon',
         lastName: 'musk',
-        image: '/images/profile/default-profile-picture.webp',
+        profileImage: '/images/profile/default-profile-picture.webp',
         isAdmin: true,
       },
     },
@@ -93,7 +93,7 @@ const data = {
       admin: {
         firstName: 'jeff',
         lastName: 'bezos',
-        image: '/images/profile/default-profile-picture.webp',
+        profileImage: '/images/profile/default-profile-picture.webp',
         isAdmin: true,
       },
     },
@@ -108,7 +108,7 @@ const data = {
       admin: {
         firstName: 'jonny',
         lastName: 'liver',
-        image: '/images/profile/default-profile-picture.webp',
+        profileImage: '/images/profile/default-profile-picture.webp',
         isAdmin: true,
       },
     },

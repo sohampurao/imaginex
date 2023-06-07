@@ -10,7 +10,13 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { useReducer } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
-import { FormatDate, FormatTime, getError } from '../../../utils';
+import {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_UPLOAD_PRESET,
+  FormatDate,
+  FormatTime,
+  getError,
+} from '../../../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import AlertBox from '../../../components/AlertBox';
 import logger from 'use-reducer-logger';
@@ -92,12 +98,9 @@ export default function CarouselEdit() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(
-          `http://localhost:5000/carousel/admin/${carouselItemId}`,
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        const { data } = await axios.get(`/api/carousel/${carouselItemId}`, {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        });
         setCarouselItem(data.carouselItem);
         setTitle(data.carouselItem.title);
         setSubtitle(data.carouselItem.subtitle);
@@ -115,7 +118,7 @@ export default function CarouselEdit() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `http://localhost:5000/carousel/update/${carouselItemId}`,
+        `/api/carousel/${carouselItemId}`,
         {
           image,
           title,
@@ -140,8 +143,8 @@ export default function CarouselEdit() {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
-        cloudName: 'dazvnvkca',
-        uploadPreset: 'pgu2ly6f',
+        cloudName: CLOUDINARY_CLOUD_NAME,
+        uploadPreset: CLOUDINARY_UPLOAD_PRESET,
       },
       function (error, result) {
         if (result.event == 'success') {

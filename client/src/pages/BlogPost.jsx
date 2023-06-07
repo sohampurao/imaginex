@@ -4,17 +4,17 @@ import { useParams } from 'react-router-dom';
 import Preloader from '../components/Preloader';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Avatar, Badge, Tooltip } from 'flowbite-react';
 import { FormatDate, FormatTime, getError } from '../utils';
 import AlertBox from '../components/AlertBox';
+import { Tooltip } from 'flowbite-react';
 
 const blogPostReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_BLOGPOST_REQUEST':
+    case 'FETCH_REQUEST':
       return { ...state, blogPostLoading: true };
-    case 'FETCH_BLOGPOST_SUCCESS':
+    case 'FETCH_SUCCESS':
       return { ...state, blogPostLoading: false, blogPost: action.payload };
-    case 'FETCH_BLOGPOST_FAIL':
+    case 'FETCH_FAIL':
       return {
         ...state,
         blogPostLoading: false,
@@ -39,19 +39,17 @@ export default function BlogPost() {
   // This hook is used to fetch blog post data
   useEffect(() => {
     const fetchData = async () => {
-      blogPostDispatch({ type: 'FETCH_BLOGPOST_REQUEST' });
       try {
-        const response = await axios.get(
-          `http://localhost:5000/blogposts/slug/${slug}`
-        );
+        blogPostDispatch({ type: 'FETCH_REQUEST' });
+        const response = await axios.get(`/api/blogposts/slug/${slug}`);
         blogPostDispatch({
-          type: 'FETCH_BLOGPOST_SUCCESS',
+          type: 'FETCH_SUCCESS',
           payload: response.data,
         });
       } catch (error) {
         toast.error(getError(error));
         blogPostDispatch({
-          type: 'FETCH_BLOGPOST_FAIL',
+          type: 'FETCH_FAIL',
           payload: getError(error),
         });
       }
@@ -91,47 +89,10 @@ export default function BlogPost() {
         <section className="container mx-auto mt-5  px-5 md:px-0">
           <article className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">
             <div className="blog-body | container p-5">
-              <div className="profile | flex gap-2 items-center">
-                <Avatar
-                  img={blogPost.admin.profileImage}
-                  alt="Admin Profile pic"
-                  rounded={true}
-                ></Avatar>
-                <ul className="profile-details | flex items-center gap-2 list-none text-sm text-neutral-600 font-extralight">
-                  <li>
-                    <span className="fullname">
-                      {blogPost.admin.firstName + ' ' + blogPost.admin.lastName}
-                      <div className="inline-block mx-1">•</div>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="type">
-                      <span className="flex items-center font-semibold">
-                        <Badge color="success">
-                          {blogPost.admin.isAdmin ? (
-                            <>
-                              <span>Admin</span>
-                              <img
-                                src="/images/profile/crown.png"
-                                className="float-right align-middle h-4 ms-[2px]"
-                              />
-                            </>
-                          ) : (
-                            'Unknown'
-                          )}
-                        </Badge>
-                        <div className="inline-block mx-1">•</div>
-                      </span>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="date">
-                      {FormatDate(blogPost.createdAt)}
-                    </span>
-                    <div className="inline-block mx-1">•</div>
-                    <span className="uploaded-time">{formattedTime}</span>
-                  </li>
-                </ul>
+              <div className="date-time| flex gap-2 items-center text-sm text-gray-500 dark:text-gray-400">
+                <div className="date">{FormatDate(blogPost.createdAt)}</div>
+                <div className="inline-block mx-1">•</div>
+                <div className="uploaded-time">{formattedTime}</div>
               </div>
 
               <hr className="my-2 block" />

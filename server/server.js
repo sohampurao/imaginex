@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // this api responds to seed route
-app.use('/seed', seedRouter);
+app.use('/api/seed', seedRouter);
 
 // this connects the application to MongoDB database
 mongoose
@@ -29,11 +29,11 @@ mongoose
     console.log(error.message);
   });
 
-app.use('/blogposts', BlogPostRouter);
+app.use('/api/blogposts', BlogPostRouter);
 
-app.use('/carousel', CarouselRouter);
+app.use('/api/carousel', CarouselRouter);
 
-app.use('/admins', AdminRouter);
+app.use('/api/admins', AdminRouter);
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });

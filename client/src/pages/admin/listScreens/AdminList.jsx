@@ -52,7 +52,7 @@ export default function AdminList() {
     const fectchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get('http://localhost:5000/admins', {
+        const { data } = await axios.get('/api/admins', {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -77,7 +77,7 @@ export default function AdminList() {
     ) {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(`http://localhost:5000/admins/delete/${admin._id}`, {
+        await axios.delete(`/api/admins/${admin._id}`, {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         });
         dispatch({ type: 'DELETE_SUCCESS' });

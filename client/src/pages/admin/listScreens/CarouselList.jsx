@@ -69,12 +69,7 @@ export default function CarouselList() {
     const fetchData = async () => {
       dispatch({ type: 'CAROUSEL_REQUEST' });
       try {
-        const { data } = await axios.get(
-          'http://localhost:5000/carousel/admin',
-          {
-            headers: { Authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        const { data } = await axios.get('/api/carousel');
         dispatch({ type: 'CAROUSEL_SUCCESS', payload: data });
       } catch (error) {
         toast.error(getError(error));
@@ -93,7 +88,7 @@ export default function CarouselList() {
     try {
       dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
       const { data } = await axios.post(
-        'http://localhost:5000/carousel',
+        '/api/carousel',
         { authorization: `Bearer ${adminInfo.token}` },
         {
           headers: { authorization: `Bearer ${adminInfo.token}` },
@@ -116,12 +111,9 @@ export default function CarouselList() {
     )
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(
-          `http://localhost:5000/carousel/delete/${item._id}`,
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        await axios.delete(`/api/carousel/${item._id}`, {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        });
         dispatch({ type: 'DELETE_SUCCESS' });
         toast.success('Carousel item deleted successfully');
       } catch (error) {

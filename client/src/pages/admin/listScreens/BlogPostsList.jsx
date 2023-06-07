@@ -70,12 +70,7 @@ export default function BlogPostsList() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const { data } = await axios.get(
-          'http://localhost:5000/blogposts/admin',
-          {
-            headers: { Authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        const { data } = await axios.get('/api/blogposts');
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         toast.error(getError(error));
@@ -94,13 +89,12 @@ export default function BlogPostsList() {
     try {
       dispatch({ type: 'CREATE_BLOGPOST_REQUEST' });
       const { data } = await axios.post(
-        'http://localhost:5000/blogposts',
+        '/api/blogposts',
         {
           adminInfo,
-          authorization: `Bearer ${adminInfo.token}`,
         },
         {
-          headers: { Authorization: `Bearer ${adminInfo.token}` },
+          headers: { authorization: `Bearer ${adminInfo.token}` },
         }
       );
       toast.success('Blogpost created successfully!');
@@ -116,12 +110,9 @@ export default function BlogPostsList() {
     if (window.confirm(`Are you sure you want to Detele: ${post.title}`))
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(
-          `http://localhost:5000/blogposts/delete/${post._id}`,
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        await axios.delete(`/api/blogposts/${post._id}`, {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        });
         dispatch({ type: 'DELETE_SUCCESS' });
         toast.success('Blogpost deleted successfully');
       } catch (error) {

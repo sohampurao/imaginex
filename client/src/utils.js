@@ -35,6 +35,7 @@ export const FormatDate = (createdAt) => {
   const date = new Date(createdAt);
   const month = date.toLocaleString('default', { month: 'long' });
   const day = date.getDate();
+  const year = date.getFullYear();
 
-  return `${month} ${day}`;
+  return `${month} ${day} ${year}`;
 };

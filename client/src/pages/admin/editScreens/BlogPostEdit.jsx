@@ -78,12 +78,9 @@ export default function BlogPostEdit() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(
-          `http://localhost:5000/blogposts/edit/${blogPostId}`,
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        const { data } = await axios.get(`/api/blogposts/${blogPostId}`, {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        });
         setBlogPost(data.blogPost);
         setPath(data.blogPost.path);
         setMediaType(data.blogPost.mediaType);
@@ -109,7 +106,7 @@ export default function BlogPostEdit() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `http://localhost:5000/blogposts/update/${blogPostId}`,
+        `/api/blogposts/${blogPostId}`,
         {
           path,
           mediaType,

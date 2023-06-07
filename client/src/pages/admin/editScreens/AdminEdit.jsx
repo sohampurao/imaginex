@@ -61,12 +61,9 @@ export default function AdminEdit() {
     const fetchData = async () => {
       try {
         dispatch({ type: `FETCH_REQUEST` });
-        const { data } = await axios.get(
-          `http://localhost:5000/admins/edit/${adminId}`,
-          {
-            headers: { authorization: `Bearer ${adminInfo.token}` },
-          }
-        );
+        const { data } = await axios.get(`/api/admins/${adminId}`, {
+          headers: { authorization: `Bearer ${adminInfo.token}` },
+        });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
         setFirstName(data.firstName);
         setLastName(data.lastName);
@@ -116,7 +113,7 @@ export default function AdminEdit() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `http://localhost:5000/admins/update/${adminId}`,
+        `/api/admins/${adminId}`,
         {
           profileImage,
           firstName,

@@ -15,6 +15,7 @@ import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
 import BlogPostEdit from './pages/admin/editScreens/BlogPostEdit';
 import AdminList from './pages/admin/listScreens/AdminList';
 import AdminEdit from './pages/admin/editScreens/AdminEdit';
+import Features from './pages/Features';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
 
           {/* blog post page */}
           <Route path="/blogpost/:slug" element={<BlogPost></BlogPost>}></Route>
+
+          {/* Features */}
+          <Route path="/features" element={<Features></Features>}></Route>
 
           {/* Virtual Tours*/}
           <Route path="/virtualtours" element={<VirtualTours />}></Route>

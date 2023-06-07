@@ -7,7 +7,7 @@ import seedRouter from './routes/seedRoutes.js';
 import BlogPostRouter from './routes/BlogPostRoutes.js';
 import CarouselRouter from './routes/CarouselRoutes.js';
 import AdminRouter from './routes/AdminRoutes.js';
-import expressAsyncHandler from 'express-async-handler';
+import FeaturesRouter from './routes/FeaturesRoutes.js';
 
 // basic configuration
 const app = express();
@@ -29,9 +29,11 @@ mongoose
     console.log(error.message);
   });
 
+app.use('/api/carousel', CarouselRouter);
+
 app.use('/api/blogposts', BlogPostRouter);
 
-app.use('/api/carousel', CarouselRouter);
+app.use('/api/features', FeaturesRouter);
 
 app.use('/api/admins', AdminRouter);
 

@@ -113,6 +113,46 @@ const data = {
       },
     },
   ],
+  features: [
+    {
+      image:
+        'https://pexels360.com/wp-content/uploads/2021/11/google-street-iview.png',
+      title: 'google map integration',
+      description:
+        "We put your projects on Google Maps by integrating the virtual tour model with Google street view. This opens up endless opportunities of organic visibility to your project. Google Maps recognizes your virtual tour scans and converts them into it's own virtual tour path thereby giving you twin advantage. Our clients have highly rated this initiative and we continue to offer this to all our clients in our package",
+      admin: {
+        firstName: 'jonny',
+        lastName: 'liver',
+        profileImage: '/images/profile/default-profile-picture.webp',
+        isAdmin: true,
+      },
+    },
+    {
+      image:
+        'https://pexels360.com/wp-content/uploads/2021/08/Furniture-info-virtual-tour-1000x1024.jpg',
+      title: 'information tagging',
+      description:
+        "We Tag useful information that you provide like the useful sections, amenities, elements and features of your space within the 3D virtual tour. In short, your space's key USPs, important links and media can go right into the tour itself. A great way to keep your users engaged. Advantage 2 over normal real estate photography and 360 tours. Information tagging in our virtual tours can be of 3 types - Text content tagging, tagging of useful weblinks and tagging a video or image.",
+      admin: {
+        firstName: 'jonny',
+        lastName: 'liver',
+        profileImage: '/images/profile/default-profile-picture.webp',
+        isAdmin: true,
+      },
+    },
+    {
+      image:
+        'https://pexels360.com/wp-content/uploads/2021/08/hospitality-dollhouse-virtual-tour3.jpg',
+      title: 'information tagging',
+      description:
+        "Dollhouse and Floor Plan Views give Completeness to our 3D scanning process. Visitors get to see the Dollhouse view or sectional view of the property. From the dollhouse view they'll be able to jump to any section of their interest in the virtual tour model, making it more simpler for the users. This is made possible using Matterport virtual tour technology that is immersive in nature from start to finish. Advantage 3 over normal real estate photography.",
+      admin: {
+        firstName: 'jeff',
+        lastName: 'bezos',
+        profileImage: '/images/profile/default-profile-picture.webp',
+        isAdmin: true,
+      },
+    },
+  ],
 };
-
 export default data;

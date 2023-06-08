@@ -10,11 +10,12 @@ html:focus-within {
     scroll-behavior: smooth;
     margin: 0%;
     padding: 0%;
+    height: 100%;
 }
 
 /* Set core body defaults */
 body {
-    min-height: 100vh;
+    height: 100%;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
@@ -22,6 +23,12 @@ body {
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: rgb(255, 255, 255);
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Navbar */
@@ -35,6 +42,11 @@ body {
 .header-nav.active {
     font-weight: 600;
     color: rgb(28, 100, 242);
+}
+
+.footer-nav .active {
+    font-weight: 500;
+    color: gold;
 }
 
 .nav-item {

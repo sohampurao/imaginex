@@ -18,6 +18,7 @@ import AdminEdit from './pages/admin/editScreens/AdminEdit';
 import Features from './pages/Features';
 import FeaturesList from './pages/admin/listScreens/FeaturesList';
 import FeatureEdit from './pages/admin/editScreens/FeatureEdit';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -151,6 +152,7 @@ function App() {
           {/* Page-Not-Found page*/}
           <Route index path="*" element={<PageNotFound />}></Route>
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </>
   );

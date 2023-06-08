@@ -134,7 +134,7 @@ export default function BlogPost() {
                 <ul className="share-socialmedia-list | flex items-center justify-evenly gap-3">
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
                     <Link
-                      to={`https://www.facebook.com/sharer/sharer.php?u=http://localhost:5173/blogposts/slug/${currentURL}`}
+                      to={`https://www.facebook.com/sharer/sharer.php?u=${currentURL}`}
                       target="_blank"
                     >
                       <Tooltip
@@ -147,7 +147,7 @@ export default function BlogPost() {
                   </li>
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
                     <Link
-                      to={`https://twitter.com/intent/tweet?url=http://localhost:5173/blogposts/slug/${currentURL}&text=Check out this amazing content!`}
+                      to={`https://twitter.com/intent/tweet?url=${currentURL}&text=Check out this amazing content!`}
                       target="_blank"
                     >
                       <Tooltip
@@ -160,7 +160,7 @@ export default function BlogPost() {
                   </li>
                   <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
                     <Link
-                      to={`https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:5173/blogposts/slug/${currentURL}`}
+                      to={`https://www.linkedin.com/sharing/share-offsite/?url=${currentURL}`}
                       target="_blank"
                     >
                       <Tooltip

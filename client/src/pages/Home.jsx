@@ -120,59 +120,65 @@ export default function Home() {
             <AlertBox variant="failure">{carouselError}</AlertBox>
           ) : (
             <>
-              <Swiper
-                spaceBetween={30}
-                effect={'fade'}
-                autoplay={{
-                  delay: 3000,
-                  disableOnInteraction: false,
-                }}
-                keyboard={{
-                  enabled: true,
-                }}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                loop={true}
-                modules={[
-                  EffectFade,
-                  Navigation,
-                  Pagination,
-                  Autoplay,
-                  Keyboard,
-                ]}
-                className="mySwiper"
-              >
-                {carouselItems.map((item) => {
-                  return (
-                    <SwiperSlide key={item._id}>
-                      <div className="w-full h-[35rem] overflow-hidden">
-                        <img
-                          src={item.image}
-                          className="max-w-full h-auto"
-                          alt={item.title}
-                        />
-                        <div className="absolute inset-x-[15%] bottom-3 py-5 text-center text-white hidden sm:block">
-                          <h5 className="text-3xl font-medium subpixel-antialiased">
-                            {item.title}
-                          </h5>
-                          <p className="text-xl font-normal">{item.subtitle}</p>
+              <div className="carousel-container">
+                <Swiper
+                  spaceBetween={30}
+                  effect={'fade'}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }}
+                  keyboard={{
+                    enabled: true,
+                  }}
+                  navigation={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  loop={true}
+                  modules={[
+                    EffectFade,
+                    Navigation,
+                    Pagination,
+                    Autoplay,
+                    Keyboard,
+                  ]}
+                  className="mySwiper"
+                >
+                  {carouselItems.map((item) => {
+                    return (
+                      <SwiperSlide key={item._id}>
+                        <div className="w-full h-[35rem] overflow-hidden">
+                          <img
+                            src={item.image}
+                            className="max-w-full h-auto"
+                            alt={item.title}
+                          />
+                          <div className="absolute inset-x-[15%] bottom-3 py-5 text-center text-white hidden sm:block">
+                            <h5 className="text-3xl font-medium subpixel-antialiased">
+                              {item.title}
+                            </h5>
+                            <p className="text-xl font-normal">
+                              {item.subtitle}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </div>
             </>
           )}
 
           {/* blog posts */}
-          {blogPostsError ? (
-            <AlertBox variant="failure">{blogPostsError}</AlertBox>
-          ) : (
-            <BlogPost blogPosts={blogPosts}></BlogPost>
-          )}
+          <main>
+            {blogPostsError ? (
+              <AlertBox variant="failure">{blogPostsError}</AlertBox>
+            ) : (
+              <BlogPost blogPosts={blogPosts}></BlogPost>
+            )}
+          </main>
         </>
       )}
 

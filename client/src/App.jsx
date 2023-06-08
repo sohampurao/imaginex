@@ -17,6 +17,7 @@ import AdminList from './pages/admin/listScreens/AdminList';
 import AdminEdit from './pages/admin/editScreens/AdminEdit';
 import Features from './pages/Features';
 import FeaturesList from './pages/admin/listScreens/FeaturesList';
+import FeatureEdit from './pages/admin/editScreens/FeatureEdit';
 
 function App() {
   return (
@@ -103,6 +104,16 @@ function App() {
             element={
               <AdminRoute>
                 <FeaturesList></FeaturesList>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* FeaturesEdit */}
+          <Route
+            path="/featureedit/:id"
+            element={
+              <AdminRoute>
+                <FeatureEdit></FeatureEdit>
               </AdminRoute>
             }
           ></Route>

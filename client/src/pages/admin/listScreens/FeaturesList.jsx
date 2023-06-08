@@ -191,7 +191,7 @@ export default function FeaturesList() {
                               deleteHandler(feature);
                             }}
                           />
-                          <Link to={`/features/${feature._id}`}>
+                          <Link to={`/featureedit/${feature._id}`}>
                             <ActionBtn
                               type="edit"
                               sizeReset="p-3 rounded-lg"

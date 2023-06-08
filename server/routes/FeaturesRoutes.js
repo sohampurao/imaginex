@@ -13,6 +13,21 @@ FeaturesRouter.get(
   })
 );
 
+FeaturesRouter.get(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const featureId = req.params.id;
+    const feature = await Features.findById(featureId);
+    if (feature) {
+      return res.send(feature);
+    } else {
+      res.status(404).send({ message: 'Feature not found.' });
+    }
+  })
+);
+
 FeaturesRouter.post(
   '/',
   isAuth,
@@ -33,6 +48,37 @@ FeaturesRouter.post(
     });
     const feature = await newCreatedFeature.save();
     res.send({ message: 'New sample feature created successfully.', feature });
+  })
+);
+
+FeaturesRouter.put(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const admin = req.body.adminInfo;
+    const featureId = req.params.id;
+    const feature = await Features.findById(featureId);
+
+    if (feature) {
+      (feature.image = req.body.image),
+        (feature.title = req.body.title),
+        (feature.description = req.body.description),
+        (feature.admin = {
+          firstName: admin.firstName,
+          lastName: admin.lastName,
+          profileImage: admin.profileImage,
+          isAdmin: admin.isAdmin,
+        }),
+        await feature.save();
+      res.send({
+        message: 'New sample feature created successfully.',
+      });
+    } else {
+      res.send({
+        message: 'Feature not found.',
+      });
+    }
   })
 );
 

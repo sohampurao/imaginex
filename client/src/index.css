@@ -169,3 +169,9 @@ body {
     left: 0;
     transition: all 350ms ease-in;
 }
+
+/* About page */
+
+.profile-detials {
+    letter-spacing: 4px;
+}

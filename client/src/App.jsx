@@ -19,6 +19,9 @@ import Features from './pages/Features';
 import FeaturesList from './pages/admin/listScreens/FeaturesList';
 import FeatureEdit from './pages/admin/editScreens/FeatureEdit';
 import Footer from './components/Footer';
+import AboutUs from './pages/AboutUs';
+import AboutusList from './pages/admin/listScreens/AboutusList';
+import AboutusEdit from './pages/admin/editScreens/AboutusEdit';
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
 
           {/* Virtual Tours*/}
           <Route path="/virtualtours" element={<VirtualTours />}></Route>
+
+          {/* About Us*/}
+          <Route path="/aboutus" element={<AboutUs />}></Route>
 
           {/* Sign-In page */}
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
@@ -115,6 +121,26 @@ function App() {
             element={
               <AdminRoute>
                 <FeatureEdit></FeatureEdit>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* About US List */}
+          <Route
+            path="/aboutuslist"
+            element={
+              <AdminRoute>
+                <AboutusList></AboutusList>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* About US Edit */}
+          <Route
+            path="/aboutusedit/:id"
+            element={
+              <AdminRoute>
+                <AboutusEdit></AboutusEdit>
               </AdminRoute>
             }
           ></Route>

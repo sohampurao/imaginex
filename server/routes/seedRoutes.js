@@ -4,6 +4,7 @@ import data from '../data/Data.js';
 import Carousel from '../models/CarouselModel.js';
 import Admin from '../models/AdminModel.js';
 import Features from '../models/FeaturesModel.js';
+import Aboutus from '../models/AboutusModel.js';
 
 const seedRouter = express.Router();
 
@@ -21,11 +22,14 @@ seedRouter.get('/', async (req, res) => {
   await Features.deleteMany({});
   const createFeatures = await Features.insertMany(data.features);
 
+  await Aboutus.deleteMany({});
+  const createAboutus = await Aboutus.insertMany(data.aboutus);
   res.send({
     createCarouselItems,
     createdBlogPosts,
     createdAdmins,
     createFeatures,
+    createAboutus,
   });
 });
 

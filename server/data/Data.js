@@ -154,5 +154,35 @@ const data = {
       },
     },
   ],
+  aboutus: [
+    {
+      profileImage:
+        'https://pbs.twimg.com/profile_images/1485050791488483328/UNJ05AV8_400x400.jpg',
+      firstName: 'chetan',
+      lastName: 'kumar',
+      position: 'Founder',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quis magnam? Reprehenderit optio quo fugiat perferendis cupiditate, rerum, sequi mollitia dolores quos amet ab ex reiciendis, nulla praesentium inventore iste? Reprehenderit numquam dolores voluptate, hic, dolorum commodi sit ipsa mollitia cumque, assumenda molestias dicta temporibus nulla eum eligendi. In nostrum repudiandae atque quisquam ab nemo laudantium error velit, corporis quia? Perspiciatis nobis optio deserunt voluptatibus adipisci, quae exercitationem! Temporibus quibusdam facilis amet? Porro ducimus distinctio facilis beatae voluptatem totam tempore in, quidem nam nihil eaque pariatur sit, vel dignissimos magnam.',
+      facebookURL: '#',
+      twitterURL: '#',
+      linkedinURL: '#',
+      whatsappNo: 9518556937,
+      instagramURL: '#',
+    },
+    {
+      profileImage:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeJmFW_rzPyuJUmTEmTk9ZLB7u1CmTclyKCA&usqp=CAU',
+      firstName: 'SHAILESH',
+      lastName: 'TORASKAR',
+      position: 'co-founder',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quis magnam? Reprehenderit optio quo fugiat perferendis cupiditate, rerum, sequi mollitia dolores quos amet ab ex reiciendis, nulla praesentium inventore iste? Reprehenderit numquam dolores voluptate, hic, dolorum commodi sit ipsa mollitia cumque, assumenda molestias dicta temporibus nulla eum eligendi. In nostrum repudiandae atque quisquam ab nemo laudantium error velit, corporis quia? Perspiciatis nobis optio deserunt voluptatibus adipisci, quae exercitationem! Temporibus quibusdam facilis amet? Porro ducimus distinctio facilis beatae voluptatem totam tempore in, quidem nam nihil eaque pariatur sit, vel dignissimos magnam.',
+      facebookURL: '#',
+      twitterURL: '#',
+      linkedinURL: '#',
+      whatsappNo: 9518556937,
+      instagramURL: '#',
+    },
+  ],
 };
 export default data;

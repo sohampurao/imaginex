@@ -61,7 +61,82 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#333333] text-slate-50 mt-auto">
+    <footer className="mt-auto text-slate-50 w-full bg-[#333333]">
+      <div className="services-contact | bg-[#ff536d] py-8">
+        <div className="m-auto px-2 max-w-5xl sm:px-6 lg:px-8 flex justify-between gap-10">
+          <div className="services w-6/12">
+            <div className="services-title | mb-3">
+              BOOK YOUR MATTERPORT SCANNING TODAY
+            </div>
+            <ul className="services-list | transition-all cursor-default">
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-warehouse"></i>
+                </span>
+                <span className="service-text">Hotels and Resorts</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-store"></i>
+                </span>
+                <span className="service-text">Retail Spaces</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-brands fa-artstation"></i>
+                </span>
+                <span className="service-text">Museums & Art galleries</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-warehouse"></i>
+                </span>
+                <span className="service-text">Commercial Real Estate</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-building"></i>
+                </span>
+                <span className="service-text">Residential Real Estate</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-house-user"></i>
+                </span>
+                <span className="service-text">Home Owners</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-network-wired"></i>
+                </span>
+                <span className="service-text">Offices and CoWorking</span>
+              </li>
+              <li className="service-item | flex hover:text-neutral-500 text-white">
+                <span className="service-icon | mb-3 w-1/12">
+                  <i className="fa-solid fa-car"></i>
+                </span>
+                <span className="service-text">Showrooms</span>
+              </li>
+            </ul>
+          </div>
+          <div className="contact-detials w-6/12">
+            <div className="contact-title | mb-3 uppercase">contact us</div>
+            <div className="mail | flex hover:text-neutral-500 text-white">
+              <span className="mail-icon | mb-3 w-1/12">
+                <i className="bi bi-envelope-at"></i>
+              </span>
+              <Link to="mailto:example@gmail.com">example@gmail.com</Link>
+            </div>
+            <div className="telephone | flex hover:text-neutral-500 text-white">
+              <span className="phone-icon | mb-3 w-1/12">
+                <i className="bi bi-telephone-fill"></i>
+              </span>
+              <Link to="tel:+9518556937">9518556937</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="share-text | text-center py-2 font-light">
           share with love <i className="bi bi-heart-fill text-red-600"></i>
@@ -70,7 +145,7 @@ export default function Footer() {
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to}>
-                <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[#22b3a4] flex justify-center items-center transition-colors hover:bg-white hover:text-neutral-800">
+                <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-neutral-800">
                   {item.platformIcon}
                 </li>
               </Link>
@@ -90,7 +165,7 @@ export default function Footer() {
             })}
           </ul>
         </nav>
-        <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto  ">
+        <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto">
           <div className="copy-rigth | text-sm font-semibold hover:text-blue-400 transition cursor-pointer">
             &#169;2023.example.com.All Rights Reserved.
           </div>

@@ -138,7 +138,7 @@ body {
 
 /* scroll-to-top btn */
 .scroll-to-top {
-    background-color: #ea4961 !important;
+    background-color: #ffffff !important;
     animation: scrollani 700ms infinite alternate ease-in;
 }
 

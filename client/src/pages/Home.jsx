@@ -182,6 +182,39 @@ export default function Home() {
         </>
       )}
 
+      {/* intro text */}
+      <section className="intro-container | container relative text-white">
+        <div className="intro-bg-image | max-h-[550px] min-h-[500px] md:min-h-[600px] bg-[url('/images/home/intro-banner.webp')] bg-cover bg-no-repeat bg-center brightness-50"></div>
+        <div className="mx-auto max-h-[550px] min-h-[500px] md:min-h-[600px] flex flex-col md:flex-row justify-center items-center gap-10 absolute top-0 w-full">
+          <article className="intro | max-w-md">
+            <h1 className="intro-title | text-3xl mb-2">
+              Make smarter choices
+            </h1>
+            <p className="intro-discription | text-xl">
+              Without leaving your home, get a thorough overview of the
+              property. Live-In Tours let you choose wisely every time whether
+              to buy or rent.
+            </p>
+          </article>
+
+          <article className="intro | max-w-md">
+            <div className="intro-container|">
+              <div className="intro-title | text-3xl mb-2">
+                Find Your Dream Home More Quickly
+              </div>
+              <p className="intro-discription | text-xl">
+                Put an end to the pointless site visits! Live-In Tours give you
+                all the information you need to make an immediate decision about
+                your new home.
+              </p>
+              <p>
+                Property Listings with Live-In Tours Produce 30% More Buyers
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
       {/* WhatsApp chat link icon */}
       <WhatsappChat></WhatsappChat>
     </>

@@ -22,7 +22,7 @@ body {
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
 }
 
 #root {
@@ -111,7 +111,7 @@ body {
 /* carousel previous and next btn */
 .swiper-button-next,
 .swiper-button-prev {
-    color: #ffffff;
+    color: #ffffff !important;
     display: none;
 }
 

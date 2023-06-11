@@ -168,7 +168,7 @@ export default function Footer() {
           </ul>
         </nav>
         <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto">
-          <div className="copy-rigth | text-sm font-semibold hover:text-blue-400 transition cursor-pointer">
+          <div className="copy-rigth | text-sm hover:text-blue-400 transition cursor-pointer">
             &#169;2023.example.com.All Rights Reserved.
           </div>
           <div className="social-links | flex flex-col justify-center">

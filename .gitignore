@@ -23,5 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-server/.env
 *package-lock.json
+client/package-lock.json
+server/.env

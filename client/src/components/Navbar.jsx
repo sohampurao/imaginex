@@ -59,7 +59,12 @@ export default function Navbar() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <div className="font-semibold text-xl">
-                      <Link to={'/'}>Blog App</Link>
+                      <Link to={'/'}>
+                        <img
+                          src="/images/logo/brand-logo.png"
+                          className="h-[40px]"
+                        ></img>
+                      </Link>
                     </div>
                   </div>
                 </div>

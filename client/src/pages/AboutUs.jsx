@@ -49,7 +49,7 @@ export default function AboutUs() {
             return (
               <article
                 key={item._id}
-                className="about-container | border border-[#22b3a4] p-4"
+                className="about-container | border border-[gold] shadow-sm rounded p-4"
               >
                 <div className="profile-container | flex gap-4 mb-4">
                   <div className="profile-image">

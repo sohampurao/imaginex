@@ -2,7 +2,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
-import SignIn from './pages/SignIn';
+import SignIn from './pages/Signin';
 import AddAdmin from './pages/AddAdmin';
 import VirtualTours from './pages/VirtualTours';
 import PageNotFound from './pages/PageNotFound';

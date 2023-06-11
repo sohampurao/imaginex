@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import data from './data/Data.js';
+import path from 'path';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
@@ -42,6 +42,13 @@ app.use('/api/admins', AdminRouter);
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
+});
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
 });
 
 app.get('/', (req, res) => {

@@ -1,0 +1,20 @@
+{
+  "name": "blog-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install && cd ../client && npm install --legacy-peer-deps && npm run build --legacy-peer-deps",
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sohampurao/blog-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sohampurao/blog-app/issues"
+  },
+  "homepage": "https://github.com/sohampurao/blog-app#readme"
+}

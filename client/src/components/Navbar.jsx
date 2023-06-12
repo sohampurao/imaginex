@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Our Work', to: '/ourwork' },
   { name: 'Features', to: '/features' },
   { name: 'Virtual Tours', to: '/virtualtours' },
-  { name: 'Contact', to: '/contact' },
+  { name: 'Contact Us', to: '/contactus' },
   { name: 'About Us', to: '/aboutus' },
 ];
 

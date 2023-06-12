@@ -31,6 +31,19 @@ body {
     flex-direction: column;
 }
 
+/* this hides the number input counter */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 /* Navbar */
 .header-nav {
     font-size: 1rem;

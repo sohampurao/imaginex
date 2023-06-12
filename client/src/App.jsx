@@ -7,7 +7,6 @@ import AddAdmin from './pages/AddAdmin';
 import VirtualTours from './pages/VirtualTours';
 import PageNotFound from './pages/PageNotFound';
 import ScrollToTop from 'react-scroll-to-top';
-import Dashboard from './components/Dashboard';
 import AdminRoute from './components/AdminRoute';
 import BlogPostsList from './pages/admin/listScreens/BlogPostsList';
 import CarouselList from './pages/admin/listScreens/CarouselList';
@@ -22,6 +21,7 @@ import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import AboutusList from './pages/admin/listScreens/AboutusList';
 import AboutusEdit from './pages/admin/editScreens/AboutusEdit';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -50,6 +50,9 @@ function App() {
           {/* About Us*/}
           <Route path="/aboutus" element={<AboutUs />}></Route>
 
+          {/* Contact Us*/}
+          <Route path="/contactus" element={<ContactUs />}></Route>
+
           {/* Sign-In page */}
           <Route path="/signin" element={<SignIn></SignIn>}></Route>
 
@@ -61,16 +64,6 @@ function App() {
             element={
               <AdminRoute>
                 <AddAdmin></AddAdmin>
-              </AdminRoute>
-            }
-          ></Route>
-
-          {/* Dashboard */}
-          <Route
-            path="/dashboard"
-            element={
-              <AdminRoute>
-                <Dashboard></Dashboard>
               </AdminRoute>
             }
           ></Route>

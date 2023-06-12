@@ -109,6 +109,18 @@ export default function Home() {
     fetchData();
   }, []);
 
+  // this blocks body scrolling while Preloader is active
+  useEffect(() => {
+    const blockBodyScrolling = () => {
+      if (carouselLoading || blogPostsLoading) {
+        document.body.classList.add('overflow-y-hidden');
+      } else {
+        document.body.classList.remove('overflow-y-hidden');
+      }
+    };
+    blockBodyScrolling();
+  }, [blogPostsLoading, carouselLoading]);
+
   return (
     <>
       {/* Carousel */}

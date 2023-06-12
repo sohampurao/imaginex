@@ -44,6 +44,7 @@ app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
 });
 
+//fot hosting
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

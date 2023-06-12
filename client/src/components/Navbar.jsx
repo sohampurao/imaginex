@@ -15,10 +15,6 @@ const navigation = [
   { name: 'About Us', to: '/aboutus' },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Navbar() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { adminInfo } = state;
@@ -34,11 +30,11 @@ export default function Navbar() {
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-zinc-100 z-40 shadow-lg sticky top-0 rigth-0 w-full"
+        className="bg-[#202020] z-40 shadow-lg sticky top-0 rigth-0 w-full"
       >
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="mx-auto container px-5 md:px-10">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="block sm:ml-6 sm:hidden">
                   <Avatar
@@ -70,7 +66,7 @@ export default function Navbar() {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white sm:hidden">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white sm:hidden">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -113,20 +109,18 @@ export default function Navbar() {
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.to}
-                    className={classNames(
-                      item.current
-                        ? 'bg-gray-600 text-white'
-                        : 'text-neutral-600 hover:bg-zinc-300',
-                      'block rounded-md px-3 py-2 text-base font-medium'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
+                  <NavLink to={item.to} key={item.name} className="header-nav">
+                    <Disclosure.Button
+                      as="a"
+                      to={item.to}
+                      className={
+                        'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                      }
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>

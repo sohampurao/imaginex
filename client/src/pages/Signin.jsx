@@ -35,7 +35,7 @@ export default function SignIn() {
     [adminInfo, navigate];
   return (
     <>
-      <div className="container mx-auto flex justify-center">
+      <div className="container mx-auto flex justify-center mb-5">
         <form
           className="flex flex-col gap-4 mt-10 w-[300px] sm:w-[500px]"
           onSubmit={onSubmitHandler}

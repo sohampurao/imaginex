@@ -35,13 +35,13 @@ body {
 .header-nav {
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
-    color: rgb(82 82 82);
     transition: color 300ms ease-in;
+    color: #b6b6b6;
 }
 
 .header-nav.active {
-    font-weight: 600;
-    color: rgb(28, 100, 242);
+    font-weight: 500;
+    color: #ffffff;
 }
 
 .footer-nav .active {
@@ -57,7 +57,7 @@ body {
     content: ' ';
     position: absolute;
     display: block;
-    background-color: rgb(28, 100, 242);
+    background-color: #ffffff;
     border-radius: 1000vmax;
     height: 2px;
     width: 100%;
@@ -72,7 +72,7 @@ body {
 }
 
 .header-nav:hover {
-    color: rgb(28, 100, 242);
+    color: #ffffff;
 }
 
 /* Carousel */
@@ -138,8 +138,9 @@ body {
 
 /* scroll-to-top btn */
 .scroll-to-top {
-    background-color: #ffffff !important;
+    background-color: #ff536d !important;
     animation: scrollani 700ms infinite alternate ease-in;
+    color: #ffffff;
 }
 
 @keyframes scrollani {

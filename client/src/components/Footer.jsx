@@ -61,11 +61,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto w-full bg-[#333333]">
-      <div className="services-contact | bg-[#f9f9f9] py-8">
+    <footer className="mt-auto w-full bg-[#333333] px-2">
+      <div className="services-contact | py-8">
         <div className="m-auto px-2 max-w-5xl sm:px-6 lg:px-8 flex justify-between gap-10">
           <div className="services w-6/12">
-            <div className="services-title | mb-3 text-neutral-900 font-semibold font-serif">
+            <div className="services-title | mb-3 text-white font-semibold font-serif">
               BOOK YOUR MATTERPORT SCANNING TODAY
             </div>
             <ul className="services-list | transition-all cursor-default">
@@ -120,7 +120,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="contact-detials w-6/12">
-            <div className="contact-title | mb-3 uppercase font-serif font-semibold">
+            <div className="contact-title | mb-3 uppercase font-serif font-semibold text-white">
               contact us on
             </div>
             <div className="mail | flex text-[#b53836] hover:text-[#8e2c2a]">
@@ -147,7 +147,7 @@ export default function Footer() {
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to}>
-                <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-neutral-800">
+                <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-[rgb(255,83,109)]">
                   {item.platformIcon}
                 </li>
               </Link>

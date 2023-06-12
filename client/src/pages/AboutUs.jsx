@@ -36,7 +36,7 @@ export default function AboutUs() {
   console.log(aboutus);
 
   return (
-    <section className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly items-center my-8">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly items-center my-8">
       {loading ? (
         <div className="text-center">
           <Spinner aria-label="Center-aligned spinner example" />
@@ -49,7 +49,7 @@ export default function AboutUs() {
             return (
               <article
                 key={item._id}
-                className="about-container | border border-[gold] shadow-sm rounded p-4"
+                className="about-container | border flex flex-col border-[gold] shadow-sm rounded p-4 min-h-[500px] max-w-[600px]"
               >
                 <div className="profile-container | flex gap-4 mb-4">
                   <div className="profile-image">
@@ -71,7 +71,7 @@ export default function AboutUs() {
                 <div className="about-info | text-justify text-neutral-600">
                   {item.description}
                 </div>
-                <div className="social-handles | text-center mt-5">
+                <div className="social-handles | text-center mt-auto">
                   <div className="font-serif">Connect with Me</div>
                   <ul className="share-web | flex justify-center gap-4 mt-2 mb-4">
                     {item.facebookURL && (

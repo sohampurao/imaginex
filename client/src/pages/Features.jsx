@@ -33,6 +33,18 @@ export default function Features() {
     fetchData();
   }, []);
 
+  // this blocks body scrolling while Preloader is active
+  useEffect(() => {
+    const blockBodyScrolling = () => {
+      if (loading) {
+        document.body.classList.add('overflow-y-hidden');
+      } else {
+        document.body.classList.remove('overflow-y-hidden');
+      }
+    };
+    blockBodyScrolling();
+  }, [loading]);
+
   return (
     <>
       {loading ? (

@@ -22,11 +22,13 @@ import AboutUs from './pages/AboutUs';
 import AboutusList from './pages/admin/listScreens/AboutusList';
 import AboutusEdit from './pages/admin/editScreens/AboutusEdit';
 import ContactUs from './pages/ContactUs';
+import ScrollRestore from './components/ScrollRestore';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollRestore></ScrollRestore>
         <Navbar></Navbar>
         {/* Scroll to the top btn */}
         <ScrollToTop

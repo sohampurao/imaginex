@@ -8,6 +8,7 @@ import { Store } from '../Store';
 import Dashboard from './Dashboard';
 
 const navigation = [
+  { name: 'Home', to: '/' },
   { name: 'Our Work', to: '/ourwork' },
   { name: 'Features', to: '/features' },
   { name: 'Virtual Tours', to: '/virtualtours' },
@@ -35,7 +36,7 @@ export default function Navbar() {
         {({ open }) => (
           <>
             <div className="mx-auto container px-5 md:px-10">
-              <div className="relative flex h-16 items-center justify-between">
+              <div className="relative flex h-20 items-center justify-between">
                 <div className="block sm:ml-6 sm:hidden">
                   <Avatar
                     data-drawer-target="drawer-navigation"
@@ -58,7 +59,7 @@ export default function Navbar() {
                       <Link to={'/'}>
                         <img
                           src="/images/logo/brand-logo.png"
-                          className="h-[40px]"
+                          className="h-[60px]"
                         ></img>
                       </Link>
                     </div>

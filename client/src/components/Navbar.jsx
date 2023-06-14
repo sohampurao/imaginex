@@ -35,9 +35,9 @@ export default function Navbar() {
       >
         {({ open }) => (
           <>
-            <div className="mx-auto container px-5 md:px-10">
+            <div className="mx-auto px-5">
               <div className="relative flex h-20 items-center justify-between">
-                <div className="block sm:ml-6 sm:hidden">
+                <div className="block md:hidden">
                   <Avatar
                     data-drawer-target="drawer-navigation"
                     data-drawer-show="drawer-navigation"
@@ -53,7 +53,7 @@ export default function Navbar() {
                     bordered={true}
                   />
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <div className="font-semibold text-xl">
                       <Link to={'/'}>
@@ -67,7 +67,7 @@ export default function Navbar() {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white sm:hidden">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -76,7 +76,7 @@ export default function Navbar() {
                     )}
                   </Disclosure.Button>
 
-                  <div className="hidden sm:ml-6 sm:block">
+                  <div className="hidden sm:ml-6 md:block">
                     <div className="flex space-x-4 items-center">
                       {navigation.map((item) => (
                         <div className="nav-item" key={item.name}>
@@ -107,7 +107,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden">
+            <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
                   <NavLink to={item.to} key={item.name} className="header-nav">

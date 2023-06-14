@@ -2,6 +2,7 @@ import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import AlertBox from '../components/AlertBox';
 import Preloader from '../components/Preloader';
+import { Fade } from 'react-reveal';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,33 +53,32 @@ export default function Features() {
       ) : error ? (
         <AlertBox variant="failure">{error}</AlertBox>
       ) : (
-        <section className="container mx-auto mt-5  px-5 md:px-0">
+        <section className="feature | mx-auto mt-5 px-5">
           {features.map((feature) => {
             return (
-              <article
-                key={feature._id}
-                className="feature-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row-reverse"
-              >
-                <div className="feature-display | md:w-6/12">
-                  <img
-                    src={feature.image}
-                    alt=""
-                    className="feature-image | w-full max-w-full h-[250px] sm:h-[350px] object-cover"
-                  />
-                </div>
+              <Fade bottom duration={2000} distance="50%" key={feature._id}>
+                <article className="feature-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row-reverse">
+                  <div className="feature-display | md:w-6/12">
+                    <img
+                      src={feature.image}
+                      alt="feature"
+                      className="feature-image | w-full max-w-full h-[250px] sm:h-[350px] object-cover"
+                    />
+                  </div>
 
-                <div className="feature-text | lg:relative p-5 md:w-6/12 md:max-md:w-6/12">
-                  <div className="bullet-box | lg:absolute lg:text-2xl lg:p-3 p-2 inline-block lg:right-full top-0 lg:me-2  bg-black text-white transition-colors hover:text-neutral-400">
-                    <i className="fab fa-connectdevelop"></i>
+                  <div className="feature-text | lg:relative p-5 md:w-6/12 md:max-md:w-6/12">
+                    <div className="bullet-box | lg:absolute lg:text-2xl lg:p-3 p-2 inline-block lg:right-full top-0 lg:me-2  bg-black text-white transition-colors hover:text-neutral-400">
+                      <i className="fa-solid fa-dice-d20"></i>
+                    </div>
+                    <h1 className="feature-title | inline-block ms-2 lg:ms-0 text-2xl font-serif font-medium mb-3 capitalize">
+                      {feature.title}
+                    </h1>
+                    <div className="feature-subtitle | text-base text-neutral-600 text-justify">
+                      {feature.description}
+                    </div>
                   </div>
-                  <h1 className="feature-title | inline-block ms-2 lg:ms-0 text-2xl font-serif font-medium mb-3">
-                    {feature.title}
-                  </h1>
-                  <div className="feature-subtitle | text-base text-neutral-600 text-justify">
-                    {feature.description}
-                  </div>
-                </div>
-              </article>
+                </article>
+              </Fade>
             );
           })}
         </section>

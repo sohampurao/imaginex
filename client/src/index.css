@@ -44,6 +44,11 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+/* Preloader */
+.preloader-wrapper {
+    z-index: 99999999;
+}
+
 /* Navbar */
 .header-nav {
     font-size: 1rem;
@@ -57,10 +62,7 @@ input[type=number] {
     color: #ffffff;
 }
 
-.footer-nav .active {
-    font-weight: 500;
-    color: gold;
-}
+
 
 .nav-item {
     position: relative;
@@ -91,14 +93,33 @@ input[type=number] {
 /* Carousel */
 .mySwiper {
     width: 100%;
-    height: 20rem;
+    height: 300px;
 }
 
+
+/* for small devices */
 @media (min-width: 640px) {
     .mySwiper {
-        height: 35rem;
+        height: 350px;
     }
 }
+
+/* for medium devices */
+@media (min-width: 768px) {
+    .mySwiper {
+        height: 450px;
+    }
+}
+
+/* for large devices */
+@media (min-width: 1024px) {
+    .mySwiper {
+        height: 600px;
+    }
+}
+
+/* for extra large devices */
+@media (min-width: 1280px) {}
 
 .swiper-slide {
     width: 100%;
@@ -125,14 +146,14 @@ input[type=number] {
 .swiper-button-next,
 .swiper-button-prev {
     color: #ffffff !important;
-    display: none;
+    display: none !important;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
 
     .swiper-button-next,
     .swiper-button-prev {
-        display: block;
+        display: block !important;
     }
 }
 
@@ -154,6 +175,7 @@ input[type=number] {
     background-color: #ff536d !important;
     animation: scrollani 700ms infinite alternate ease-in;
     color: #ffffff;
+    z-index: 60 !important;
 }
 
 @keyframes scrollani {
@@ -188,4 +210,11 @@ input[type=number] {
 
 .profile-detials {
     letter-spacing: 4px;
+}
+
+
+/* footer */
+.footer-nav .active {
+    font-weight: 500;
+    color: gold;
 }

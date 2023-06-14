@@ -3,6 +3,7 @@ import { Spinner } from 'flowbite-react';
 import { useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import AlertBox from '../components/AlertBox';
+import { Zoom } from 'react-reveal';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -36,7 +37,7 @@ export default function AboutUs() {
   console.log(aboutus);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly items-center my-8">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly my-8">
       {loading ? (
         <div className="text-center">
           <Spinner aria-label="Center-aligned spinner example" />
@@ -47,67 +48,67 @@ export default function AboutUs() {
         <>
           {aboutus.map((item) => {
             return (
-              <article
-                key={item._id}
-                className="about-container | border flex flex-col border-[gold] shadow-sm rounded p-4 min-h-[500px] max-w-[600px]"
-              >
-                <div className="profile-container | flex gap-4 mb-4">
-                  <div className="profile-image">
-                    <img
-                      src={item.profileImage}
-                      alt=""
-                      className="h-[100px] rounded-md"
-                    />
-                  </div>
-                  <div className="profile-detials | pt-1">
-                    <div className="owner-name uppercase | font-semibold font-serif">
-                      {item.firstName + ' ' + item.lastName}
+              <Zoom key={item._id}>
+                <article className="about-container | border flex flex-col border-[gold] shadow-sm rounded p-4 min-h-[500px] max-w-[600px] md:w-6/12">
+                  <div className="profile-container | flex flex-col gap-4 md:flex-row">
+                    <div className="profile-image">
+                      <img
+                        src={item.profileImage}
+                        alt=""
+                        className="w-full mx-auto block rounded-md max-w-[250px] max-h-[200px] md:w-200px md:h-[120px]"
+                      />
                     </div>
-                    <div className="owner-positon uppercase | text-sm">
-                      {item.position}
+                    <div className="profile-detials | text-center md:text-start">
+                      <div className="owner-name uppercase | font-semibold font-serif">
+                        {item.firstName + ' ' + item.lastName}
+                      </div>
+                      <div className="owner-positon uppercase | text-sm mt-1">
+                        {item.position}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="about-info | text-justify text-neutral-600">
-                  {item.description}
-                </div>
-                <div className="social-handles | text-center mt-auto">
-                  <div className="font-serif">Connect with Me</div>
-                  <ul className="share-web | flex justify-center gap-4 mt-2 mb-4">
-                    {item.facebookURL && (
-                      <Link to={item.facebookURL} target="_blank">
-                        <li className="social-link-item | transition-all bg-[#1877F2] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
-                          <i className="bi bi-facebook"></i>
-                        </li>
-                      </Link>
-                    )}
-                    {item.linkedinURL && (
-                      <Link to={item.linkedinURL} target="_blank">
-                        <li className="social-link-item | transition-all bg-[#0A66C2] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
-                          <i className="bi bi-linkedin"></i>
-                        </li>
-                      </Link>
-                    )}
-                    {item.whatsappNo && (
-                      <Link
-                        to={`https://api.whatsapp.com/send/?phone=91${item.whatsappNo}&text&type=phone_number&app_absent=0`}
-                        target="_blank"
-                      >
-                        <li className="social-link-item | transition-all bg-[#25D366] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
-                          <i className="bi bi-whatsapp"></i>
-                        </li>
-                      </Link>
-                    )}
-                    {item.instagramURL && (
-                      <Link to={item.instagramURL} target="_blank">
-                        <li className="social-link-item | transition-all bg-gradient-to-r from-[#FEDA75] to-[#F58529] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
-                          <i className="bi bi-instagram"></i>
-                        </li>
-                      </Link>
-                    )}
-                  </ul>
-                </div>
-              </article>
+                  <hr className="block md:hidden h-[2px] my-2" />
+                  <div className="about-info | text-justify text-neutral-600 md:mt-2">
+                    {item.description}
+                  </div>
+                  <div className="social-handles | text-center mt-auto pt-3">
+                    <div className="font-serif">Connect with Me</div>
+                    <ul className="share-web | flex justify-center gap-4 mt-2 mb-4">
+                      {item.facebookURL && (
+                        <Link to={item.facebookURL} target="_blank">
+                          <li className="social-link-item | transition-all bg-[#1877F2] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
+                            <i className="bi bi-facebook"></i>
+                          </li>
+                        </Link>
+                      )}
+                      {item.linkedinURL && (
+                        <Link to={item.linkedinURL} target="_blank">
+                          <li className="social-link-item | transition-all bg-[#0A66C2] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
+                            <i className="bi bi-linkedin"></i>
+                          </li>
+                        </Link>
+                      )}
+                      {item.whatsappNo && (
+                        <Link
+                          to={`https://api.whatsapp.com/send/?phone=91${item.whatsappNo}&text&type=phone_number&app_absent=0`}
+                          target="_blank"
+                        >
+                          <li className="social-link-item | transition-all bg-[#25D366] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
+                            <i className="bi bi-whatsapp"></i>
+                          </li>
+                        </Link>
+                      )}
+                      {item.instagramURL && (
+                        <Link to={item.instagramURL} target="_blank">
+                          <li className="social-link-item | transition-all bg-gradient-to-r from-[#FEDA75] to-[#F58529] hover:bg-opacity-80 hover:scale-105 flex justify-center items-center h-10 w-10  rounded-full text-white">
+                            <i className="bi bi-instagram"></i>
+                          </li>
+                        </Link>
+                      )}
+                    </ul>
+                  </div>
+                </article>
+              </Zoom>
             );
           })}
         </>

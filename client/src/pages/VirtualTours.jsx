@@ -74,7 +74,7 @@ export default function VirtualTours() {
     <>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <nav>
-          <ul className="nav-tab | mt-10 list-none flex justify-center items-center">
+          <ul className="nav-tab | mt-10 list-none flex flex-wrap justify-center items-center">
             <li
               className={`tab-item | px-5 py-3 font-medium capitalize text-sm text-center rounded-md md:min-h-0 flex items-center ${
                 'all' === category ? 'text-[#1c64f2] tab-item-active' : ''

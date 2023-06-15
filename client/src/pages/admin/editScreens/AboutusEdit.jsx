@@ -270,7 +270,7 @@ export default function AboutusEdit() {
 
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="facebook" value="Facebook URL" />
+                  <Label htmlFor="facebook" value="Facebook URL (optional)" />
                 </div>
                 <TextInput
                   id="facebook"
@@ -283,7 +283,7 @@ export default function AboutusEdit() {
 
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="linkedin" value="LinkedIn URL" />
+                  <Label htmlFor="linkedin" value="LinkedIn URL (optional)" />
                 </div>
                 <TextInput
                   id="linkedin"
@@ -296,7 +296,10 @@ export default function AboutusEdit() {
 
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="whatsapp" value="Whatsapp Number" />
+                  <Label
+                    htmlFor="whatsapp"
+                    value="Whatsapp Number (optional)"
+                  />
                 </div>
                 <TextInput
                   id="whatsapp"
@@ -311,7 +314,7 @@ export default function AboutusEdit() {
 
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="instagram" value="Instagram URL" />
+                  <Label htmlFor="instagram" value="Instagram URL (optional)" />
                 </div>
                 <TextInput
                   id="instagram"

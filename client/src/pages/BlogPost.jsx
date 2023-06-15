@@ -87,9 +87,9 @@ export default function BlogPost() {
         <AlertBox variant="failure">{blogPostError}</AlertBox>
       ) : (
         <section className="container mx-auto mt-5  px-5 md:px-0">
-          <article className="blog-post | md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">
+          <article className="blog-post | bg-[#222222] text-white md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">
             <div className="blog-body | container p-5">
-              <div className="date-time| flex gap-2 items-center text-sm text-gray-500 dark:text-gray-400">
+              <div className="date-time| flex gap-2 items-center text-sm text-[#ffd900ed]">
                 <div className="date">{FormatDate(blogPost.createdAt)}</div>
                 <div className="inline-block mx-1">•</div>
                 <div className="uploaded-time">{formattedTime}</div>
@@ -97,10 +97,10 @@ export default function BlogPost() {
 
               <hr className="my-2 block" />
 
-              <h1 className="blog-title | text-2xl font-serif font-medium">
+              <h1 className="blog-title | text-2xl font-serif font-medium pb-2">
                 {blogPost.title}
               </h1>
-              <div className="blog-subtitle | text-base text-neutral-600 text-justify">
+              <div className="blog-subtitle | text-base text-justify text-neutral-300">
                 {blogPost.description}
               </div>
             </div>
@@ -109,8 +109,8 @@ export default function BlogPost() {
               {blogPost.mediaType == 'image' && (
                 <img
                   src={blogPost.path}
-                  alt=""
-                  className="blogblogPost.image | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto"
+                  alt={blogPost.title}
+                  className="blogblogPost.image | w-full h-[280px] sm:h-[400px] md:h-[470px] lg:h-[540px] mx-auto"
                 />
               )}
               {blogPost.mediaType == 'video' && (
@@ -121,7 +121,7 @@ export default function BlogPost() {
 
               {blogPost.mediaType == 'matterport' && (
                 <iframe
-                  className="matterport-iframe | w-full h-[330px] sm:h-[430px] md:h-[530px] mx-auto"
+                  className="matterport-iframe | w-full aspect-video mx-auto"
                   src={blogPost.path}
                   allowFullScreen
                 ></iframe>
@@ -129,10 +129,10 @@ export default function BlogPost() {
             </div>
 
             <div className="container p-5">
-              <hr className="my-2 block" />
+              <hr className="my-2 block bg-white" />
               <div className="blogpost-footer | flex justify-between items-center px-1">
                 <ul className="share-socialmedia-list | flex items-center justify-evenly gap-3">
-                  <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
+                  <li className="text-lg cursor-pointer hover:text-blue-500">
                     <Link
                       to={`https://www.facebook.com/sharer/sharer.php?u=${currentURL}`}
                       target="_blank"
@@ -140,12 +140,13 @@ export default function BlogPost() {
                       <Tooltip
                         content="Share on Facebook"
                         animation="duration-300"
+                        style="light"
                       >
                         <i className="bi bi-facebook"></i>
                       </Tooltip>
                     </Link>
                   </li>
-                  <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
+                  <li className="text-lg cursor-pointer hover:text-blue-500">
                     <Link
                       to={`https://twitter.com/intent/tweet?url=${currentURL}&text=Check out this amazing content!`}
                       target="_blank"
@@ -153,12 +154,13 @@ export default function BlogPost() {
                       <Tooltip
                         content="Share on Twitter"
                         animation="duration-300"
+                        style="light"
                       >
                         <i className="bi bi-twitter"></i>
                       </Tooltip>
                     </Link>
                   </li>
-                  <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
+                  <li className="text-lg cursor-pointer hover:text-blue-500">
                     <Link
                       to={`https://www.linkedin.com/sharing/share-offsite/?url=${currentURL}`}
                       target="_blank"
@@ -166,13 +168,18 @@ export default function BlogPost() {
                       <Tooltip
                         content="Share on LinkedIn"
                         animation="duration-300"
+                        style="light"
                       >
                         <i className="bi bi-linkedin"></i>
                       </Tooltip>
                     </Link>
                   </li>
-                  <li className="text-lg text-neutral-900 cursor-pointer hover:text-blue-500">
-                    <Tooltip content="Copy Link" animation="duration-300">
+                  <li className="text-lg cursor-pointer hover:text-blue-500">
+                    <Tooltip
+                      content="Copy Link"
+                      animation="duration-300"
+                      style="light"
+                    >
                       <i
                         className="bi bi-link-45deg"
                         onClick={copyToClipboard}
@@ -180,13 +187,19 @@ export default function BlogPost() {
                     </Tooltip>
                   </li>
                 </ul>
-                <div className="category | font-sans font-semibold cursor-pointer hover:text-blue-400 capitalize">
+                <div className="category | font-sans text-xs sm:text-base font-semibold cursor-pointer hover:text-blue-400 capitalize">
                   <Link to={`/virtualtours?category=${blogPost.category}`}>
-                    {blogPost.category}
+                    <Tooltip
+                      content="Category"
+                      animation="duration-300"
+                      style="light"
+                    >
+                      {blogPost.category}
+                    </Tooltip>
                   </Link>
                 </div>
               </div>
-              <hr className="my-2 block" />
+              <hr className="my-2 block bg-white" />
             </div>
           </article>
         </section>

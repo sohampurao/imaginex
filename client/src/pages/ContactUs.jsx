@@ -21,7 +21,7 @@ export default function ContactUs() {
     <section>
       <div className="google-map | min-w-full h-auto">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3084.4299131228795!2d72.92775625541314!3d18.563624394481355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be86fede644c453%3A0x11b858cf963dcf9b!2sSankura%20Cottage!5e0!3m2!1sen!2sin!4v1686545940301!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d945.5591160932617!2d72.92675366953719!3d18.56337509890866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be86f78b00bdc75%3A0x2ff1858e73f07aaf!2sHome%20Jitendra%20Buwa!5e0!3m2!1sen!2sin!4v1686805987556!5m2!1sen!2sin"
           className="h-[300px] sm:h-[370px] w-full"
           allowFullScreen
           loading="lazy"
@@ -45,7 +45,7 @@ export default function ContactUs() {
                     type="text"
                     name="name"
                     id="name"
-                    className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    className="block px-1 py-2.5 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required
                   />
@@ -67,7 +67,7 @@ export default function ContactUs() {
                     type="email"
                     name="email"
                     id="floating_email"
-                    className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    className="block px-1 py-2.5 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required
                   />
@@ -92,7 +92,7 @@ export default function ContactUs() {
                     placeholder=" "
                     maxLength={10}
                     minLength={10}
-                    className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+                    className="block px-1 py-2.5 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
                     required
                   />
                   <label

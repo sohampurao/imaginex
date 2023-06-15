@@ -9,6 +9,6 @@ export default function AdminRoute({ children }) {
   return adminInfo && adminInfo.isAdmin ? (
     children
   ) : (
-    <Navigate to="/signin"></Navigate>
+    <Navigate to="/admin"></Navigate>
   );
 }

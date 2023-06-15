@@ -56,7 +56,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />}></Route>
 
           {/* Sign-In page */}
-          <Route path="/signin" element={<SignIn></SignIn>}></Route>
+          <Route path="/admin" element={<SignIn></SignIn>}></Route>
 
           {/* ----- ADMIN ROUTES ----- */}
 

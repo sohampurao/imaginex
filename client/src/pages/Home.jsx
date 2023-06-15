@@ -165,7 +165,7 @@ export default function Home() {
                       <div className="w-full  overflow-hidden">
                         <img
                           src={item.image}
-                          className="max-w-full min-h-[300px] max-h-[600px] sm:min-h-[350px] md:min-h-[450px]"
+                          className="max-w-full max-h-[270px] min-h-[270px] sm:max-h-[600px] sm:min-h-[350px] md:min-h-[450px]"
                           alt={item.title}
                         />
                         <div className="absolute inset-x-[15%] bottom-3 py-5 text-center text-white hidden sm:block">

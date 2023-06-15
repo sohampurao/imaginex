@@ -1,11 +1,10 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Slide, ToastContainer } from 'react-toastify';
-import { Avatar } from 'flowbite-react';
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { Store } from '../Store';
-import Dashboard from './Dashboard';
+import AdminDropdown from './AdminDropdown';
 
 const navigation = [
   { name: 'Home', to: '/' },
@@ -27,42 +26,23 @@ export default function Navbar() {
   };
   return (
     <>
-      <Dashboard signOut={signOutHandler}></Dashboard>
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-[#202020] z-40 shadow-lg sticky top-0 rigth-0 w-full"
+        className="bg-[#202020] z-50 shadow-lg sticky top-0 rigth-0 w-full"
       >
         {({ open }) => (
           <>
             <div className="mx-auto px-5">
               <div className="relative flex h-20 items-center justify-between">
-                <div className="block md:hidden">
-                  <Avatar
-                    data-drawer-target="drawer-navigation"
-                    data-drawer-show="drawer-navigation"
-                    aria-controls="drawer-navigation"
-                    className="cursor-pointer"
-                    alt="Admin Profile"
-                    img={
-                      adminInfo
-                        ? adminInfo.profileImage
-                        : '/images/profile/admin.png'
-                    }
-                    rounded={true}
-                    bordered={true}
-                  />
-                </div>
-                <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+                <div className="flex flex-1 items-center justify-start md:items-stretch md:justify-start">
                   <div className="flex flex-shrink-0 items-center">
-                    <div className="font-semibold text-xl">
-                      <Link to={'/'}>
-                        <img
-                          src="/images/logo/brand-logo.png"
-                          className="h-[60px]"
-                        ></img>
-                      </Link>
-                    </div>
+                    <Link to={'/'}>
+                      <img
+                        src="/images/logo/brand-logo.png"
+                        className="h-[60px]"
+                      ></img>
+                    </Link>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -78,6 +58,19 @@ export default function Navbar() {
 
                   <div className="hidden sm:ml-6 md:block">
                     <div className="flex space-x-4 items-center">
+                      {adminInfo ? (
+                        <>
+                          <div className="admin-dropdown">
+                            <AdminDropdown
+                              adminInfo={adminInfo}
+                              signOut={signOutHandler}
+                            ></AdminDropdown>
+                          </div>
+                          <span className="text-white">|</span>
+                        </>
+                      ) : (
+                        ''
+                      )}
                       {navigation.map((item) => (
                         <div className="nav-item" key={item.name}>
                           <NavLink to={item.to} className="header-nav">
@@ -85,22 +78,6 @@ export default function Navbar() {
                           </NavLink>
                         </div>
                       ))}
-
-                      <Avatar
-                        data-drawer-target="drawer-navigation"
-                        data-drawer-show="drawer-navigation"
-                        aria-controls="drawer-navigation"
-                        // data-drawer-backdrop="false"
-                        className="cursor-pointer"
-                        alt="Admin Profile"
-                        img={
-                          adminInfo
-                            ? adminInfo.profileImage
-                            : '/images/profile/admin.png'
-                        }
-                        rounded={true}
-                        bordered={true}
-                      />
                     </div>
                   </div>
                 </div>
@@ -109,6 +86,18 @@ export default function Navbar() {
 
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
+                {adminInfo ? (
+                  <>
+                    <div className="admin-dropdown | flex justify-center">
+                      <AdminDropdown
+                        adminInfo={adminInfo}
+                        signOut={signOutHandler}
+                      ></AdminDropdown>
+                    </div>
+                  </>
+                ) : (
+                  ''
+                )}
                 {navigation.map((item) => (
                   <NavLink to={item.to} key={item.name} className="header-nav">
                     <Disclosure.Button
@@ -117,7 +106,6 @@ export default function Navbar() {
                       className={
                         'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
                       }
-                      aria-current={item.current ? 'page' : undefined}
                     >
                       {item.name}
                     </Disclosure.Button>

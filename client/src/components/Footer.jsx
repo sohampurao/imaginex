@@ -64,7 +64,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto w-full bg-[#333333] z-50">
+    <footer className="mt-auto w-full bg-[#333333] z-20">
       <div className="services-contact | py-8">
         <div className="mx-auto flex flex-col  px-5 gap-5 sm:flex-row sm:justify-center">
           <div className="services sm:w-7/12">

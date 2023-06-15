@@ -55,7 +55,7 @@ export default function Dashboard({ signOut }) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      className="bi bi-images | flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      className="bi bi-images"
                       viewBox="0 0 16 16"
                     >
                       <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />

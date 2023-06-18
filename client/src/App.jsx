@@ -23,6 +23,8 @@ import AboutusList from './pages/admin/listScreens/AboutusList';
 import AboutusEdit from './pages/admin/editScreens/AboutusEdit';
 import ContactUs from './pages/ContactUs';
 import ScrollRestore from './components/ScrollRestore';
+import OurWork from './pages/OurWork';
+import OurWorkDetails from './pages/OurWorkDetails';
 
 function App() {
   return (
@@ -40,7 +42,14 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home></Home>}></Route>
 
-          {/* blog post page */}
+          {/* Our Work page */}
+          <Route path="/ourwork" element={<OurWork></OurWork>}></Route>
+          <Route
+            path="/ourwork/:slug"
+            element={<OurWorkDetails></OurWorkDetails>}
+          ></Route>
+
+          {/* blogpost page */}
           <Route path="/blogpost/:slug" element={<BlogPost></BlogPost>}></Route>
 
           {/* Features */}

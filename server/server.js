@@ -9,6 +9,7 @@ import CarouselRouter from './routes/CarouselRoutes.js';
 import AdminRouter from './routes/AdminRoutes.js';
 import FeaturesRouter from './routes/FeaturesRoutes.js';
 import AboutusRouter from './routes/AboutusRoutes.js';
+import OurWorkRouter from './routes/OurWorkRoutes.js';
 
 // basic configuration
 const app = express();
@@ -33,6 +34,8 @@ mongoose
 app.use('/api/carousel', CarouselRouter);
 
 app.use('/api/blogposts', BlogPostRouter);
+
+app.use('/api/ourwork', OurWorkRouter);
 
 app.use('/api/features', FeaturesRouter);
 

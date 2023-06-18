@@ -64,8 +64,15 @@ export default function BlogPost({ blogPosts }) {
 
                 <div className="blog-text | p-5  text-white md:w-6/12">
                   <div className="date-time | flex gap-2 items-center text-sm text-[#ffd900ed]">
-                    <div className="date">{FormatDate(post.createdAt)}</div> •{' '}
-                    <div className="uploaded-time">{formattedTimes[index]}</div>
+                    <div className="date">{FormatDate(post.createdAt)}</div>{' '}
+                    {formattedTimes[index] && (
+                      <>
+                        •{' '}
+                        <div className="uploaded-time">
+                          {formattedTimes[index]}
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <hr className="my-2 block" />

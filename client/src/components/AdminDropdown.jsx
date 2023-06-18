@@ -21,23 +21,23 @@ export default function AdminDropdown({ adminInfo, signOut }) {
           {adminInfo.email}
         </span>
       </Dropdown.Header>
-      <Dropdown.Item icon={BsFillImageFill}>
-        <Link to={'/carousellist'}>Carousel</Link>
-      </Dropdown.Item>
-      <Dropdown.Item icon={BsFillPostcardFill}>
-        <Link to={'/blogpostslist'}>Blog Post</Link>
-      </Dropdown.Item>
+      <Link to={'/carousellist'}>
+        <Dropdown.Item icon={BsFillImageFill}>Carousel</Dropdown.Item>
+      </Link>
+      <Link to={'/blogpostslist'}>
+        <Dropdown.Item icon={BsFillPostcardFill}>Blog Post</Dropdown.Item>
+      </Link>
 
-      <Dropdown.Item icon={BsListStars}>
-        <Link to={'/featureslist'}>Features</Link>
-      </Dropdown.Item>
-      <Dropdown.Item icon={TiInfoLarge}>
-        <Link to={'/aboutuslist'}>About Us</Link>
-      </Dropdown.Item>
+      <Link to={'/featureslist'}>
+        <Dropdown.Item icon={BsListStars}>Features</Dropdown.Item>
+      </Link>
+      <Link to={'/aboutuslist'}>
+        <Dropdown.Item icon={TiInfoLarge}>About Us</Dropdown.Item>
+      </Link>
       <Dropdown.Divider />
-      <Dropdown.Item icon={MdAdminPanelSettings}>
-        <Link to={'/adminlist'}>Admins</Link>
-      </Dropdown.Item>
+      <Link to={'/adminlist'}>
+        <Dropdown.Item icon={MdAdminPanelSettings}>Admins</Dropdown.Item>
+      </Link>
       <Dropdown.Item icon={HiLogout} onClick={signOut}>
         Sign out
       </Dropdown.Item>

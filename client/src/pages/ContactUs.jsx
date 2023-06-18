@@ -1,4 +1,4 @@
-import { Button, Spinner } from 'flowbite-react';
+import { Button, Select, Spinner } from 'flowbite-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
@@ -19,7 +19,7 @@ export default function ContactUs() {
 
   return (
     <section>
-      <div className="google-map | min-w-full h-auto">
+      <div className="google-map | min-w-full h-auto overflow-x-hidden">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d945.5591160932617!2d72.92675366953719!3d18.56337509890866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be86f78b00bdc75%3A0x2ff1858e73f07aaf!2sHome%20Jitendra%20Buwa!5e0!3m2!1sen!2sin!4v1686805987556!5m2!1sen!2sin"
           className="h-[300px] sm:h-[370px] w-full"
@@ -131,16 +131,48 @@ export default function ContactUs() {
                   errors={state.errors}
                 />
 
+                <div className="w-full mb-7 group">
+                  <label
+                    htmlFor="service"
+                    className="block mb-2 text-sm font-medium text-gray-500 dark:text-white"
+                  >
+                    Select Service
+                  </label>
+                  <Select id="service" name="service">
+                    <option value="" selected className="hidden"></option>
+                    <option value={'Real Estate'}>Real Estate</option>
+                    <option value={'Events Spaces'}>Events Spaces</option>
+                    <option value={'Art-Gallery'}>Art-Gallery</option>
+                    <option value={'Sample Flats'}>Sample Flats</option>
+                    <option value={'Showrooms and Experience Centers'}>
+                      Showrooms and Experience Centers
+                    </option>
+                    <option value={'Resale Homes'}>Resale Homes</option>
+                    <option value={"Hospiatls & Clinic's"}>
+                      Hospiatls & Clinic&#39;s
+                    </option>
+                    <option value={'Hotes,Resorts,Villa'}>
+                      Hotes,Resorts,Villa
+                    </option>
+                  </Select>
+
+                  <ValidationError
+                    prefix="Service"
+                    field="service"
+                    errors={state.errors}
+                  />
+                </div>
+
                 <Button
                   type="submit"
                   disabled={state.submitting}
                   gradientDuoTone="purpleToBlue"
-                  className="mx-auto w-28 rounded-3xl"
+                  className="mx-auto w-28 rounded-3xl px-4"
                 >
                   {state.submitting ? (
                     <>
                       <Spinner aria-label="Spinner button example" />
-                      <span className="px-3">Sending...</span>
+                      <span className="inline-block ms-2">Sending...</span>
                     </>
                   ) : (
                     <>
@@ -169,8 +201,8 @@ export default function ContactUs() {
                         Address:
                       </div>
                       <div className="contact-content font-medium">
-                        Sankura Cottage, At post chaul, near Rameshwar temple,
-                        Alibag, Maharashtra-402203.
+                        At post chaul, near Rameshwar temple, Alibag,
+                        Maharashtra-402203.
                       </div>
                     </div>
                   </address>

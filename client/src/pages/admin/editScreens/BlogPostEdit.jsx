@@ -337,6 +337,10 @@ export default function BlogPostEdit() {
                   <option>Sample Flats</option>
                   <option>Resale Homes</option>
                   <option>Showrooms and Experience Centers</option>
+                  <option>Hotes,Resorts,Villa</option>
+                  <option>Hospiatls & Clinic&#39;s</option>
+                  <option>Art-Gallery</option>
+                  <option>Events Spaces</option>
                 </Select>
               </div>
               <Button type="submit" disabled={loadingUpdate}>

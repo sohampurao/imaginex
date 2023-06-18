@@ -129,39 +129,6 @@ export default function CarouselList() {
           Carousel
         </div>
 
-        <div className="create-btn-container | flex justify-end mx-auto max-w-4xl my-2">
-          <Button
-            gradientDuoTone="pinkToOrange"
-            onClick={() => setOpenModel(true)}
-          >
-            Create
-          </Button>
-        </div>
-        <Modal show={openModel} onClose={() => setOpenModel(false)}>
-          <Modal.Header>Add CarouselItem Confirmation</Modal.Header>
-          <Modal.Body>
-            <div className="space-y-6">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Are you sure you want to add Carousel Item?
-              </p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={createHandler}>Yess!</Button>
-            <Button color="gray" onClick={() => setOpenModel(false)}>
-              <p>Cancel</p>
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        {loadingCreate ? (
-          <div className="text-center">
-            <Spinner aria-label="Center-aligned spinner example" />
-          </div>
-        ) : errorCreate ? (
-          <AlertBox variant="failure">{errorCreate}</AlertBox>
-        ) : (
-          ''
-        )}
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />
@@ -170,6 +137,40 @@ export default function CarouselList() {
           <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
+            <div className="create-btn-container | flex justify-end mx-auto max-w-4xl my-2">
+              <Button
+                gradientDuoTone="pinkToOrange"
+                onClick={() => setOpenModel(true)}
+              >
+                Create
+              </Button>
+            </div>
+            <Modal show={openModel} onClose={() => setOpenModel(false)}>
+              <Modal.Header>Add CarouselItem Confirmation</Modal.Header>
+              <Modal.Body>
+                <div className="space-y-6">
+                  <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    Are you sure you want to add Carousel Item?
+                  </p>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={createHandler}>Yess!</Button>
+                <Button color="gray" onClick={() => setOpenModel(false)}>
+                  <p>Cancel</p>
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            {loadingCreate ? (
+              <div className="text-center">
+                <Spinner aria-label="Center-aligned spinner example" />
+              </div>
+            ) : errorCreate ? (
+              <AlertBox variant="failure">{errorCreate}</AlertBox>
+            ) : (
+              ''
+            )}
+
             {carouselItems.map((item, index) => {
               return (
                 <Card

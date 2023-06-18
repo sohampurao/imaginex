@@ -184,5 +184,51 @@ const data = {
       instagramURL: '#',
     },
   ],
+  ourwork: [
+    {
+      title: 'POPULAR PROJECTS',
+      description:
+        'These are Matterport virtual tour projects that we had most fun shooting and also the most liked by our visitors, clients and prospects. We ensure most of our commercial and residential projects get integrated on google maps and by doing so we ensure lot of visitors see our client’s spaces via street view. All our virtual tours are created with Matterport Pro 2 and the following once are some favourites. P.S – these are as of feb 2022. If you are a frequent visitor to our site, you will find lot more 360 virtual tours getting added to the popular list.',
+      work: [
+        {
+          thumbnail:
+            'https://media.designcafe.com/wp-content/uploads/2023/01/31151510/contemporary-interior-design-ideas-for-your-home.jpg',
+          title: 'Matterport Virtual Tour The Address Moshi Pune',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          slug: 'matterport-virtual-tour-the-address-moshi-pune',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://thestoreys.in/wp-content/uploads/2022/08/3d-rendering-modern-dining-room-living-room-with-luxury-decor-1300x698.jpg',
+          title:
+            'Marc Salon & Furniture Equipments Virtual Showroom – Matterport',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          slug: 'marc-salon-&-furniture-equipments-virtual-showroom-matterport',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://5.imimg.com/data5/SELLER/Default/2022/12/RG/PR/AQ/34203483/flat-interior-designing-service-500x500.jpg',
+          title: 'Monarch Aqua 3BHK Bengaluru Virtual Tour',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          slug: 'monarch-aqua-3bhk-bengaluru-virtual-tour',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://static.asianpaints.com/content/dam/asianpaintsbeautifulhomes/home-decor-advice/design-and-style/nine-small-house-interior-design-hacks/Title-two-seater-couches-and-wall--mounts-design-hack.jpg',
+          title: 'Matterport Virtual Tour of Sanskruti Luxury Villa 2BHK',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          slug: 'matterport-virtual-tour-of-sanskruti-luxury-villa',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+      ],
+    },
+  ],
 };
 export default data;

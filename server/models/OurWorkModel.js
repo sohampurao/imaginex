@@ -5,7 +5,6 @@ const WorkSchema = new mongoose.Schema(
     thumbnail: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String },
-    slug: { type: String, required: true, unique: true },
     model: { type: String, required: true },
   },
   {
@@ -13,11 +12,17 @@ const WorkSchema = new mongoose.Schema(
   }
 );
 
-const OurWorkSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  work: [WorkSchema],
-});
+const OurWorkSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    work: [WorkSchema],
+  },
+  {
+    timestamps: true,
+  }
+);
 
+export const Work = mongoose.model('Work', WorkSchema);
 const OurWork = mongoose.model('OurWork', OurWorkSchema);
 export default OurWork;

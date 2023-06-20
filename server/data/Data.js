@@ -196,7 +196,6 @@ const data = {
           title: 'Matterport Virtual Tour The Address Moshi Pune',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
-          slug: 'matterport-virtual-tour-the-address-moshi-pune',
           model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
         },
         {
@@ -206,7 +205,6 @@ const data = {
             'Marc Salon & Furniture Equipments Virtual Showroom – Matterport',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
-          slug: 'marc-salon-&-furniture-equipments-virtual-showroom-matterport',
           model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
         },
         {
@@ -215,7 +213,6 @@ const data = {
           title: 'Monarch Aqua 3BHK Bengaluru Virtual Tour',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
-          slug: 'monarch-aqua-3bhk-bengaluru-virtual-tour',
           model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
         },
         {
@@ -224,7 +221,46 @@ const data = {
           title: 'Matterport Virtual Tour of Sanskruti Luxury Villa 2BHK',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
-          slug: 'matterport-virtual-tour-of-sanskruti-luxury-villa',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+      ],
+    },
+    {
+      title: 'RESIDENTIAL PROJECTS',
+      description:
+        'Since inception, 80% of our work has been into residential real estate (New live projects and resale homes alike). Matterport virtual tours is the best way of marketing and showcasing residential units of different types. Our work has helped builders and developers garner better marketing strategies and reaching larger set of users. It is a great mix to have (Online and Offline). Going virtual helps individual home owners too to sell faster or to simply preserve a digital copy of their home as memory.',
+      work: [
+        {
+          thumbnail:
+            'https://media.designcafe.com/wp-content/uploads/2023/01/31151510/contemporary-interior-design-ideas-for-your-home.jpg',
+          title: 'Matterport Virtual Tour The Address Moshi Pune',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://thestoreys.in/wp-content/uploads/2022/08/3d-rendering-modern-dining-room-living-room-with-luxury-decor-1300x698.jpg',
+          title:
+            'Marc Salon & Furniture Equipments Virtual Showroom – Matterport',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://5.imimg.com/data5/SELLER/Default/2022/12/RG/PR/AQ/34203483/flat-interior-designing-service-500x500.jpg',
+          title: 'Monarch Aqua 3BHK Bengaluru Virtual Tour',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
+          model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
+        },
+        {
+          thumbnail:
+            'https://static.asianpaints.com/content/dam/asianpaintsbeautifulhomes/home-decor-advice/design-and-style/nine-small-house-interior-design-hacks/Title-two-seater-couches-and-wall--mounts-design-hack.jpg',
+          title: 'Matterport Virtual Tour of Sanskruti Luxury Villa 2BHK',
+          description:
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, ad? Quidem nam ducimus provident sequi enim, cumque unde corrupti inventore eius vero minus magnam rerum?',
           model: 'https://my.matterport.com/show/?m=XYZ46qV7SaP',
         },
       ],

@@ -139,7 +139,11 @@ export default function ContactUs() {
                     Select Service
                   </label>
                   <Select id="service" name="service">
-                    <option value="" selected className="hidden"></option>
+                    <option
+                      value="No service requested"
+                      selected
+                      className="hidden"
+                    ></option>
                     <option value={'Real Estate'}>Real Estate</option>
                     <option value={'Events Spaces'}>Events Spaces</option>
                     <option value={'Art-Gallery'}>Art-Gallery</option>

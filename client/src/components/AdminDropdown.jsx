@@ -2,7 +2,7 @@
 import { Dropdown } from 'flowbite-react';
 import { HiLogout } from 'react-icons/hi';
 import { TiInfoLarge } from 'react-icons/ti';
-import { MdAdminPanelSettings } from 'react-icons/md';
+import { MdAdminPanelSettings, MdHomeWork } from 'react-icons/md';
 import {
   BsFillPostcardFill,
   BsFillImageFill,
@@ -27,7 +27,9 @@ export default function AdminDropdown({ adminInfo, signOut }) {
       <Link to={'/blogpostslist'}>
         <Dropdown.Item icon={BsFillPostcardFill}>Blog Post</Dropdown.Item>
       </Link>
-
+      <Link to={'/ourworklist'}>
+        <Dropdown.Item icon={MdHomeWork}>Our Work</Dropdown.Item>
+      </Link>
       <Link to={'/featureslist'}>
         <Dropdown.Item icon={BsListStars}>Features</Dropdown.Item>
       </Link>

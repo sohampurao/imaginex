@@ -25,6 +25,9 @@ import ContactUs from './pages/ContactUs';
 import ScrollRestore from './components/ScrollRestore';
 import OurWork from './pages/OurWork';
 import OurWorkDetails from './pages/OurWorkDetails';
+import OurWorkList from './pages/admin/listScreens/OurWorkList';
+import OurWorkEdit from './pages/admin/editScreens/OurWorkEdit';
+import WorkEdit from './pages/admin/editScreens/WorkEdit';
 
 function App() {
   return (
@@ -45,7 +48,7 @@ function App() {
           {/* Our Work page */}
           <Route path="/ourwork" element={<OurWork></OurWork>}></Route>
           <Route
-            path="/ourwork/:slug"
+            path="/ourwork/work/:id"
             element={<OurWorkDetails></OurWorkDetails>}
           ></Route>
 
@@ -105,6 +108,36 @@ function App() {
             element={
               <AdminRoute>
                 <BlogPostsList></BlogPostsList>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* OurWorkList */}
+          <Route
+            path="/ourworklist"
+            element={
+              <AdminRoute>
+                <OurWorkList></OurWorkList>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* OurWorkEdit */}
+          <Route
+            path="/ourworkedit/:id"
+            element={
+              <AdminRoute>
+                <OurWorkEdit></OurWorkEdit>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* WorkEdit */}
+          <Route
+            path="/ourwork/workedit/:id"
+            element={
+              <AdminRoute>
+                <WorkEdit></WorkEdit>
               </AdminRoute>
             }
           ></Route>

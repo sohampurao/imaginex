@@ -1,7 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Fade, Zoom } from 'react-reveal';
-import Flash from 'react-reveal/Flash';
 
 export default function Footer() {
   const [domainName, setDomainName] = useState('');
@@ -159,11 +158,11 @@ export default function Footer() {
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to}>
-                <Flash delay={2500} duration={2000}>
+                <Zoom delay={2500 + index * 200}>
                   <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-[rgb(255,83,109)]">
                     {item.platformIcon}
                   </li>
-                </Flash>
+                </Zoom>
               </Link>
             );
           })}

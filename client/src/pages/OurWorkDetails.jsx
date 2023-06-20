@@ -12,18 +12,18 @@ const reducer = (state, action) => {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, work: action.payload };
+      return { ...state, loading: false, workInfo: action.payload };
     case 'FETCH_FAILED':
       return { ...state, loading: false, error: action.payload };
   }
 };
 export default function OurWorkDetails() {
   const params = useParams();
-  const { slug: WorkSlug } = params;
+  const { id: WorkId } = params;
 
   const currentURL = window.location.href;
 
-  const [{ loading, error, work }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, workInfo }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
   });
@@ -32,14 +32,14 @@ export default function OurWorkDetails() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/ourwork/${WorkSlug}`);
+        const { data } = await axios.get(`/api/ourwork/work/${WorkId}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };
     fetchData();
-  }, [WorkSlug]);
+  }, [WorkId]);
 
   // this blocks body scrolling while Preloader is active
   useEffect(() => {
@@ -57,19 +57,19 @@ export default function OurWorkDetails() {
   const [formattedTime, setFormattedTime] = useState(null);
   useEffect(() => {
     const intervalId = setInterval(() => {
-      const FormattedTime = FormatTime(work.createdAt);
+      const FormattedTime = FormatTime(workInfo.work.createdAt);
       setFormattedTime(FormattedTime);
     }, 1000);
     return () => {
       clearInterval(intervalId);
     };
-  }, [work]);
+  }, [workInfo]);
 
   const copyToClipboard = () => {
     navigator.clipboard
       .writeText(currentURL)
       .then(() => {
-        work.success('Link copied to clipboard!');
+        toast.success('Link copied to clipboard!');
       })
       .catch((error) => {
         toast.error(error);
@@ -87,7 +87,9 @@ export default function OurWorkDetails() {
           <article className="work-post | bg-[#222222] text-white md:max-w-2xl lg:max-w-4xl mx-auto shadow mb-5">
             <div className="work-body | container p-5">
               <div className="date-time| flex gap-2 items-center text-sm text-[#ffd900ed]">
-                <div className="date">{FormatDate(work.createdAt)}</div>
+                <div className="date">
+                  {FormatDate(workInfo.work.createdAt)}
+                </div>
                 <div className="inline-block mx-1">•</div>
                 <div className="uploaded-time">{formattedTime}</div>
               </div>
@@ -95,17 +97,17 @@ export default function OurWorkDetails() {
               <hr className="my-2 block" />
 
               <h1 className="work-title | text-2xl font-serif font-medium pb-2">
-                {work.title}
+                {workInfo.work.title}
               </h1>
               <div className="work-subtitle | text-base text-justify text-neutral-300">
-                {work.description}
+                {workInfo.work.description}
               </div>
             </div>
 
             <div className="work-display | w-full">
               <iframe
                 className="matterport-iframe | w-full aspect-video mx-auto"
-                src={work.model}
+                src={workInfo.work.model}
                 allowFullScreen
               ></iframe>
             </div>

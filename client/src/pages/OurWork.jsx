@@ -73,7 +73,7 @@ export default function OurWork() {
                       return (
                         <Zoom key={work._id} delay={index * 250}>
                           <div className="display-col | w-full sm:w-6/12 lg:w-3/12 pe-4 pb-4 box-border">
-                            <div className="work-card | hover:shadow-xl hover:scale-105 transition-all max-w-sm sm:min-h-[250px] md:min-h-[330px] bg-white border border-gray-200 rounded-lg shadow mx-auto">
+                            <div className="work-card | hover:shadow-xl hover:scale-105 transition-all max-w-sm max-h-[300px] min-h-[300px] md:min-h-[330px] md:max-h-[330px] bg-white border border-gray-200 rounded-lg shadow mx-auto">
                               <img
                                 className="rounded-t-lg max-h-[180px] min-h-[180px] w-full"
                                 src={work.thumbnail}
@@ -85,7 +85,7 @@ export default function OurWork() {
                                 </h5>
 
                                 <Link
-                                  to={`/ourwork/${work.slug}`}
+                                  to={`/ourwork/work/${work._id}`}
                                   className="mx-auto md:me-auto md:mx-0"
                                 >
                                   <Button

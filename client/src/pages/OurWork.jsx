@@ -52,7 +52,7 @@ export default function OurWork() {
 
   return (
     <>
-      <section className="work-container | max-w-6xl mx-auto">
+      <section className="work-container | max-w-6xl mx-auto 3xl:max-w-7xl">
         {loading ? (
           <Preloader></Preloader>
         ) : error ? (
@@ -62,7 +62,7 @@ export default function OurWork() {
             {ourwork.map((item) => {
               return (
                 <article className="work | w-full my-8" key={item._id}>
-                  <h1 className="work-title | uppercase font-serif font-bold tracking-widest text-neutral-900 text-center mb-5">
+                  <h1 className="work-title | text-lg uppercase font-serif font-bold tracking-widest text-neutral-900 text-center mb-5 3xl:text-xl">
                     {item.title}
                   </h1>
                   <div className="work-description | indent-8 text-justify subpixel-antialiased text-neutral-600 px-4">
@@ -73,14 +73,14 @@ export default function OurWork() {
                       return (
                         <Zoom key={work._id} delay={index * 250}>
                           <div className="display-col | w-full sm:w-6/12 lg:w-3/12 pe-4 pb-4 box-border">
-                            <div className="work-card | hover:shadow-xl hover:scale-105 transition-all max-w-sm max-h-[300px] min-h-[300px] md:min-h-[330px] md:max-h-[330px] bg-white border border-gray-200 rounded-lg shadow mx-auto">
+                            <div className="work-card | sm:hover:shadow-xl sm:hover:scale-105 transition-all max-w-sm max-h-[300px] min-h-[300px] md:min-h-[330px] md:max-h-[330px] 3xl:min-h-[350px] 3xl:max-h-[350px] bg-white border border-gray-200 rounded-lg shadow mx-auto">
                               <img
-                                className="rounded-t-lg max-h-[180px] min-h-[180px] w-full"
+                                className="rounded-t-lg max-h-[180px] min-h-[180px] w-full 3xl:max-h-[190px] 3xl:min-h-[190px]"
                                 src={work.thumbnail}
                                 alt={work.title}
                               />
                               <div className="px-5 py-4 flex flex-col items-center justify-between gap-1">
-                                <h5 className="mb-2 text-sm font-bold tracking-tight text-neutral-600">
+                                <h5 className="mb-2 text-sm font-bold tracking-tight text-neutral-600 3xl:text-base">
                                   {work.title}
                                 </h5>
 

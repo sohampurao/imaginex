@@ -57,7 +57,6 @@ input[type=number] {
 }
 
 .header-nav {
-    font-size: 1rem;
     font-family: 'Roboto', sans-serif;
     transition: color 300ms ease-in;
     color: #b6b6b6;
@@ -124,8 +123,12 @@ input[type=number] {
     }
 }
 
-/* for extra large devices */
-@media (min-width: 1280px) {}
+/* for 3xl devices */
+@media (min-width: 1600px) {
+    .mySwiper {
+        height: 750px;
+    }
+}
 
 .swiper-slide {
     width: 100%;

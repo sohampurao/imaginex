@@ -21,13 +21,16 @@ export default function Footer() {
     },
     {
       platformIcon: <i className="bi bi-linkedin"></i>,
-      to: `https://twitter.com/intent/tweet?url=${domainName}&text=Check out this amazing content!`,
+      to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}&title=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers`,
     },
     {
       platformIcon: <i className="bi bi-twitter"></i>,
       to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}`,
     },
-    { platformIcon: <i className="bi bi-instagram"></i>, to: '#' },
+    {
+      platformIcon: <i className="bi bi-whatsapp"></i>,
+      to: `https://api.whatsapp.com/send?text=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers%0A%0A*Checkout%20Now:*%20${domainName}`,
+    },
   ];
 
   const navigation = [
@@ -63,10 +66,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto w-full bg-[#333333] z-20">
-      <div className="services-contact | py-8">
-        <div className="mx-auto flex flex-col  px-5 gap-5 sm:flex-row sm:justify-center">
-          <div className="services sm:w-7/12">
+    <footer className="mt-auto w-full bg-[#333333] z-20 px-5">
+      <div className="services-contact | py-8 max-w">
+        <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-between sm:max-w-7xl 3xl:max-w-[1400px]">
+          <div className="services">
             <div className="services-title | mb-3 text-white font-semibold font-serif ">
               BOOK YOUR MATTERPORT SCANNING TODAY
             </div>
@@ -125,7 +128,7 @@ export default function Footer() {
               </ul>
             </Fade>
           </div>
-          <div className="contact-detials | sm:5/12">
+          <div className="contact-detials">
             <div className="contact-title | mb-3 uppercase font-serif font-semibold text-white">
               contact us on
             </div>
@@ -157,7 +160,7 @@ export default function Footer() {
         <ul className="share-web | flex justify-center gap-10 pt-5">
           {shareWebLinks.map((item, index) => {
             return (
-              <Link key={index} to={item.to}>
+              <Link key={index} to={item.to} target="_blank">
                 <Zoom delay={2500 + index * 200}>
                   <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-[rgb(255,83,109)]">
                     {item.platformIcon}
@@ -171,7 +174,7 @@ export default function Footer() {
           <div className="nav-title | text-center py-2 font-semibold mt-8">
             Quick Links
           </div>
-          <ul className="footer-nav | flex flex-wrap justify-center items-center gap-8 py-4">
+          <ul className="footer-nav | flex flex-wrap justify-center items-center gap-8 py-4 3xl:text-xl">
             {navigation.map((item, index) => {
               return (
                 <NavLink to={item.to} key={index}>
@@ -184,7 +187,7 @@ export default function Footer() {
           </ul>
         </nav>
         <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto">
-          <div className="copy-rigth | text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm">
+          <div className="copy-rigth | text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm 3xl:text-base">
             &#169;2023.example.com.All Rights Reserved.
           </div>
           <div className="social-links | flex flex-col justify-center">

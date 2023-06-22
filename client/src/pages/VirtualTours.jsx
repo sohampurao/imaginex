@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { Spinner } from 'flowbite-react';
 import BlogPost from '../components/BlogPost';
-import logger from 'use-reducer-logger';
 import AlertBox from '../components/AlertBox';
 
 const reducer = (state, action) => {
@@ -28,15 +27,11 @@ export default function VirtualTours() {
   const { search } = useLocation();
   const sp = new URLSearchParams(search); //search?category=postname
   const category = sp.get('category') || 'all';
-  console.log(category);
 
-  const [{ loading, error, blogPosts }, dispatch] = useReducer(
-    logger(reducer),
-    {
-      loading: true,
-      error: '',
-    }
-  );
+  const [{ loading, error, blogPosts }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
 
   useEffect(() => {
     try {
@@ -72,7 +67,7 @@ export default function VirtualTours() {
 
   return (
     <>
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 3xl:max-w-[1400px]">
         <nav>
           <ul className="nav-tab | mt-10 list-none flex flex-wrap justify-center items-center">
             <li
@@ -93,7 +88,9 @@ export default function VirtualTours() {
               </li>
             ))}
           </ul>
-        </nav>
+        </nav>{' '}
+      </div>
+      <main>
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />
@@ -105,7 +102,7 @@ export default function VirtualTours() {
             <BlogPost blogPosts={blogPosts}></BlogPost>
           </>
         )}
-      </div>
+      </main>
     </>
   );
 }

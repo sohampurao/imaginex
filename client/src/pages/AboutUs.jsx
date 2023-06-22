@@ -34,10 +34,9 @@ export default function AboutUs() {
     };
     fetchData();
   }, []);
-  console.log(aboutus);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly my-8">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-5 justify-evenly my-8 3xl:max-w-[1400px]">
       {loading ? (
         <div className="text-center">
           <Spinner aria-label="Center-aligned spinner example" />
@@ -49,7 +48,7 @@ export default function AboutUs() {
           {aboutus.map((item) => {
             return (
               <Zoom key={item._id}>
-                <article className="about-container | border flex flex-col border-[gold] shadow-sm rounded p-4 min-h-[500px] max-w-[600px] md:w-6/12">
+                <article className="about-container | border flex flex-col border-[gold] shadow-sm rounded p-4 min-h-[500px] max-w-[800px] md:w-6/12">
                   <div className="profile-container | flex flex-col gap-4 md:flex-row">
                     <div className="profile-image">
                       <img

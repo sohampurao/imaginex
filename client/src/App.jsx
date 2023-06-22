@@ -40,7 +40,7 @@ function App() {
           smooth
           top={1500}
           component={<i className="bi bi-arrow-up"></i>}
-          className="left-5 bottom-4 font-bold border-0 transition-opacity opacity-80 hover:opacity-100"
+          className="top-[84%] left-5 lg:left-15 font-bold border-0 transition-opacity opacity-80 hover:opacity-100"
         />
         <Routes>
           <Route index path="/" element={<Home></Home>}></Route>

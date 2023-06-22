@@ -34,13 +34,13 @@ export default function Navbar() {
         {({ open }) => (
           <>
             <div className="mx-auto px-5">
-              <div className="relative flex h-20 items-center justify-between">
+              <div className="relative flex h-20 3xl:h-24 items-center justify-between">
                 <div className="flex flex-1 items-center justify-start md:items-stretch md:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to={'/'}>
                       <img
                         src="/images/logo/brand-logo.png"
-                        className="h-[60px]"
+                        className="h-[60px] 3xl:h-[95px]"
                       ></img>
                     </Link>
                   </div>
@@ -56,9 +56,9 @@ export default function Navbar() {
                     )}
                   </Disclosure.Button>
 
-                  <div className="hidden sm:ml-6 md:block">
+                  <div className="hidden sm:ml-6 md:block text-base 3xl:text-xl">
                     <div className="flex space-x-4 items-center">
-                      {adminInfo ? (
+                      {adminInfo && (
                         <>
                           <div className="admin-dropdown">
                             <AdminDropdown
@@ -68,8 +68,6 @@ export default function Navbar() {
                           </div>
                           <span className="text-white">|</span>
                         </>
-                      ) : (
-                        ''
                       )}
                       {navigation.map((item) => (
                         <div className="nav-item" key={item.name}>
@@ -86,7 +84,7 @@ export default function Navbar() {
 
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
-                {adminInfo ? (
+                {adminInfo && (
                   <>
                     <div className="admin-dropdown | flex justify-center">
                       <AdminDropdown
@@ -95,8 +93,6 @@ export default function Navbar() {
                       ></AdminDropdown>
                     </div>
                   </>
-                ) : (
-                  ''
                 )}
                 {navigation.map((item) => (
                   <NavLink to={item.to} key={item.name} className="header-nav">

@@ -57,12 +57,12 @@ export default function Features() {
           {features.map((feature) => {
             return (
               <Fade bottom duration={2000} distance="50%" key={feature._id}>
-                <article className="feature-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row-reverse">
+                <article className="feature-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row-reverse 3xl:max-w-[1400px]">
                   <div className="feature-display | md:w-6/12">
                     <img
                       src={feature.image}
                       alt="feature"
-                      className="feature-image | w-full max-w-full h-[250px] sm:h-[350px] object-cover"
+                      className="feature-image | w-full max-w-full object-cover h-[250px] sm:h-[350px] 3xl:h-[430px]"
                     />
                   </div>
 

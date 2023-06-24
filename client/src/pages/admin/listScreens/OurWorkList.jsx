@@ -141,7 +141,7 @@ export default function OurWorkList() {
           </Modal.Footer>
         </Modal>
         {loading ? (
-          <div className="text-center">
+          <div className="text-center py-2">
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (

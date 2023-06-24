@@ -21,7 +21,7 @@ export default function ContactUs() {
     <section>
       <div className="google-map | min-w-full h-auto overflow-x-hidden">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d945.5591160932617!2d72.92675366953719!3d18.56337509890866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be86f78b00bdc75%3A0x2ff1858e73f07aaf!2sHome%20Jitendra%20Buwa!5e0!3m2!1sen!2sin!4v1686805987556!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15128.957030377536!2d72.9271682!3d18.5632491!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be86f71281a4983%3A0xa68dc206ceed3185!2sImaginex%203D%20Studio!5e0!3m2!1sen!2sin!4v1687602074898!5m2!1sen!2si"
           className="h-[300px] sm:h-[370px] w-full"
           allowFullScreen
           loading="lazy"

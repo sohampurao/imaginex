@@ -6,11 +6,12 @@ const AdminSchema = new mongoose.Schema(
     lastName: { type: String, required: true },
     profileImage: {
       type: String,
-      default: '/images/profile/profile-picture.webp',
+      default: '/images/profile/default-profile-picture.webp',
     },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: true },
+    isOwner: { type: Boolean, default: false },
   },
   {
     timestamps: true,

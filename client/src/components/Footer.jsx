@@ -137,13 +137,21 @@ export default function Footer() {
                 <span className="mail-icon | w-8 inline-block mb-3">
                   <i className="bi bi-envelope-at"></i>
                 </span>
-                <Link to="mailto:example@gmail.com">example@gmail.com</Link>
+                <Link to="mailto:imaginex3dstudio@gmail.com">
+                  imaginex3dstudio@gmail.com
+                </Link>
               </div>
               <div className="telephone | flex text-[#b53836] hover:text-[#8e2c2a]">
                 <span className="phone-icon | w-8 inline-block mb-3">
                   <i className="bi bi-telephone-fill"></i>
                 </span>
-                <Link to="tel:+9518556937">9518556937</Link>
+                <Link to="tel:+91 9527570677">9527570677</Link>
+              </div>
+              <div className="telephone | flex text-[#b53836] hover:text-[#8e2c2a]">
+                <span className="phone-icon | w-8 inline-block mb-3">
+                  <i className="bi bi-telephone-fill"></i>
+                </span>
+                <Link to="tel:+91 9653295270">9653295270</Link>
               </div>
             </Fade>
           </div>
@@ -188,7 +196,7 @@ export default function Footer() {
         </nav>
         <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto">
           <div className="copy-rigth | text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm 3xl:text-base">
-            &#169;2023.example.com.All Rights Reserved.
+            &#169;2023.imaginex.in.All Rights Reserved.
           </div>
           <div className="social-links | flex flex-col justify-center">
             <div className="social-link-header | text-center">Get In Touch</div>

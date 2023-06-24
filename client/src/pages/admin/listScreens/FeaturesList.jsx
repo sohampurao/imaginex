@@ -114,40 +114,9 @@ export default function FeaturesList() {
         <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
           Features
         </div>
-        <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
-          <Button
-            gradientDuoTone="pinkToOrange"
-            disabled={loadingCreate}
-            onClick={() => setOpenModel(true)}
-          >
-            {loadingCreate ? (
-              <>
-                <Spinner aria-label="Spinner button example" />
-                <span className="pl-3">Creating...</span>
-              </>
-            ) : (
-              'Create'
-            )}
-          </Button>
-        </div>
-        <Modal show={openModel} onClose={() => setOpenModel(false)}>
-          <Modal.Header>Add Feature Confirmation</Modal.Header>
-          <Modal.Body>
-            <div className="space-y-6">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Are you sure you want to create new feature?
-              </p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={createHandler}>Yess!</Button>
-            <Button color="gray" onClick={() => setOpenModel(false)}>
-              <p>Cancel</p>
-            </Button>
-          </Modal.Footer>
-        </Modal>
+
         {loading ? (
-          <div className="text-center">
+          <div className="text-center py-2">
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (
@@ -156,6 +125,38 @@ export default function FeaturesList() {
           <AlertBox variant="failure">{errorCreate}</AlertBox>
         ) : (
           <>
+            <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
+              <Button
+                gradientDuoTone="pinkToOrange"
+                disabled={loadingCreate}
+                onClick={() => setOpenModel(true)}
+              >
+                {loadingCreate ? (
+                  <>
+                    <Spinner aria-label="Spinner button example" />
+                    <span className="pl-3">Creating...</span>
+                  </>
+                ) : (
+                  'Create'
+                )}
+              </Button>
+            </div>
+            <Modal show={openModel} onClose={() => setOpenModel(false)}>
+              <Modal.Header>Add Feature Confirmation</Modal.Header>
+              <Modal.Body>
+                <div className="space-y-6">
+                  <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    Are you sure you want to create new feature?
+                  </p>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={createHandler}>Yess!</Button>
+                <Button color="gray" onClick={() => setOpenModel(false)}>
+                  <p>Cancel</p>
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>

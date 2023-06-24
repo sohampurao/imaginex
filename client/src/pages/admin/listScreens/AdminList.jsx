@@ -1,4 +1,4 @@
-import { Avatar, Button, Spinner, Table } from 'flowbite-react';
+import { Avatar, Badge, Button, Spinner, Table } from 'flowbite-react';
 import { useContext, useEffect, useReducer } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import { getError } from '../../../utils';
 import AlertBox from '../../../components/AlertBox';
 import ActionBtn from '../../../components/ActionBtn';
 import { Link } from 'react-router-dom';
-import logger from 'use-reducer-logger';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -40,7 +39,7 @@ export default function AdminList() {
   const { adminInfo } = state;
 
   const [{ loading, error, admins, successDelete }, dispatch] = useReducer(
-    logger(reducer),
+    reducer,
     {
       loading: true,
       error: '',
@@ -96,11 +95,15 @@ export default function AdminList() {
         <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
           System Admins
         </div>
-        <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
-          <Link to={'/addadmin'}>
-            <Button gradientDuoTone="pinkToOrange">Add Admin</Button>
-          </Link>
-        </div>
+        {adminInfo.isOwner ? (
+          <div className="create-btn-container | flex justify-end mx-auto pe-2 my-5">
+            <Link to={'/addadmin'}>
+              <Button gradientDuoTone="pinkToOrange">Add Admin</Button>
+            </Link>
+          </div>
+        ) : (
+          ''
+        )}
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />
@@ -113,6 +116,9 @@ export default function AdminList() {
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Admin</Table.HeadCell>
+                  <Table.HeadCell>
+                    <span className="sr-only">Position</span>
+                  </Table.HeadCell>
                   <Table.HeadCell>Email</Table.HeadCell>
                   <Table.HeadCell>
                     <span className="sr-only">Edit</span>
@@ -137,6 +143,24 @@ export default function AdminList() {
                               {admin.firstName + ' ' + admin.lastName}
                             </div>
                           </div>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Badge
+                            color={`${
+                              admin.isOwner
+                                ? 'warning'
+                                : admin.isAdmin
+                                ? 'success'
+                                : 'dark'
+                            }`}
+                            className="px-4 py-1"
+                          >
+                            {admin.isOwner
+                              ? 'Owner'
+                              : admin.isAdmin
+                              ? 'Admin'
+                              : 'Undefined'}
+                          </Badge>
                         </Table.Cell>
                         <Table.Cell>{admin.email}</Table.Cell>
                         <Table.Cell className="flex flex-wrap gap-3">

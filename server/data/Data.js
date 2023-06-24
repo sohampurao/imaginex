@@ -11,6 +11,7 @@ const data = {
         'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       password: bcrypt.hashSync('1234', saltRounds),
       isAdmin: true,
+      isOwner: true,
     },
     {
       firstName: 'daani',

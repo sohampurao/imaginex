@@ -19,7 +19,6 @@ import {
 } from '../../../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import AlertBox from '../../../components/AlertBox';
-import logger from 'use-reducer-logger';
 import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
@@ -75,7 +74,7 @@ export default function CarouselEdit() {
       updateSuccess,
     },
     dispatch,
-  ] = useReducer(logger(reducer), {
+  ] = useReducer(reducer, {
     loading: true,
     error: '',
     loadingCreate: false,

@@ -1,9 +1,7 @@
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Store } from '../../../Store';
-import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Badge, Button, Label, Spinner, TextInput } from 'flowbite-react';
-import AlertBox from '../../../components/AlertBox';
 import {
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_UPLOAD_PRESET,
@@ -12,6 +10,8 @@ import {
   getError,
 } from '../../../utils';
 import { toast } from 'react-toastify';
+import { Badge, Button, Label, Spinner, TextInput } from 'flowbite-react';
+import AlertBox from '../../../components/AlertBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,10 +32,8 @@ const reducer = (state, action) => {
   }
 };
 
-export default function AdminEdit() {
+export default function ProfileEdit() {
   const navigate = useNavigate();
-  const params = useParams();
-  const { id: adminId } = params;
 
   const { state } = useContext(Store);
   const { adminInfo } = state;
@@ -60,7 +58,7 @@ export default function AdminEdit() {
     const fetchData = async () => {
       try {
         dispatch({ type: `FETCH_REQUEST` });
-        const { data } = await axios.get(`/api/admins/${adminId}`, {
+        const { data } = await axios.get(`/api/admins/${adminInfo._id}`, {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -73,7 +71,7 @@ export default function AdminEdit() {
       }
     };
     fetchData();
-  }, [adminInfo, adminId]);
+  }, [adminInfo]);
 
   // this updates the uploaded time every seconds
   useEffect(() => {
@@ -111,8 +109,8 @@ export default function AdminEdit() {
     e.preventDefault();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
-      await axios.put(
-        `/api/admins/${adminId}`,
+      const { data } = await axios.put(
+        `/api/admins/${adminInfo._id}`,
         {
           profileImage,
           firstName,
@@ -125,13 +123,16 @@ export default function AdminEdit() {
         }
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success(`${firstName + ' ' + lastName} saved successfully.`);
-      navigate('/adminlist');
+      localStorage.setItem('adminInfo', JSON.stringify(data.adminInfo));
+      console.log(data);
+      toast.success(`Your profile updated successfully`);
+      navigate('/');
     } catch (error) {
       toast.error(getError(error));
       dispatch({ type: 'UPDATE_SUCCESS', payload: error });
     }
   };
+
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">
@@ -140,7 +141,7 @@ export default function AdminEdit() {
           onSubmit={submitHandler}
         >
           <div className="signin-title | text-xl font-semibold font-serif text-center">
-            Edit Admin
+            Edit Profile
           </div>
           {loading ? (
             <div className="text-center">

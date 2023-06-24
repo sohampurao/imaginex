@@ -185,44 +185,43 @@ export default function Home() {
             {/* Blog Posts */}
             <BlogPost blogPosts={blogPosts}></BlogPost>
           </main>
+
+          {/* intro text */}
+          <section className="intro-container | relative text-white mb-5">
+            <div className="intro-bg-image | w-full  max-h-[450px] min-h-[450px] md:min-h-[600px] bg-[url('/images/home/intro-banner.webp')] bg-cover bg-no-repeat bg-center brightness-50"></div>
+            <div className="mx-auto px-5 w-full max-h-[450px] min-h-[450px] md:min-h-[600px] flex flex-col md:flex-row justify-center items-center gap-8  3xl:gap-14 absolute top-0">
+              <article className="intro | max-w-lg">
+                <Fade left duration={2500}>
+                  <h1 className="intro-title | text-2xl mb-2 3xl:text-3xl">
+                    Make smarter choices
+                  </h1>
+                  <p className="intro-discription | text-base 3xl:text-xl 3xl:leading-10">
+                    Without leaving your home, get a thorough overview of the
+                    property. Live-In Tours let you choose wisely every time
+                    whether to buy or rent.
+                  </p>
+                </Fade>
+              </article>
+
+              <article className="intro | max-w-lg">
+                <div className="intro-container|">
+                  <div className="intro-title | text-2xl mb-2 3xl:text-3xl">
+                    Find Your Dream Home More Quickly
+                  </div>
+                  <p className="intro-discription | text-lg 3xl:text-xl 3xl:leading-10">
+                    Put an end to the pointless site visits! Live-In Tours give
+                    you all the information you need to make an immediate
+                    decision about your new home.
+                  </p>
+                  <p>
+                    Property Listings with Live-In Tours Produce 30% More Buyers
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
         </>
       )}
-
-      {/* intro text */}
-      <section className="intro-container | relative text-white mb-5">
-        <div className="intro-bg-image | w-full  max-h-[450px] min-h-[450px] md:min-h-[600px] bg-[url('/images/home/intro-banner.webp')] bg-cover bg-no-repeat bg-center brightness-50"></div>
-        <div className="mx-auto px-5 w-full max-h-[450px] min-h-[450px] md:min-h-[600px] flex flex-col md:flex-row justify-center items-center gap-8  3xl:gap-14 absolute top-0">
-          <article className="intro | max-w-lg">
-            <Fade left duration={2500}>
-              <h1 className="intro-title | text-2xl mb-2 3xl:text-3xl">
-                Make smarter choices
-              </h1>
-              <p className="intro-discription | text-base 3xl:text-xl 3xl:leading-10">
-                Without leaving your home, get a thorough overview of the
-                property. Live-In Tours let you choose wisely every time whether
-                to buy or rent.
-              </p>
-            </Fade>
-          </article>
-
-          <article className="intro | max-w-lg">
-            <div className="intro-container|">
-              <div className="intro-title | text-2xl mb-2 3xl:text-3xl">
-                Find Your Dream Home More Quickly
-              </div>
-              <p className="intro-discription | text-lg 3xl:text-xl 3xl:leading-10">
-                Put an end to the pointless site visits! Live-In Tours give you
-                all the information you need to make an immediate decision about
-                your new home.
-              </p>
-              <p>
-                Property Listings with Live-In Tours Produce 30% More Buyers
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
-
       {/* WhatsApp chat link icon */}
       <WhatsappChat></WhatsappChat>
     </>

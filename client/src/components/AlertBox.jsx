@@ -4,7 +4,7 @@ import { Alert } from 'flowbite-react';
 export default function AlertBox(props) {
   return (
     <>
-      <div className="max-w-5xl mt-5 mx-auto px-3">
+      <div className="max-w-7xl my-5 mx-auto px-3">
         <Alert color={props.variant || 'info'} withBorderAccent rounded>
           <span>
             <p>

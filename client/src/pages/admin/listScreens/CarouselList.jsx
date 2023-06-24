@@ -3,7 +3,6 @@ import { Button, Card, Modal, Spinner } from 'flowbite-react';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import { toast } from 'react-toastify';
 import ActionBtn from '../../../components/ActionBtn';
-import logger from 'use-reducer-logger';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../../Store';
 import { getError } from '../../../utils';
@@ -59,7 +58,7 @@ export default function CarouselList() {
       successDelete,
     },
     dispatch,
-  ] = useReducer(logger(reducer), {
+  ] = useReducer(reducer, {
     loading: true,
     error: '',
     errorDelete: '',
@@ -130,7 +129,7 @@ export default function CarouselList() {
         </div>
 
         {loading ? (
-          <div className="text-center">
+          <div className="text-center py-2">
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (

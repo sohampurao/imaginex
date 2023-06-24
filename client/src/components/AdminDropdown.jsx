@@ -2,6 +2,9 @@
 import { Dropdown } from 'flowbite-react';
 import { HiLogout } from 'react-icons/hi';
 import { TiInfoLarge } from 'react-icons/ti';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { FaUserCircle } from 'react-icons/fa';
+
 import { MdAdminPanelSettings, MdHomeWork } from 'react-icons/md';
 import {
   BsFillPostcardFill,
@@ -37,8 +40,19 @@ export default function AdminDropdown({ adminInfo, signOut }) {
         <Dropdown.Item icon={TiInfoLarge}>About Us</Dropdown.Item>
       </Link>
       <Dropdown.Divider />
-      <Link to={'/adminlist'}>
-        <Dropdown.Item icon={MdAdminPanelSettings}>Admins</Dropdown.Item>
+
+      {adminInfo.isAdmin == adminInfo.isOwner && (
+        <Link to={'/adminlist'}>
+          <Dropdown.Item icon={MdAdminPanelSettings}>Admins</Dropdown.Item>
+        </Link>
+      )}
+
+      <Link to={'/profileedit'}>
+        <Dropdown.Item icon={FaUserCircle}>Profile</Dropdown.Item>
+      </Link>
+
+      <Link to={'/changepassword'}>
+        <Dropdown.Item icon={RiLockPasswordFill}>Change Password</Dropdown.Item>
       </Link>
       <Dropdown.Item icon={HiLogout} onClick={signOut}>
         Sign out

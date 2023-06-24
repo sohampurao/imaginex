@@ -15,7 +15,6 @@ import {
   Textarea,
 } from 'flowbite-react';
 import AlertBox from '../../../components/AlertBox';
-import logger from 'use-reducer-logger';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -53,7 +52,7 @@ export default function BlogPostEdit() {
   const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
   const [{ loading, error, loadingUpdate, errorUpdate }, dispatch] = useReducer(
-    logger(reducer),
+    reducer,
     {
       loading: true,
       error: '',
@@ -139,7 +138,6 @@ export default function BlogPostEdit() {
       function (error, result) {
         if (result.event == 'success') {
           setPath(result.info.secure_url);
-          console.log(path);
         }
         if (error) {
           toast.error(getError(error));
@@ -147,8 +145,6 @@ export default function BlogPostEdit() {
       }
     );
   }, [path]);
-  const text = 'https://my.matterport.com/show/?m=';
-  console.log(text.length);
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">

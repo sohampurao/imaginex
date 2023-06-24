@@ -3,6 +3,7 @@ import axios from 'axios';
 import AlertBox from '../components/AlertBox';
 import Preloader from '../components/Preloader';
 import { Fade } from 'react-reveal';
+import { getError } from '../utils';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +29,7 @@ export default function Features() {
         const { data } = await axios.get('/api/features');
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
-        dispatch({ type: 'FETCH_FAILED', payload: error });
+        dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };
     fetchData();

@@ -11,7 +11,7 @@ AdminRouter.get(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const admins = await Admin.find({});
+    const admins = await Admin.find({ isOwner: false });
     res.send(admins);
   })
 );
@@ -45,9 +45,43 @@ AdminRouter.put(
           (admin.lastName = req.body.lastName),
           (admin.email = req.body.email),
           await admin.save();
-        return res.send({ message: 'Admin updated successfully.' });
+        return res.send({
+          message: 'Admin updated successfully.',
+          adminInfo: {
+            _id: admin._id,
+            profileImage: admin.profileImage,
+            firstName: admin.firstName,
+            lastName: admin.lastName,
+            email: admin.email,
+            isAdmin: admin.isAdmin,
+            isOwner: admin.isOwner,
+            token: generateToken(admin),
+          },
+        });
       } else {
         return res.status(401).send({ message: 'Invaild email or password.' });
+      }
+    } else {
+      res.send({ message: 'Admin Not Found' });
+    }
+  })
+);
+
+AdminRouter.put(
+  `/changepassword/:id`,
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const newPassword = req.body.newPassword;
+    const password = req.body.password;
+    const admin = await Admin.findById(req.params.id);
+    if (admin) {
+      if (bcrypt.compareSync(password, admin.password)) {
+        admin.password = bcrypt.hashSync(newPassword, 10);
+        await admin.save();
+        return res.send({ message: 'Admin updated successfully.' });
+      } else {
+        return res.status(401).send({ message: 'Invaild current password' });
       }
     } else {
       res.send({ message: 'Admin Not Found' });
@@ -84,6 +118,7 @@ AdminRouter.post(
           lastName: admin.lastName,
           email: admin.email,
           isAdmin: admin.isAdmin,
+          isOwner: admin.isOwner,
           token: generateToken(admin),
         });
         return;

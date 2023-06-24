@@ -39,14 +39,16 @@ export default function AddAdmin() {
         await axios.post('/api/admins/addadmin', {
           firstName,
           lastName,
-          profileImage,
+          profileImage: profileImage
+            ? profileImage
+            : '/images/profile/default-profile-picture.webp',
           email,
           password,
         });
         toast.success(
           `${firstName} ${lastName} is successfully added as a admin.`
         );
-        navigate('/addlist');
+        navigate('/adminlist');
       } catch (error) {
         toast.error(getError(error));
       }

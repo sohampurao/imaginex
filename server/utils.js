@@ -38,3 +38,11 @@ export const isAdmin = (req, res, next) => {
     res.status(401).send({ message: 'Invalid Admin Token' });
   }
 };
+
+export const isOwner = (req, res, next) => {
+  if (req.admin && req.admin.isOwner) {
+    next();
+  } else {
+    res.status(401).send({ message: 'Invalid Admin Token' });
+  }
+};

@@ -40,7 +40,7 @@ export default function Navbar() {
                     <Link to={'/'}>
                       <img
                         src="/images/logo/brand-logo.png"
-                        className="h-[60px] 3xl:h-[95px]"
+                        className="h-[70px] 3xl:h-[95px]"
                       ></img>
                     </Link>
                   </div>

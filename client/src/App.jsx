@@ -7,7 +7,7 @@ import AddAdmin from './pages/AddAdmin';
 import VirtualTours from './pages/VirtualTours';
 import PageNotFound from './pages/PageNotFound';
 import ScrollToTop from 'react-scroll-to-top';
-import AdminRoute from './components/AdminRoute';
+import { AdminRoute, OwnerRoute } from './components/AuthRoute';
 import BlogPostsList from './pages/admin/listScreens/BlogPostsList';
 import CarouselList from './pages/admin/listScreens/CarouselList';
 import CarouselEdit from './pages/admin/editScreens/CarouselEdit';
@@ -28,6 +28,8 @@ import OurWorkDetails from './pages/OurWorkDetails';
 import OurWorkList from './pages/admin/listScreens/OurWorkList';
 import OurWorkEdit from './pages/admin/editScreens/OurWorkEdit';
 import WorkEdit from './pages/admin/editScreens/WorkEdit';
+import ChangePassword from './pages/admin/editScreens/ChangePassword';
+import ProfileEdit from './pages/admin/editScreens/ProfileEdit';
 
 function App() {
   return (
@@ -76,8 +78,28 @@ function App() {
           <Route
             path="/addadmin"
             element={
-              <AdminRoute>
+              <OwnerRoute>
                 <AddAdmin></AddAdmin>
+              </OwnerRoute>
+            }
+          ></Route>
+
+          {/* Profile Edit page */}
+          <Route
+            path="/profileedit"
+            element={
+              <AdminRoute>
+                <ProfileEdit />
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* Change Password */}
+          <Route
+            path="/changepassword"
+            element={
+              <AdminRoute>
+                <ChangePassword />
               </AdminRoute>
             }
           ></Route>

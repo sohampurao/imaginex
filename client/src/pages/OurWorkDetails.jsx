@@ -96,7 +96,7 @@ export default function OurWorkDetails() {
 
               <hr className="my-2 block" />
 
-              <h1 className="work-title | text-2xl font-serif font-medium pb-2">
+              <h1 className="work-title | text-xl sm:text-2xl font-serif font-medium pb-2">
                 {workInfo.work.title}
               </h1>
               <div className="work-subtitle | text-base text-justify text-neutral-300">

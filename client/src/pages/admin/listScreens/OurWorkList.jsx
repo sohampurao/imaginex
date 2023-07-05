@@ -118,10 +118,10 @@ export default function OurWorkList() {
   };
   return (
     <>
+      <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
+        Our Work
+      </div>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-5">
-        <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          Our Work
-        </div>
         <Modal show={openModel} onClose={() => setOpenModel(false)}>
           <Modal.Header>Add Work Confirmation</Modal.Header>
           <Modal.Body>
@@ -161,7 +161,7 @@ export default function OurWorkList() {
                 Create
               </Button>
             </div>
-            <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
+            <div className="mx-over w-[320px] sm:w-full overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Title</Table.HeadCell>
@@ -203,6 +203,9 @@ export default function OurWorkList() {
                   })}
                 </Table.Body>
               </Table>
+            </div>
+            <div className="block sm:hidden text-center text-neutral-600 mt-2">
+              ⟪ Swipe ⟫
             </div>
           </>
         )}

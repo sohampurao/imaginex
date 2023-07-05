@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Avatar, Spinner, Table } from 'flowbite-react';
+import { Spinner, Table } from 'flowbite-react';
 import { useEffect, useReducer } from 'react';
 import AlertBox from '../../../components/AlertBox';
 import { Link } from 'react-router-dom';
@@ -37,10 +37,10 @@ export default function AboutusList() {
 
   return (
     <>
+      <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
+        About Us
+      </div>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-5">
-        <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          About Us
-        </div>
         {loading ? (
           <div className="text-center">
             <Spinner aria-label="Center-aligned spinner example" />
@@ -49,7 +49,7 @@ export default function AboutusList() {
           <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
-            <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
+            <div className="mx-over w-[320px] sm:w-full overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Admin</Table.HeadCell>
@@ -67,11 +67,13 @@ export default function AboutusList() {
                       >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                           <div className="flex items-center gap-3">
-                            <Avatar
-                              alt={item.firstName + ' ' + item.lastName}
-                              img={item.profileImage}
-                              rounded
-                              bordered
+                            <img
+                              className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                              src={
+                                item.profileImage ||
+                                'images/profile/default-profile-picture.webp'
+                              }
+                              alt="Bordered avatar"
                             />
                             <div className="owner-name | font-medium dark:text-white capitalize">
                               {item.firstName + ' ' + item.lastName}
@@ -93,6 +95,9 @@ export default function AboutusList() {
                   })}
                 </Table.Body>
               </Table>
+            </div>
+            <div className="block sm:hidden text-center text-neutral-600 mt-2">
+              ⟪ Swipe ⟫
             </div>
           </>
         )}

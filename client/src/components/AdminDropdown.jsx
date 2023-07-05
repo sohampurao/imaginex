@@ -11,7 +11,7 @@ import {
   BsFillImageFill,
   BsListStars,
 } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function AdminDropdown({ adminInfo, signOut }) {
   return (
@@ -24,36 +24,36 @@ export default function AdminDropdown({ adminInfo, signOut }) {
           {adminInfo.email}
         </span>
       </Dropdown.Header>
-      <Link to={'/carousellist'}>
+      <NavLink to={'/carousellist'}>
         <Dropdown.Item icon={BsFillImageFill}>Carousel</Dropdown.Item>
-      </Link>
-      <Link to={'/blogpostslist'}>
+      </NavLink>
+      <NavLink to={'/blogpostslist'}>
         <Dropdown.Item icon={BsFillPostcardFill}>Blog Post</Dropdown.Item>
-      </Link>
-      <Link to={'/ourworklist'}>
+      </NavLink>
+      <NavLink to={'/ourworklist'}>
         <Dropdown.Item icon={MdHomeWork}>Our Work</Dropdown.Item>
-      </Link>
-      <Link to={'/featureslist'}>
+      </NavLink>
+      <NavLink to={'/featureslist'}>
         <Dropdown.Item icon={BsListStars}>Features</Dropdown.Item>
-      </Link>
-      <Link to={'/aboutuslist'}>
+      </NavLink>
+      <NavLink to={'/aboutuslist'}>
         <Dropdown.Item icon={TiInfoLarge}>About Us</Dropdown.Item>
-      </Link>
+      </NavLink>
       <Dropdown.Divider />
 
       {adminInfo.isAdmin == adminInfo.isOwner && (
-        <Link to={'/adminlist'}>
+        <NavLink to={'/adminlist'}>
           <Dropdown.Item icon={MdAdminPanelSettings}>Admins</Dropdown.Item>
-        </Link>
+        </NavLink>
       )}
 
-      <Link to={'/profileedit'}>
+      <NavLink to={'/profileedit'}>
         <Dropdown.Item icon={FaUserCircle}>Profile</Dropdown.Item>
-      </Link>
+      </NavLink>
 
-      <Link to={'/changepassword'}>
+      <NavLink to={'/changepassword'}>
         <Dropdown.Item icon={RiLockPasswordFill}>Change Password</Dropdown.Item>
-      </Link>
+      </NavLink>
       <Dropdown.Item icon={HiLogout} onClick={signOut}>
         Sign out
       </Dropdown.Item>

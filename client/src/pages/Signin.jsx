@@ -58,7 +58,7 @@ export default function SignIn() {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password" value="password" />
+              <Label htmlFor="password" value="Password" />
             </div>
             <TextInput
               id="password"

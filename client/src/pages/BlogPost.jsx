@@ -97,7 +97,7 @@ export default function BlogPost() {
 
               <hr className="my-2 block" />
 
-              <h1 className="blog-title | text-2xl font-serif font-medium pb-2">
+              <h1 className="blog-title | text-xl sm:text-2xl font-serif font-medium pb-2">
                 {blogPost.title}
               </h1>
               <div className="blog-subtitle | text-base text-justify text-neutral-300">

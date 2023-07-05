@@ -160,13 +160,13 @@ export default function BlogPostsList() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={createHandler}>Yess!</Button>
+                <Button onClick={createHandler}>Yes</Button>
                 <Button color="gray" onClick={() => setOpenModel(false)}>
                   <p>Cancel</p>
                 </Button>
               </Modal.Footer>
             </Modal>
-            <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
+            <div className="mx-over w-[320px] sm:w-full overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Post Title</Table.HeadCell>
@@ -214,6 +214,9 @@ export default function BlogPostsList() {
                   })}
                 </Table.Body>
               </Table>
+            </div>
+            <div className="block sm:hidden text-center text-neutral-600 mt-2">
+              ⟪ Swipe ⟫
             </div>
           </>
         )}

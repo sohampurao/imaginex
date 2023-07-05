@@ -149,7 +149,7 @@ export default function BlogPostEdit() {
     <>
       <div className="container mx-auto flex justify-center pb-5">
         <form
-          className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] shadow p-4 rounded-lg"
+          className="flex w-full flex-col gap-4 mt-5 max-w-md sm:w-[500px] sm:shadow p-4 rounded-lg"
           onSubmit={submitHandler}
         >
           <div className="signin-title | text-xl font-semibold font-serif text-center">
@@ -179,7 +179,7 @@ export default function BlogPostEdit() {
                   ''
                 )}
               </div>
-              <div className="carousel-img">
+              <div className="carousel-display">
                 {mediaType == 'image' && (
                   <img
                     src={path}
@@ -217,7 +217,7 @@ export default function BlogPostEdit() {
                     />
                   ) : (
                     <iframe
-                      className="matterport-iframe |  w-full h-[300px]"
+                      className="matterport-iframe | aspect-video md:min-h-[300px] w-full"
                       src={path}
                       allowFullScreen
                     ></iframe>

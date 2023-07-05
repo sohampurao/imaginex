@@ -110,11 +110,10 @@ export default function FeaturesList() {
   };
   return (
     <>
+      <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
+        Features
+      </div>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-5">
-        <div className="carouseledit-title | mt-10 text-2xl font-semibold font-serif text-center">
-          Features
-        </div>
-
         {loading ? (
           <div className="text-center py-2">
             <Spinner aria-label="Center-aligned spinner example" />
@@ -151,13 +150,13 @@ export default function FeaturesList() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={createHandler}>Yess!</Button>
+                <Button onClick={createHandler}>Yes</Button>
                 <Button color="gray" onClick={() => setOpenModel(false)}>
                   <p>Cancel</p>
                 </Button>
               </Modal.Footer>
             </Modal>
-            <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
+            <div className="mx-over w-[320px] sm:w-full overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Title</Table.HeadCell>
@@ -205,6 +204,9 @@ export default function FeaturesList() {
                   })}
                 </Table.Body>
               </Table>
+            </div>
+            <div className="block sm:hidden text-center text-neutral-600 mt-2">
+              ⟪ Swipe ⟫
             </div>
           </>
         )}

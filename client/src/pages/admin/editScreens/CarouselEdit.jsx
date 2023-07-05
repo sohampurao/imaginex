@@ -169,7 +169,7 @@ export default function CarouselEdit() {
       ) : (
         <div className="container mx-auto flex justify-center pb-5">
           <form
-            className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] shadow p-4 rounded-lg"
+            className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] sm:shadow p-4 rounded-lg"
             onSubmit={submitHandler}
           >
             <div className="signin-title | text-xl font-semibold font-serif text-center">

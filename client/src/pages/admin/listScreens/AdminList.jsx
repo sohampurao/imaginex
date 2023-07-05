@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Spinner, Table } from 'flowbite-react';
+import { Badge, Button, Spinner, Table } from 'flowbite-react';
 import { useContext, useEffect, useReducer } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
@@ -112,7 +112,7 @@ export default function AdminList() {
           <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
-            <div className="mx-auto overflow-x-scroll sm:overflow-x-hidden p-2">
+            <div className="mx-over w-[320px] sm:w-full overflow-x-scroll sm:overflow-x-hidden p-2">
               <Table hoverable>
                 <Table.Head>
                   <Table.HeadCell>Admin</Table.HeadCell>
@@ -133,12 +133,15 @@ export default function AdminList() {
                       >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                           <div className="flex items-center gap-3">
-                            <Avatar
-                              alt={admin.firstName + ' ' + admin.lastName}
-                              img={admin.profileImage}
-                              rounded
-                              bordered
+                            <img
+                              className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                              src={
+                                admin.profileImage ||
+                                'images/profile/default-profile-picture.webp'
+                              }
+                              alt="Bordered avatar"
                             />
+
                             <div className="admin-name | font-medium dark:text-white">
                               {admin.firstName + ' ' + admin.lastName}
                             </div>
@@ -185,6 +188,9 @@ export default function AdminList() {
                   })}
                 </Table.Body>
               </Table>
+            </div>
+            <div className="block sm:hidden text-center text-neutral-600 mt-2">
+              ⟪ Swipe ⟫
             </div>
           </>
         )}

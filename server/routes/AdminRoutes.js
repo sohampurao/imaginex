@@ -46,7 +46,7 @@ AdminRouter.put(
           (admin.email = req.body.email),
           await admin.save();
         return res.send({
-          message: 'Admin updated successfully.',
+          message: 'Admin updated successfully',
           adminInfo: {
             _id: admin._id,
             profileImage: admin.profileImage,
@@ -59,7 +59,7 @@ AdminRouter.put(
           },
         });
       } else {
-        return res.status(401).send({ message: 'Invaild email or password.' });
+        return res.status(401).send({ message: 'Invaild password' });
       }
     } else {
       res.send({ message: 'Admin Not Found' });
@@ -79,7 +79,7 @@ AdminRouter.put(
       if (bcrypt.compareSync(password, admin.password)) {
         admin.password = bcrypt.hashSync(newPassword, 10);
         await admin.save();
-        return res.send({ message: 'Admin updated successfully.' });
+        return res.send({ message: 'Admin updated successfully' });
       } else {
         return res.status(401).send({ message: 'Invaild current password' });
       }

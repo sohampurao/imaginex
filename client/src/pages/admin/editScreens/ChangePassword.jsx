@@ -4,6 +4,7 @@ import { getError } from '../../../utils';
 import { Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { Store } from '../../../Store';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +24,7 @@ const reducer = (state, action) => {
 };
 
 export default function ChangePassword() {
+  const navigate = useNavigate();
   const { state } = useContext(Store);
   const { adminInfo } = state;
 
@@ -74,6 +76,7 @@ export default function ChangePassword() {
       );
       dispatch({ type: 'PASSCHANGE_SUCCESS' });
       toast.success('Password updated successfully');
+      navigate('/');
     } catch (error) {
       toast.error(getError(error));
       dispatch({ type: 'PASSCHANGE_FAILED', payload: getError(error) });
@@ -83,7 +86,7 @@ export default function ChangePassword() {
     <>
       <div className="container mx-auto flex justify-center pb-5">
         <form
-          className="flex flex-col gap-4 mt-5 max-w-md sm:w-[500px] shadow p-4 px-8 rounded-lg"
+          className="flex flex-col gap-4 mt-5 w-full max-w-md sm:w-[500px] sm:shadow p-4 px-8 rounded-lg"
           onSubmit={submitHandler}
         >
           <>

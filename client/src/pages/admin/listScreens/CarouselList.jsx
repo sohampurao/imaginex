@@ -88,7 +88,7 @@ export default function CarouselList() {
       dispatch({ type: 'CAROUSEL_CREATE_REQUEST' });
       const { data } = await axios.post(
         '/api/carousel',
-        { authorization: `Bearer ${adminInfo.token}` },
+        {},
         {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         }
@@ -154,7 +154,7 @@ export default function CarouselList() {
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={createHandler}>Yess!</Button>
+                <Button onClick={createHandler}>Yes</Button>
                 <Button color="gray" onClick={() => setOpenModel(false)}>
                   <p>Cancel</p>
                 </Button>

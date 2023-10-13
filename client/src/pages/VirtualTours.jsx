@@ -92,7 +92,7 @@ export default function VirtualTours() {
       </div>
       <main>
         {loading ? (
-          <div className="text-center">
+          <div className="text-center my-4">
             <Spinner aria-label="Center-aligned spinner example" />
           </div>
         ) : error ? (

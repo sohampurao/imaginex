@@ -29,21 +29,24 @@ export default function Navbar() {
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-[#202020] z-50 shadow-lg sticky top-0 rigth-0 w-full"
+        className="bg-[#232323] z-50 shadow-lg sticky top-0 rigth-0 w-full"
       >
         {({ open }) => (
           <>
             <div className="mx-auto px-5">
               <div className="relative flex h-20 3xl:h-24 items-center justify-between">
                 <div className="flex flex-1 items-center justify-start md:items-stretch md:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
-                    <Link to={'/'}>
+                  <Link to={'/'}>
+                    <div className="flex flex-shrink-0 items-center flex-row">
                       <img
-                        src="/images/logo/brand-logo.png"
+                        src="/images/logo/IM.png"
                         className="h-[70px] 3xl:h-[95px]"
                       ></img>
-                    </Link>
-                  </div>
+                      <div className="brand-name | inline-block font-bold text-white text-lg">
+                        Imaginex
+                      </div>
+                    </div>
+                  </Link>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Mobile menu button*/}

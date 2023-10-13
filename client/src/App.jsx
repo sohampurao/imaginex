@@ -30,6 +30,9 @@ import OurWorkEdit from './pages/admin/editScreens/OurWorkEdit';
 import WorkEdit from './pages/admin/editScreens/WorkEdit';
 import ChangePassword from './pages/admin/editScreens/ChangePassword';
 import ProfileEdit from './pages/admin/editScreens/ProfileEdit';
+import NewHome from './pages/NewHome';
+import Gallery from './components/Gallery';
+import ProjectsAlbums from './pages/ProjectsAlbums';
 
 function App() {
   return (
@@ -46,6 +49,14 @@ function App() {
         />
         <Routes>
           <Route index path="/" element={<Home></Home>}></Route>
+
+          <Route index path="/newhome" element={<NewHome></NewHome>}></Route>
+          <Route
+            index
+            path="/ProjectAlbums"
+            element={<ProjectsAlbums></ProjectsAlbums>}
+          ></Route>
+          <Route index path="/gallery" element={<Gallery></Gallery>}></Route>
 
           {/* Our Work page */}
           <Route path="/ourwork" element={<OurWork></OurWork>}></Route>

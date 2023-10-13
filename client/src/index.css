@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing: border-box;
+}
 
 
 html:focus-within {
@@ -93,6 +96,46 @@ input[type=number] {
 
 .header-nav:hover {
     color: #ffffff;
+}
+
+/* HOME PAGE */
+
+.left-partition .background-image:hover,
+.right-partition .background-image:hover {
+    -webkit-animation: kenburns-bottom 5s ease-in-out infinite alternate-reverse both;
+    animation: kenburns-bottom 5s ease-in-out infinite alternate-reverse both;
+}
+
+@-webkit-keyframes kenburns-bottom {
+    0% {
+        -webkit-transform: scale(1) translateY(0);
+        transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 84%;
+        transform-origin: 50% 84%;
+    }
+
+    100% {
+        -webkit-transform: scale(1.25) translateY(15px);
+        transform: scale(1.25) translateY(15px);
+        -webkit-transform-origin: bottom;
+        transform-origin: bottom;
+    }
+}
+
+@keyframes kenburns-bottom {
+    0% {
+        -webkit-transform: scale(1) translateY(0);
+        transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 84%;
+        transform-origin: 50% 84%;
+    }
+
+    100% {
+        -webkit-transform: scale(1.25) translateY(15px);
+        transform: scale(1.25) translateY(15px);
+        -webkit-transform-origin: bottom;
+        transform-origin: bottom;
+    }
 }
 
 /* Carousel */
@@ -213,6 +256,34 @@ input[type=number] {
     bottom: 0;
     left: 0;
     transition: all 350ms ease-in;
+}
+
+/* 3D VISUALIZATION */
+
+.album {
+    transition: all 0.4s ease-in-out cubic-bezier(0.175, 0.885, 0, 1);
+}
+
+.album:hover {
+    -webkit-box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+    transform: scale(1.03, 1.03);
+    border: none;
+}
+
+.album:hover .album-tumbhnail {
+    height: 100%;
+    transition: all 0.4s ease-in-out cubic-bezier(0.175, 0.885, 0, 1);
+}
+
+.album:hover .album-info {
+    background-color: transparent;
+}
+
+.album:hover .album-info .album-info-title,
+.album:hover .album-info .album-img-count {
+    color: white;
+    text-shadow: 2px 1px 4px rgb(0, 0, 0);
 }
 
 /* About page */

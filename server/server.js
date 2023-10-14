@@ -10,6 +10,7 @@ import AdminRouter from './routes/AdminRoutes.js';
 import FeaturesRouter from './routes/FeaturesRoutes.js';
 import AboutusRouter from './routes/AboutusRoutes.js';
 import OurWorkRouter from './routes/OurWorkRoutes.js';
+import ProjectAlbumRouter from './routes/ProjectAlbumRoutes.js';
 
 // basic configuration
 const app = express();
@@ -31,6 +32,8 @@ mongoose
     console.log(error.message);
   });
 
+app.use('/api/projectalbums', ProjectAlbumRouter);
+
 app.use('/api/carousel', CarouselRouter);
 
 app.use('/api/blogposts', BlogPostRouter);
@@ -47,13 +50,13 @@ app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
 });
 
-//fot hosting
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/dist')));
+//for hosting
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/client/dist/index.html'));
+// });
 
 app.get('/', (req, res) => {
   res.send('Server is active!');

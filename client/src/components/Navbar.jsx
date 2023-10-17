@@ -42,7 +42,7 @@ export default function Navbar() {
                         src="/images/logo/IM.png"
                         className="h-[70px] 3xl:h-[95px]"
                       ></img>
-                      <div className="brand-name | inline-block font-bold text-white text-lg">
+                      <div className="brand-name | inline-block font-sans font-semibold text-white text-lg">
                         Imaginex
                       </div>
                     </div>

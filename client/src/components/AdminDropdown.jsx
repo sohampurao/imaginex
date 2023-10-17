@@ -4,6 +4,7 @@ import { HiLogout } from 'react-icons/hi';
 import { TiInfoLarge } from 'react-icons/ti';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
+import { BiPhotoAlbum } from 'react-icons/bi';
 
 import { MdAdminPanelSettings, MdHomeWork } from 'react-icons/md';
 import {
@@ -24,6 +25,9 @@ export default function AdminDropdown({ adminInfo, signOut }) {
           {adminInfo.email}
         </span>
       </Dropdown.Header>
+      <NavLink to={'/albumslist'}>
+        <Dropdown.Item icon={BiPhotoAlbum}>Albums</Dropdown.Item>
+      </NavLink>
       <NavLink to={'/carousellist'}>
         <Dropdown.Item icon={BsFillImageFill}>Carousel</Dropdown.Item>
       </NavLink>

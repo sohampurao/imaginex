@@ -4,16 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
+/* @font-face {
     font-family: 'Bhaskerville';
     src: local('Bhaskerville'), url('./fonts/BASKVILL.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
-.brand-name {
+/* .brand-name {
     font-family: 'Bhaskerville';
-}
+} */
 
 * {
     box-sizing: border-box;

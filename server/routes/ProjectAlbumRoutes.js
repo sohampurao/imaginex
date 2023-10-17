@@ -21,4 +21,34 @@ ProjectAlbumRouter.get('/images/:id', async (req, res) => {
   }
 });
 
+ProjectAlbumRouter.post(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const newAlbum = new ProjectAlbum({
+      thumbnail:
+        'https://placehold.co/500x300?text=Im+just+a+placeholder+replace+me!',
+      title: 'This is sample title',
+      images: [],
+    });
+    const album = await newAlbum.save();
+    res.send({ message: 'New Album is created!', album });
+  })
+);
+
+ProjectAlbumRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const Album = await ProjectAlbum.findById(req.params.id);
+    if (Album) {
+      await Album.deleteOne();
+      res.send({ message: 'Album deleted successfully' });
+    } else {
+      res.status(404).send({ message: 'Album not found' });
+    }
+  })
+);
 export default ProjectAlbumRouter;

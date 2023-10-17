@@ -33,6 +33,7 @@ import ProfileEdit from './pages/admin/editScreens/ProfileEdit';
 import NewHome from './pages/NewHome';
 import ProjectGallery from './components/ProjectGallery';
 import ProjectsAlbums from './pages/ProjectsAlbums';
+import AlbumsList from './pages/admin/listScreens/AlbumsList';
 
 function App() {
   return (
@@ -133,6 +134,16 @@ function App() {
             element={
               <AdminRoute>
                 <CarouselEdit />
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* AlbumsList */}
+          <Route
+            path="/albumslist"
+            element={
+              <AdminRoute>
+                <AlbumsList />
               </AdminRoute>
             }
           ></Route>

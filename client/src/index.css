@@ -81,8 +81,6 @@ input[type=number] {
     color: #ffffff;
 }
 
-
-
 .nav-item {
     position: relative;
 }
@@ -111,8 +109,14 @@ input[type=number] {
 
 /* HOME PAGE */
 
-.left-partition .background-image:hover,
-.right-partition .background-image:hover {
+.left-partition,
+.right-partition {
+    flex: 1;
+    transition: all 0.4s ease-in-out cubic-bezier(0.175, 0.885, 0, 1);
+}
+
+.left-partition:hover .background-image,
+.right-partition:hover .background-image {
     -webkit-animation: kenburns-bottom 5s ease-in-out infinite alternate-reverse both;
     animation: kenburns-bottom 5s ease-in-out infinite alternate-reverse both;
 }
@@ -308,4 +312,58 @@ input[type=number] {
 .footer-nav .active {
     font-weight: 500;
     color: gold;
+}
+
+.explore-btn {
+    position: relative;
+    width: 10em;
+    height: 2em;
+    text-align: center;
+    font-family: poppins;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    background-color: rgba(3, 3, 3, .5);
+    border: none;
+    transition: color .2s linear,
+        box-shadow .3s linear,
+        background-color .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.explore-btn:focus,
+.explore-btn:hover {
+    box-shadow: 0 0 110px #fff;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #111;
+    font-weight: 500;
+}
+
+.explore-btn:focus:before,
+.explore-btn:hover:before,
+.explore-btn:focus:after,
+.explore-btn:hover:after {
+    width: 100%;
+    left: 0%;
+}
+
+.explore-btn:before,
+.explore-btn:after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    left: 50%;
+    width: 0%;
+    height: 2px;
+    background-color: #fff;
+    transition: width, left, 250ms cubic-bezier(0.25, .8, .25, 1);
+}
+
+.explore-btn:before {
+    top: -2px;
+}
+
+.explore-btn:after {
+    bottom: -2px;
 }

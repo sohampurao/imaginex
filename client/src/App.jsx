@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
 import SignIn from './pages/Signin';
 import AddAdmin from './pages/AddAdmin';
@@ -30,10 +29,11 @@ import OurWorkEdit from './pages/admin/editScreens/OurWorkEdit';
 import WorkEdit from './pages/admin/editScreens/WorkEdit';
 import ChangePassword from './pages/admin/editScreens/ChangePassword';
 import ProfileEdit from './pages/admin/editScreens/ProfileEdit';
-import NewHome from './pages/NewHome';
+import Home from './pages/Home';
 import ProjectGallery from './components/ProjectGallery';
 import ProjectsAlbums from './pages/ProjectsAlbums';
 import AlbumsList from './pages/admin/listScreens/AlbumsList';
+import VirtualLanding from './pages/VirtualLanding';
 
 function App() {
   return (
@@ -51,7 +51,12 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home></Home>}></Route>
 
-          <Route path="/newhome" element={<NewHome></NewHome>}></Route>
+          <Route
+            index
+            path="/virtuallanding"
+            element={<VirtualLanding></VirtualLanding>}
+          ></Route>
+
           <Route
             path="/projectalbums"
             element={<ProjectsAlbums></ProjectsAlbums>}

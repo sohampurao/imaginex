@@ -66,7 +66,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto w-full bg-[#333333] z-20 px-5">
+    <footer className="mt-auto w-full bg-[#333333] z-20 px-5 overflow-x-hidden">
       <div className="services-contact | py-8 max-w">
         <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-between sm:max-w-7xl 3xl:max-w-[1400px]">
           <div className="services">

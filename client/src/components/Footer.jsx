@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Fade, Zoom } from 'react-reveal';
+import { Fade, Flip, Zoom } from 'react-reveal';
 
 export default function Footer() {
   const [domainName, setDomainName] = useState('');
@@ -18,18 +18,23 @@ export default function Footer() {
     {
       platformIcon: <i className="bi bi-facebook"></i>,
       to: `https://www.facebook.com/sharer/sharer.php?u=${domainName}`,
+      bg: '#1877F2',
+    },
+
+    {
+      platformIcon: <i className="fa-brands fa-x-twitter"></i>,
+      to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}`,
+      bg: 'black',
     },
     {
       platformIcon: <i className="bi bi-linkedin"></i>,
       to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}&title=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers`,
-    },
-    {
-      platformIcon: <i className="bi bi-twitter"></i>,
-      to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}`,
+      bg: '#0A66C2',
     },
     {
       platformIcon: <i className="bi bi-whatsapp"></i>,
       to: `https://api.whatsapp.com/send?text=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers%0A%0A*Checkout%20Now:*%20${domainName}`,
+      bg: '#25D366',
     },
   ];
 
@@ -66,7 +71,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto w-full bg-[#333333] z-20 px-5 overflow-x-hidden">
+    <footer className="mt-auto w-full bg-neutral-900 z-20 px-5 overflow-x-hidden">
       <div className="services-contact | py-8 max-w">
         <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-between sm:max-w-7xl 3xl:max-w-[1400px]">
           <div className="services">
@@ -75,51 +80,51 @@ export default function Footer() {
             </div>
             <Fade left duration={1800} distance="150px" cascade>
               <ul className="services-list | transition-all cursor-default">
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-car"></i>
                   </span>
                   <span className="service-text">Showrooms</span>
                 </li>
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-warehouse"></i>
                   </span>
                   <span className="service-text">Hotels and Resorts</span>
                 </li>
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-store"></i>
                   </span>
                   <span className="service-text">Retail Spaces</span>
                 </li>
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-house-user"></i>
                   </span>
                   <span className="service-text">Home Owners</span>
                 </li>
 
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-brands fa-artstation"></i>
                   </span>
                   <span className="service-text">Museums & Art galleries</span>
                 </li>
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-warehouse"></i>
                   </span>
                   <span className="service-text">Commercial Real Estate</span>
                 </li>
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-building"></i>
                   </span>
                   <span className="service-text">Residential Real Estate</span>
                 </li>
 
-                <li className="service-item | text-[#b53836] hover:text-[#8e2c2a]">
+                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
                   <span className="service-icon | w-8 inline-block mb-3">
                     <i className="fa-solid fa-network-wired"></i>
                   </span>
@@ -133,7 +138,7 @@ export default function Footer() {
               contact us on
             </div>
             <Fade right duration={1500} distance="150px" cascade>
-              <div className="mail | flex text-[#b53836] hover:text-[#8e2c2a]">
+              <div className="mail | flex text-slate-300 hover:text-opacity-70 transition-colors">
                 <span className="mail-icon | w-8 inline-block mb-3">
                   <i className="bi bi-envelope-at"></i>
                 </span>
@@ -141,13 +146,13 @@ export default function Footer() {
                   imaginex3dstudio@gmail.com
                 </Link>
               </div>
-              <div className="telephone | flex text-[#b53836] hover:text-[#8e2c2a]">
+              <div className="telephone | flex text-slate-300 hover:text-opacity-70 transition-colors">
                 <span className="phone-icon | w-8 inline-block mb-3">
                   <i className="bi bi-telephone-fill"></i>
                 </span>
                 <Link to="tel:+91 9527570677">9527570677</Link>
               </div>
-              <div className="telephone | flex text-[#b53836] hover:text-[#8e2c2a]">
+              <div className="telephone | flex text-slate-300 hover:text-opacity-70 transition-colors">
                 <span className="phone-icon | w-8 inline-block mb-3">
                   <i className="bi bi-telephone-fill"></i>
                 </span>
@@ -160,9 +165,9 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-slate-50">
         <div className="share-text | text-center py-2 font-semibold">
-          <Zoom top cascade delay={1500}>
+          <Flip top cascade delay={1500} duration={1500}>
             share with love
-          </Zoom>
+          </Flip>
         </div>
 
         <ul className="share-web | flex justify-center gap-10 pt-5">
@@ -170,7 +175,11 @@ export default function Footer() {
             return (
               <Link key={index} to={item.to} target="_blank">
                 <Zoom delay={2500 + index * 200}>
-                  <li className="share-web-item | text-base h-[50px] w-[50px] rounded-full bg-[rgb(255,83,109)]   flex justify-center items-center transition-colors hover:bg-white hover:text-[rgb(255,83,109)]">
+                  <li
+                    className={`share-web-item | text-base h-[40px] w-[40px] rounded-full bg-[${
+                      item.bg == 'black' ? '#000000' : item.bg
+                    }]   flex justify-center items-center transition-colors`}
+                  >
                     {item.platformIcon}
                   </li>
                 </Zoom>
@@ -186,9 +195,7 @@ export default function Footer() {
             {navigation.map((item, index) => {
               return (
                 <NavLink to={item.to} key={index}>
-                  <li className="nav-item | transition-colors hover:text-neutral-400">
-                    {item.name}
-                  </li>
+                  <li className="nav-item | transition-colors">{item.name}</li>
                 </NavLink>
               );
             })}

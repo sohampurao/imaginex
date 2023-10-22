@@ -29,7 +29,7 @@ export default function Navbar() {
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-[#232323] z-50 shadow-lg sticky top-0 rigth-0 w-full"
+        className="bg-[#000000] z-50 shadow-lg sticky top-0 rigth-0 w-full border-b border-b-slate-100"
       >
         {({ open }) => (
           <>

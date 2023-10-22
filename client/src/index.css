@@ -107,6 +107,24 @@ input[type=number] {
     color: #ffffff;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 /* HOME PAGE */
 
 .left-partition,
@@ -239,9 +257,9 @@ input[type=number] {
 
 /* scroll-to-top btn */
 .scroll-to-top {
-    background-color: #ff536d !important;
+    background-color: #ffffff !important;
     animation: scrollani 700ms infinite alternate ease-in;
-    color: #ffffff;
+    color: #000000;
     z-index: 60 !important;
 }
 
@@ -309,9 +327,23 @@ input[type=number] {
 
 
 /* footer */
-.footer-nav .active {
-    font-weight: 500;
-    color: gold;
+.footer-nav a.active {
+    font-weight: 600;
+    color: #ffffff !important;
+}
+
+.footer-nav a:hover {
+    color: #ffffff;
+}
+
+
+.footer-nav a {
+    color: #b6b6b6
+}
+
+
+.share-web-item:hover {
+    transform: scale(1.17) !important;
 }
 
 .explore-btn {

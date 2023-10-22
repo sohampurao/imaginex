@@ -93,7 +93,7 @@ function ProjectGallery() {
           >
             <FcNext />
           </button>
-          <div className="image-count | absolute bottom-3 right-3 rounded-full p-1 tracking-wider">
+          <div className="image-count | absolute z-10 bottom-4 right-3 rounded-full p-1 tracking-wider">
             {data.i + 1 + '/' + images.length}
           </div>
           <button

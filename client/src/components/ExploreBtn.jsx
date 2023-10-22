@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
-function ExploreBtn({ text }) {
+function ExploreBtn({ text, onClick }) {
   return (
     <div>
-      <button className="explore-btn text-xs sm:text-sm md:text-lg">
+      <button
+        className="explore-btn text-xs sm:text-sm md:text-lg"
+        onClick={onClick}
+      >
         {text}
       </button>
     </div>

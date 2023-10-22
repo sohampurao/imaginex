@@ -83,16 +83,16 @@ export default function BlogPost({ blogPosts }) {
                     </NavLink>
                   </h1>
                   <div
-                    className={`blog-subtitle | text-base text-neutral-300 text-justify 3xl:text-xl subpixel-antialiased ${
-                      post.description.length <= 235
+                    className={`blog-subtitle | leading-normal text-sm text-neutral-300 text-justify 3xl:text-xl subpixel-antialiased ${
+                      post.description.length <= 200
                         ? 'hover:text-blue-400 cursor-pointer'
                         : ''
                     }`}
                   >
-                    {post.description.length >= 235 ? (
+                    {post.description.length >= 200 ? (
                       <>
                         <div>
-                          {post.description.slice(0, 235) + ' '}
+                          {post.description.slice(0, 200) + ' '}
                           <Link
                             to={`/blogpost/${post.slug}`}
                             className="text-sm text-blue-500 hover:text-blue-400 transition-all whitespace-nowrap 3xl:text-lg"

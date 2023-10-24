@@ -203,7 +203,7 @@ export default function AlbumsList() {
                                 deleteHandler(album);
                               }}
                             />
-                            <Link to={`/projectablumedit/${album._id}`}>
+                            <Link to={`/albumedit/${album._id}`}>
                               <ActionBtn
                                 type="edit"
                                 sizeReset="p-3 rounded-lg"

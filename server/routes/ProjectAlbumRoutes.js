@@ -10,6 +10,21 @@ ProjectAlbumRouter.get('/', async (req, res) => {
   res.send(ProjectAlbums);
 });
 
+ProjectAlbumRouter.get(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const albumId = req.params.id;
+    const album = await ProjectAlbum.findById(albumId);
+    if (album) {
+      res.send({ album });
+    } else {
+      res.status(404).send({ message: 'Album not found' });
+    }
+  })
+);
+
 ProjectAlbumRouter.get('/images/:id', async (req, res) => {
   const projectAlbumId = req.params.id;
   const projectAlbum = await ProjectAlbum.findById(projectAlbumId);
@@ -33,7 +48,7 @@ ProjectAlbumRouter.post(
       images: [],
     });
     const album = await newAlbum.save();
-    res.send({ message: 'New Album is created!', album });
+    res.send({ message: 'New Album is created.', album });
   })
 );
 
@@ -48,6 +63,41 @@ ProjectAlbumRouter.delete(
       res.send({ message: 'Album deleted successfully' });
     } else {
       res.status(404).send({ message: 'Album not found' });
+    }
+  })
+);
+
+ProjectAlbumRouter.put(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const albumId = req.params.id;
+    const album = await ProjectAlbum.findById(albumId);
+    if (album) {
+      (album.title = req.body.title),
+        (album.thumbnail = req.body.thumbnail),
+        (album.images = req.body.images),
+        await album.save();
+      res.send({ message: 'Album Updated!' });
+    } else {
+      res.status(404).send({ message: 'Album not Found' });
+    }
+  })
+);
+
+ProjectAlbumRouter.put(
+  '/images/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const albumId = req.params.id;
+    const album = await ProjectAlbum.findById(albumId);
+    if (album) {
+      (album.images = req.body.images), await album.save();
+      res.send({ message: 'Album images updated.' });
+    } else {
+      res.status(404).send({ message: 'Album not Found' });
     }
   })
 );

@@ -77,13 +77,13 @@ export default function BlogPost({ blogPosts }) {
 
                   <hr className="my-2 block" />
 
-                  <h1 className="blog-title | text-lg font-serif font-medium hover:text-blue-400 cursor-pointer pb-2 capitalize 3xl:text-2xl">
+                  <h1 className="blog-title | font-serif font-medium hover:text-blue-400 cursor-pointer pb-2 capitalize text-lg md:text-xl 3xl:text-2xl">
                     <NavLink to={`/blogpost/${post.slug}`}>
                       {post.title}
                     </NavLink>
                   </h1>
                   <div
-                    className={`blog-subtitle | leading-normal text-sm text-neutral-300 text-justify 3xl:text-xl subpixel-antialiased ${
+                    className={`blog-subtitle | text-sm md:text-base 3xl:text-xl text-justify leading-normal subpixel-antialiased text-neutral-300 ${
                       post.description.length <= 200
                         ? 'hover:text-blue-400 cursor-pointer'
                         : ''

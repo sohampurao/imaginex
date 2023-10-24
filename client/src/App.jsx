@@ -34,6 +34,8 @@ import ProjectGallery from './components/ProjectGallery';
 import ProjectsAlbums from './pages/ProjectsAlbums';
 import AlbumsList from './pages/admin/listScreens/AlbumsList';
 import VirtualLanding from './pages/VirtualLanding';
+import AlbumEdit from './pages/admin/editScreens/AlbumEdit';
+import AlbumImagesEdit from './pages/admin/editScreens/AlbumImagesEdit';
 
 function App() {
   return (
@@ -239,6 +241,26 @@ function App() {
             element={
               <AdminRoute>
                 <BlogPostEdit></BlogPostEdit>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* Album Edit */}
+          <Route
+            path="/albumedit/:id"
+            element={
+              <AdminRoute>
+                <AlbumEdit></AlbumEdit>
+              </AdminRoute>
+            }
+          ></Route>
+
+          {/* Album Images Edit */}
+          <Route
+            path="/albumimagesedit/:id"
+            element={
+              <AdminRoute>
+                <AlbumImagesEdit />
               </AdminRoute>
             }
           ></Route>

@@ -109,6 +109,10 @@ export default function AboutusEdit() {
       {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+        mutiple: false,
+        folder: `Imaginex/about us`,
+        clientAllowedFormats: ['image'],
+        sources: ['local', 'url', 'camera', 'google_drive'],
       },
       function (error, result) {
         if (result.event == 'success') {

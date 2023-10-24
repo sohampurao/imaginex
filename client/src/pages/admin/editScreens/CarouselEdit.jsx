@@ -144,6 +144,10 @@ export default function CarouselEdit() {
       {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+        mutiple: false,
+        folder: `Imaginex/carousel`,
+        clientAllowedFormats: ['image'],
+        sources: ['local', 'url', 'camera', 'google_drive'],
       },
       function (error, result) {
         if (result.event == 'success') {

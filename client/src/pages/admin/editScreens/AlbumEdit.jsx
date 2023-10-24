@@ -1,15 +1,18 @@
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Store } from '../../../Store';
+import axios from 'axios';
 import {
   CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_UPLOAD_PRESET,
+  FormatDate,
+  FormatTime,
   getError,
 } from '../../../utils';
-import axios from 'axios';
-import { Store } from '../../../Store';
-import { Button, Label, Spinner, TextInput, Textarea } from 'flowbite-react';
-import AlertBox from '../../../components/AlertBox';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Badge, Button, Label, Spinner, TextInput } from 'flowbite-react';
+import AlertBox from '../../../components/AlertBox';
+import { FcEditImage } from 'react-icons/fc';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,14 +33,20 @@ const reducer = (state, action) => {
   }
 };
 
-export default function FeatureEdit() {
-  const params = useParams();
-  const { id: featureId } = params;
-
+export default function AlbumEdit() {
   const navigate = useNavigate();
+  const params = useParams();
 
+  const { id: AlbumId } = params;
   const { state } = useContext(Store);
   const { adminInfo } = state;
+
+  const [album, setAlbum] = useState({});
+
+  const [thumbnail, setThumbnail] = useState('');
+  const [title, setTitle] = useState('');
+  const [images, setImages] = useState([]);
+  const [formattedUpdateTime, setFormattedUpdateTime] = useState('');
 
   const [{ loading, error, loadingUpdate, errorUpdate }, dispatch] = useReducer(
     reducer,
@@ -49,47 +58,57 @@ export default function FeatureEdit() {
     }
   );
 
-  const [title, setTitle] = useState('');
-  const [image, setImage] = useState('');
-  const [description, setDescription] = useState('');
+  // this updates the uploaded time every seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const formattedTime = FormatTime(album.updatedAt);
+      setFormattedUpdateTime(formattedTime);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [album]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/features/${featureId}`, {
+        const { data } = await axios.get(`/api/projectalbums/${AlbumId}`, {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         });
-        setImage(data.image);
-        setTitle(data.title);
-        setDescription(data.description);
+        setAlbum(data.album);
+        setThumbnail(data.album.thumbnail);
+        setTitle(data.album.title);
+        setImages(data.album.images);
+
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (error) {
+        toast.error(getError(error));
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };
     fetchData();
-  }, [adminInfo, featureId]);
+  }, [adminInfo, AlbumId]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      dispatch({ type: 'UPDATE_REQEUST' });
+      dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `/api/features/${featureId}`,
+        `/api/projectalbums/${AlbumId}`,
         {
-          image,
+          thumbnail,
           title,
-          description,
-          adminInfo,
+          images,
         },
         {
           headers: { authorization: `Bearer ${adminInfo.token}` },
         }
       );
       dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success('Feature saved successfully.');
-      navigate('/featureslist');
+      toast.success('Album saved successfully!');
+      navigate('/albumslist');
     } catch (error) {
       dispatch({ type: 'UPDATE_FAILED', payload: getError(error) });
     }
@@ -104,31 +123,28 @@ export default function FeatureEdit() {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
         mutiple: false,
-        folder: `Imaginex/features`,
+        folder: `Imaginex/albums/${album.title}`,
         clientAllowedFormats: ['image'],
         sources: ['local', 'url', 'camera', 'google_drive'],
       },
       function (error, result) {
-        if (result.event == 'success') {
-          setImage(result.info.secure_url);
+        if (!error && result && result.event === 'success') {
+          setThumbnail(result.info.secure_url);
         }
         if (error) {
           toast.error(getError(error));
         }
       }
     );
-  }, [image]);
+  }, [thumbnail, album]);
 
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">
         <form
-          className="flex flex-col gap-4 mt-5 max-w-md w-full sm:w-[500px] sm:shadow p-4 rounded-lg"
+          className="flex w-full flex-col gap-4 mt-5 max-w-md sm:w-[500px] sm:shadow p-4 rounded-lg"
           onSubmit={submitHandler}
         >
-          <div className="signin-title | text-xl font-semibold font-serif text-center">
-            Edit Feature
-          </div>
           {loading ? (
             <div className="text-center">
               <Spinner aria-label="Center-aligned spinner example" />
@@ -139,15 +155,32 @@ export default function FeatureEdit() {
             <AlertBox variant="failure">{errorUpdate}</AlertBox>
           ) : (
             <>
-              <div className="feature-img">
+              <div className="signin-title | text-xl font-medium font-serif text-center">
+                Edit {album.title}
+              </div>
+              <div className="updated-status">
+                {album.createdAt !== album.updatedAt ? (
+                  <Badge
+                    color="success"
+                    className="mx-auto flex justify-center p-5 text-neutral-600 text-base w-[250px]"
+                  >
+                    <span>Updated at: {FormatDate(album.updatedAt)}</span>
+                    <span className="mx-[5px] inline-block">||</span>
+                    <span>{formattedUpdateTime}</span>
+                  </Badge>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className="thumbnail">
                 <img
-                  src={image}
-                  alt="Blog Post"
-                  className="blogpost-image | w-full h-[300px]"
+                  src={thumbnail}
+                  alt={album.title}
+                  className="w-full max-h-[300px]"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src =
-                      'https://placehold.co/500x300?text=Im+placeholder+replace+me!'; // Replace with your fallback video URL
+                      'https://placehold.co/500x300?text=Im+placeholder+replace+me!';
                   }}
                 />
               </div>
@@ -158,13 +191,17 @@ export default function FeatureEdit() {
                   className="w-full font-semibold"
                   onClick={() => widgetRef.current.open()}
                 >
-                  <i className="bi bi-cloud-arrow-up-fill"></i>{' '}
-                  <span className="ms-2">Upload Image</span>
+                  <i className="fa-solid fa-arrows-rotate"></i>
+                  <span className="ms-2">Update Thumbnail</span>
                 </Button>
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="title" value="Title" />
+                  <Label
+                    htmlFor="title"
+                    value="Title"
+                    className="font-medium"
+                  />
                 </div>
                 <TextInput
                   id="title"
@@ -175,20 +212,17 @@ export default function FeatureEdit() {
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="description" value="Description" />
+
+              <div className="my-2 ">
+                <div className="mb-2 flex justify-between items-center">
+                  <Label value="Album Images" />
+                  <Link to={`/albumimagesedit/${AlbumId}`}>
+                    <div className="flex justify-between items-center py-1 px-4 rounded-3xl text-xs tracking-wider font-semibold text-neutral-500 cursor-pointer border border-slate-400 hover:opacity-75 transition-opacity">
+                      Edit Images
+                      <FcEditImage className="text-3xl"></FcEditImage>
+                    </div>
+                  </Link>
                 </div>
-                <Textarea
-                  id="description"
-                  placeholder="Write Description..."
-                  required
-                  rows={4}
-                  value={description}
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                />
               </div>
 
               <Button type="submit" disabled={loadingUpdate}>

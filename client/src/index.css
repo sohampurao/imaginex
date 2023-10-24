@@ -399,3 +399,12 @@ input[type=number] {
 .explore-btn:after {
     bottom: -2px;
 }
+
+/* gallery edit */
+.g-imgs-edit .g-action-btns {
+    display: none;
+}
+
+.g-imgs-edit:hover .g-action-btns {
+    display: flex;
+}

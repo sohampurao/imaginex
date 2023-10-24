@@ -1,7 +1,13 @@
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { Store } from '../../../Store';
 import axios from 'axios';
-import { FormatDate, FormatTime, getError } from '../../../utils';
+import {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_UPLOAD_PRESET,
+  FormatDate,
+  FormatTime,
+  getError,
+} from '../../../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -132,8 +138,12 @@ export default function BlogPostEdit() {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
-        cloudName: 'dazvnvkca',
-        uploadPreset: 'pgu2ly6f',
+        cloudName: CLOUDINARY_CLOUD_NAME,
+        uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+        mutiple: false,
+        folder: `Imaginex/blog-post/${category}`,
+        clientAllowedFormats: ['image', 'video'],
+        sources: ['local', 'url', 'camera', 'google_drive'],
       },
       function (error, result) {
         if (result.event == 'success') {
@@ -144,7 +154,7 @@ export default function BlogPostEdit() {
         }
       }
     );
-  }, [path]);
+  }, [category]);
   return (
     <>
       <div className="container mx-auto flex justify-center pb-5">

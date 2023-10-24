@@ -23,7 +23,7 @@ export default function Footer() {
 
     {
       platformIcon: <i className="fa-brands fa-x-twitter"></i>,
-      to: `https://www.linkedin.com/sharing/share-offsite/?url=${domainName}`,
+      to: `https://twitter.com/intent/tweet?text=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers%0A%0ACheckout%20Now:%20https://${domainName}`,
       bg: 'black',
     },
     {
@@ -33,7 +33,7 @@ export default function Footer() {
     },
     {
       platformIcon: <i className="bi bi-whatsapp"></i>,
-      to: `https://api.whatsapp.com/send?text=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers%0A%0A*Checkout%20Now:*%20${domainName}`,
+      to: `https://api.whatsapp.com/send?text=Imaginex%20-%20Matterport%20360%20Virtual%20Tours%20Service%20Providers%0A%0A*Checkout%20Now:*%20https://${domainName}`,
       bg: '#25D366',
     },
   ];
@@ -165,7 +165,7 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-slate-50">
         <div className="share-text | text-center py-2 font-semibold">
-          <Flip top cascade delay={1500} duration={1500}>
+          <Flip top cascade delay={2000} duration={2000}>
             share with love
           </Flip>
         </div>
@@ -174,7 +174,7 @@ export default function Footer() {
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to} target="_blank">
-                <Zoom delay={2500 + index * 200}>
+                <Zoom delay={3500 + index * 200}>
                   <li
                     className={`share-web-item | text-base h-[40px] w-[40px] rounded-full bg-[${
                       item.bg == 'black' ? '#000000' : item.bg

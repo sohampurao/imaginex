@@ -4,7 +4,7 @@ export default function WhatsappChat() {
     <>
       <Link
         to={
-          'https://api.whatsapp.com/send/?phone=918010565656&text&type=phone_number&app_absent=0'
+          'https://api.whatsapp.com/send/?phone=919527570677&text&type=phone_number&app_absent=0'
         }
         target="_blank"
         className="cursor-pointer w-[60px] h-auto fixed bottom-4 right-4 z-10"

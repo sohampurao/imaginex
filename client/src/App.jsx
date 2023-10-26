@@ -42,14 +42,17 @@ function App() {
     <>
       <BrowserRouter>
         <ScrollRestore></ScrollRestore>
+
         <Navbar></Navbar>
+
         {/* Scroll to the top btn */}
         <ScrollToTop
           smooth
           top={1500}
           component={<i className="bi bi-arrow-up"></i>}
-          className="top-[82%] left-5 lg:left-15 font-bold border-0 transition-opacity hover:opacity-80 shadow-lg opacity-100"
+          className="top-[84%] left-5 lg:left-15 font-bold border-0 transition-opacity hover:opacity-80 shadow-lg opacity-100"
         />
+
         <Routes>
           <Route index path="/" element={<Home></Home>}></Route>
 
@@ -63,6 +66,7 @@ function App() {
             path="/projectalbums"
             element={<ProjectsAlbums></ProjectsAlbums>}
           ></Route>
+
           <Route
             path="/projectgallery/:id"
             element={<ProjectGallery></ProjectGallery>}

@@ -1,25 +1,12 @@
-import { useState } from 'react';
 import { Fade } from 'react-reveal';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
-  const navigate = useNavigate();
-  const [isclick, setIsClick] = useState('');
-
-  const handleClick = (direction, link) => {
-    setIsClick(direction);
-    setTimeout(() => {
-      navigate(link);
-    }, 375);
-  };
-
   return (
     <>
       <div className="partition-container | w-full min-h-[90vh] flex justify-center sm:gap-x-1 gap-x-[2px] overflow-hidden">
         <div
-          className={`left-partition | relative overflow-hidden flex transition-all flex-1 ${
-            isclick == 'right' ? 'hidden' : ''
-          }  md:hover:flex-[150px] justify-center items-center`}
+          className={`left-partition | relative overflow-hidden flex transition-all flex-1 md:hover:flex-[150px] justify-center items-center`}
         >
           <div className="background-image | w-full h-full absolute top-0 left-0 bg-[url('https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-no-repeat bg-center bg-cover"></div>
           <div className="inner-content | flex flex-col z-10 h-full w-full justify-center items-center backdrop-brightness-50 transition-all hover:backdrop-brightness-75">
@@ -30,23 +17,18 @@ function Home() {
             </h1>
             <div>
               <Fade top delay={1300} duration={1300}>
-                <button
-                  className="explore-btn text-xs sm:text-sm md:text-lg"
-                  onClick={() => {
-                    handleClick('left', '/projectalbums');
-                  }}
-                >
-                  Explore
-                </button>
+                <Link to={'/projectalbums'}>
+                  <button className="explore-btn text-xs sm:text-sm md:text-lg">
+                    Explore
+                  </button>
+                </Link>
               </Fade>
             </div>
           </div>
         </div>
 
         <div
-          className={`right-partition | relative overflow-hidden flex transition-all flex-1 ${
-            isclick == 'left' ? 'hidden' : ''
-          } md:hover:flex-[150px] w-full`}
+          className={`right-partition | relative overflow-hidden flex transition-all flex-1 md:hover:flex-[150px] w-full`}
         >
           <div className="background-image | w-full h-full absolute top-0 right-0 bg-[url('https://images.pexels.com/photos/417430/pexels-photo-417430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-no-repeat bg-center bg-cover"></div>
           <div className="inner-content | flex flex-col z-10  h-full w-full justify-center items-center backdrop-brightness-50 transition-all hover:backdrop-brightness-75">
@@ -57,14 +39,11 @@ function Home() {
             </h1>
             <div>
               <Fade top delay={1300} duration={1300}>
-                <button
-                  className="explore-btn text-xs sm:text-sm md:text-lg"
-                  onClick={() => {
-                    handleClick('right', '/virtualLanding');
-                  }}
-                >
-                  Explore
-                </button>
+                <Link to={'/virtuallanding'}>
+                  <button className="explore-btn text-xs sm:text-sm md:text-lg">
+                    Explore
+                  </button>
+                </Link>
               </Fade>
             </div>
           </div>

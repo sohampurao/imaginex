@@ -224,7 +224,10 @@ export default function ContactUs() {
                           Phone:
                         </div>
                         <div className="contact-content font-medium">
-                          <Link to="tel:+91 9999999999">+91 9999999999</Link>
+                          <Link to="tel:+91 9527570677">+91 9527570677</Link>
+                        </div>
+                        <div className="contact-content font-medium">
+                          <Link to="tel:+91 9653295270">+91 9653295270</Link>
                         </div>
                       </div>
                     </div>
@@ -239,8 +242,8 @@ export default function ContactUs() {
                           Mail:
                         </div>
                         <div className="contact-content font-medium">
-                          <Link to="mailto: example@gmail.com">
-                            example@gmail.com
+                          <Link to="mailto:imaginex3dstudio@gmail.com">
+                            imaginex3dstudio@gmail.com
                           </Link>
                         </div>
                       </div>

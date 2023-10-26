@@ -22,11 +22,6 @@ export default function BlogPost({ blogPosts }) {
     };
   }, [blogPosts]);
 
-  const [showControls, setShowControls] = useState(false);
-
-  const handleVideoClick = () => {
-    setShowControls((prevState) => !prevState);
-  };
   return (
     <>
       <section className="blog-post | mx-auto mt-8 px-5">
@@ -43,14 +38,24 @@ export default function BlogPost({ blogPosts }) {
                     />
                   )}
                   {post.mediaType == 'video' && (
-                    <video
-                      className="blogpost-video | w-full h-auto max-w-full"
-                      onClick={handleVideoClick}
-                      controls={showControls}
-                    >
-                      <source src={post.path} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <>
+                      <video
+                        id="my-player"
+                        className=" blogpost-video | video-js w-full h-auto max-w-full"
+                        controls
+                        preload="auto"
+                        data-setup="{}"
+                      >
+                        <source src={post.path} type="video/mp4"></source>
+                        <p className="vjs-no-js">
+                          To view this video please enable JavaScript, and
+                          consider upgrading to a web browser that
+                          <Link to={post.path} target="_blank">
+                            supports HTML5 video
+                          </Link>
+                        </p>
+                      </video>
+                    </>
                   )}
 
                   {post.mediaType == 'matterport' && (

@@ -49,30 +49,18 @@ export default function Footer() {
 
   const socialLinks = [
     {
-      platformIcon: <i className="bi bi-facebook"></i>,
-      to: '#',
-      bg: 'hover:bg-[#1877F2]',
-    },
-    {
-      platformIcon: <i className="bi bi-linkedin"></i>,
-      to: '#',
-      bg: 'hover:bg-[#0A66C2]',
-    },
-    {
-      platformIcon: <i className="bi bi-twitter"></i>,
-      to: '#',
-      bg: 'hover:bg-[#1DA1F2]',
-    },
-    {
       platformIcon: <i className="bi bi-instagram"></i>,
-      to: '#',
-      bg: 'hover:bg-gradient-to-r from-[#FEDA75] to-[#F58529]',
+      to: 'https://www.instagram.com/imx.studios?igshid=MzRlODBiNWFlZA',
+    },
+    {
+      platformIcon: <i className="bi bi-envelope"></i>,
+      to: 'mailto:imaginex3dstudio@gmail.com',
     },
   ];
 
   return (
     <footer className="mt-auto w-full bg-neutral-900 z-20 px-5 overflow-x-hidden">
-      <div className="services-contact | py-8 max-w">
+      <div className="services-contact | mt-8 mb-5 max-w">
         <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-between sm:max-w-7xl 3xl:max-w-[1400px]">
           <div className="services">
             <div className="services-title | mb-3 text-white font-semibold font-serif ">
@@ -150,13 +138,13 @@ export default function Footer() {
                 <span className="phone-icon | w-8 inline-block mb-3">
                   <i className="bi bi-telephone-fill"></i>
                 </span>
-                <Link to="tel:+91 9527570677">9527570677</Link>
+                <Link to="tel:+91 9653295270">9653295270</Link>
               </div>
               <div className="telephone | flex text-slate-300 hover:text-opacity-70 transition-colors">
                 <span className="phone-icon | w-8 inline-block mb-3">
                   <i className="bi bi-telephone-fill"></i>
                 </span>
-                <Link to="tel:+91 9653295270">9653295270</Link>
+                <Link to="tel:+91 9527570677">9527570677</Link>
               </div>
             </Fade>
           </div>
@@ -164,17 +152,17 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-slate-50">
-        <div className="share-text | text-center py-2 font-semibold">
-          <Flip top cascade delay={2000} duration={2000}>
+        <div className="share-text | text-center font-semibold mb-3">
+          <Flip top cascade delay={1500} duration={2000}>
             share with love
           </Flip>
         </div>
 
-        <ul className="share-web | flex justify-center gap-10 pt-5">
+        <ul className="share-web | flex justify-center gap-10 mb-8">
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to} target="_blank">
-                <Zoom delay={3500 + index * 200}>
+                <Zoom delay={2500 + index * 200}>
                   <li
                     className={`share-web-item | text-base h-[40px] w-[40px] rounded-full bg-[${
                       item.bg == 'black' ? '#000000' : item.bg
@@ -187,11 +175,11 @@ export default function Footer() {
             );
           })}
         </ul>
-        <nav className="mt-5">
-          <div className="nav-title | text-center py-2 font-semibold mt-8">
+        <nav className="mb-8">
+          <div className="nav-title | text-center mb-3 font-semibold">
             Quick Links
           </div>
-          <ul className="footer-nav | flex flex-wrap justify-center items-center gap-8 py-4 3xl:text-xl">
+          <ul className="footer-nav | flex flex-wrap justify-center items-center gap-5 3xl:text-xl">
             {navigation.map((item, index) => {
               return (
                 <NavLink to={item.to} key={index}>
@@ -201,25 +189,25 @@ export default function Footer() {
             })}
           </ul>
         </nav>
-        <div className="other-detials | flex justify-between items-center my-5 max-w-4xl mx-auto">
+        <div className="other-detials | flex justify-between items-center mb-5 max-w-4xl mx-auto">
           <div className="copy-rigth | text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm 3xl:text-base">
-            &#169;2023.imaginex.in.All Rights Reserved.
+            &#169;2023.{domainName}.All Rights Reserved.
           </div>
-          <div className="social-links | flex flex-col justify-center">
+          <div className="social-links | flex flex-col justify-center\">
             <div className="social-link-header | text-center">Get In Touch</div>
-            <ul className="share-web | flex gap-1">
+            <div className="flex justify-around gap-1 items-center">
               {socialLinks.map((item, index) => {
                 return (
                   <Link key={index} to={item.to}>
-                    <li
-                      className={`social-link-item | transition-colors flex justify-center items-center h-8 w-8 ${item.bg} rounded-lg`}
+                    <div
+                      className={`social-link-item | transition-opacity grid justify-center items-center h-7 w-7 hover:opacity-80 rounded-lg`}
                     >
                       {item.platformIcon}
-                    </li>
+                    </div>
                   </Link>
                 );
               })}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

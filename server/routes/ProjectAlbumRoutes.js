@@ -29,8 +29,7 @@ ProjectAlbumRouter.get('/images/:id', async (req, res) => {
   const projectAlbumId = req.params.id;
   const projectAlbum = await ProjectAlbum.findById(projectAlbumId);
   if (projectAlbum) {
-    const images = projectAlbum.images;
-    res.send({ images });
+    res.send(projectAlbum);
   } else {
     res.status(404).send({ message: 'Project album not found.' });
   }

@@ -141,6 +141,7 @@ export default function BlogPostEdit() {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
         mutiple: false,
+        showUploadMoreButton: false,
         folder: `Imaginex/blog-post/${category}`,
         clientAllowedFormats: ['image', 'video'],
         sources: ['local', 'url', 'camera', 'google_drive'],
@@ -162,8 +163,8 @@ export default function BlogPostEdit() {
           className="flex w-full flex-col gap-4 mt-5 max-w-md sm:w-[500px] sm:shadow p-4 rounded-lg"
           onSubmit={submitHandler}
         >
-          <div className="signin-title | text-xl font-semibold font-serif text-center">
-            Edit Blog Post
+          <div className="title | text-xl font-medium font-serif text-center">
+            Edit &ldquo;{blogPost.title}&rdquo;
           </div>
           {loading ? (
             <div className="text-center">

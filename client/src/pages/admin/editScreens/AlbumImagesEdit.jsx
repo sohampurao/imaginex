@@ -103,6 +103,7 @@ function AlbumImagesEdit() {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
         mutiple: false,
+        showUploadMoreButton: false,
         folder: `Imaginex/albums/${album.title}`,
         clientAllowedFormats: ['image'],
         sources: ['local', 'url', 'camera', 'google_drive'],
@@ -111,6 +112,7 @@ function AlbumImagesEdit() {
         if (!error && result && result.event === 'success') {
           setImages([...images, result.info.secure_url]);
           toast.success('Image uploaded successfully.');
+          console.log(result);
         }
         if (error) {
           toast.error(getError(error));
@@ -120,8 +122,10 @@ function AlbumImagesEdit() {
   }, [album, images]);
 
   const removeImage = (imagePath) => {
-    const updatedImages = images.filter((image) => image !== imagePath);
-    setImages(updatedImages);
+    if (window.confirm('Do you really want to delete this image?')) {
+      const updatedImages = images.filter((image) => image !== imagePath);
+      setImages(updatedImages);
+    }
   };
   return (
     <>

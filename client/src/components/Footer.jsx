@@ -47,118 +47,127 @@ export default function Footer() {
     { name: 'About Us', to: '/aboutus' },
   ];
 
-  const socialLinks = [
+  const handles = [
     {
-      platformIcon: <i className="bi bi-instagram"></i>,
+      icon: <i className="bi bi-instagram"></i>,
+      text: 'Instagram',
       to: 'https://www.instagram.com/imx.studios?igshid=MzRlODBiNWFlZA',
     },
     {
-      platformIcon: <i className="bi bi-envelope"></i>,
+      icon: <i className="bi bi-envelope-at"></i>,
+      text: 'imaginex3dstudio@gmail.com',
       to: 'mailto:imaginex3dstudio@gmail.com',
+    },
+    {
+      icon: <i className="bi bi-telephone-fill"></i>,
+      text: '9653295270',
+      to: 'tel:+91 9653295270',
+    },
+    {
+      icon: <i className="bi bi-telephone-fill"></i>,
+      text: '9527570677',
+      to: 'tel:+91 9527570677',
     },
   ];
 
+  const services = [
+    {
+      icon: <i className="fa-solid fa-car"></i>,
+      text: 'Showrooms',
+    },
+    {
+      icon: <i className="fa-solid fa-warehouse"></i>,
+      text: 'Hotels and Resorts',
+    },
+    {
+      icon: <i className="fa-solid fa-store"></i>,
+      text: 'Retail Spaces',
+    },
+    {
+      icon: <i className="fa-solid fa-house-user"></i>,
+      text: 'Home Owners',
+    },
+    {
+      icon: <i className="fa-brands fa-artstation"></i>,
+      text: 'Museums & Art galleries',
+    },
+    {
+      icon: <i className="fa-solid fa-warehouse"></i>,
+      text: 'Commercial Real Estate',
+    },
+    {
+      icon: <i className="fa-solid fa-building"></i>,
+      text: 'Residential Real Estate',
+    },
+    {
+      icon: <i className="fa-solid fa-network-wired"></i>,
+      text: 'Offices and CoWorking',
+    },
+  ];
   return (
     <footer className="mt-auto w-full bg-neutral-900 z-20 px-5 overflow-x-hidden">
-      <div className="services-contact | mt-8 mb-5 max-w">
+      <div className="services-contact | mt-8 mb-5">
         <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-between sm:max-w-7xl 3xl:max-w-[1400px]">
           <div className="services">
             <div className="services-title | mb-3 text-white font-semibold font-serif ">
               BOOK YOUR MATTERPORT SCANNING TODAY
             </div>
-            <Fade left duration={1800} distance="150px" cascade>
-              <ul className="services-list | transition-all cursor-default">
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-car"></i>
-                  </span>
-                  <span className="service-text">Showrooms</span>
-                </li>
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-warehouse"></i>
-                  </span>
-                  <span className="service-text">Hotels and Resorts</span>
-                </li>
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-store"></i>
-                  </span>
-                  <span className="service-text">Retail Spaces</span>
-                </li>
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-house-user"></i>
-                  </span>
-                  <span className="service-text">Home Owners</span>
-                </li>
-
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-brands fa-artstation"></i>
-                  </span>
-                  <span className="service-text">Museums & Art galleries</span>
-                </li>
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-warehouse"></i>
-                  </span>
-                  <span className="service-text">Commercial Real Estate</span>
-                </li>
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-building"></i>
-                  </span>
-                  <span className="service-text">Residential Real Estate</span>
-                </li>
-
-                <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
-                  <span className="service-icon | w-8 inline-block mb-3">
-                    <i className="fa-solid fa-network-wired"></i>
-                  </span>
-                  <span className="service-text">Offices and CoWorking</span>
-                </li>
-              </ul>
-            </Fade>
+            <ul className="services-list | transition-all cursor-default">
+              {services.map((item, index) => {
+                return (
+                  <Fade
+                    key={index}
+                    left
+                    delay={1000 + 150 * index}
+                    duration={1500}
+                    distance="150px"
+                  >
+                    <li className="service-item | text-slate-300 hover:text-opacity-70 transition-colors">
+                      <span className="service-icon | w-8 inline-block mb-3">
+                        {item.icon}
+                      </span>
+                      <span className="service-text">{item.text}</span>
+                    </li>
+                  </Fade>
+                );
+              })}
+            </ul>
           </div>
           <div className="contact-detials">
-            <div className="contact-title | mb-3 uppercase font-serif font-semibold text-white">
-              contact us on
+            <div className="get-in-touch | mb-3 uppercase font-serif font-semibold text-white">
+              Get In Touch
             </div>
-            <Fade right duration={1500} distance="150px" cascade>
-              <div className="mail | flex text-slate-300 hover:text-opacity-70 transition-colors">
-                <span className="mail-icon | w-8 inline-block mb-3">
-                  <i className="bi bi-envelope-at"></i>
-                </span>
-                <Link to="mailto:imaginex3dstudio@gmail.com">
-                  imaginex3dstudio@gmail.com
-                </Link>
-              </div>
-              <div className="telephone | flex text-slate-300 hover:text-opacity-70 transition-colors">
-                <span className="phone-icon | w-8 inline-block mb-3">
-                  <i className="bi bi-telephone-fill"></i>
-                </span>
-                <Link to="tel:+91 9653295270">9653295270</Link>
-              </div>
-              <div className="telephone | flex text-slate-300 hover:text-opacity-70 transition-colors">
-                <span className="phone-icon | w-8 inline-block mb-3">
-                  <i className="bi bi-telephone-fill"></i>
-                </span>
-                <Link to="tel:+91 9527570677">9527570677</Link>
-              </div>
-            </Fade>
+
+            {handles.map((item, index) => {
+              return (
+                <Fade
+                  key={index}
+                  right
+                  delay={1000 + 150 * index}
+                  duration={1500}
+                  distance="150px"
+                >
+                  <Link to={item.to} target="_blank">
+                    <div className="flex text-slate-300 hover:text-opacity-70 transition-colors">
+                      <span className="w-8 inline-block mb-3">{item.icon}</span>
+                      <span>{item.text}</span>
+                    </div>
+                  </Link>
+                </Fade>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-slate-50">
+      <div className="mx-auto max-w-7xl mb-8 px-2 sm:px-6 lg:px-8 text-slate-50">
         <div className="share-text | text-center font-semibold mb-3">
           <Flip top cascade delay={1500} duration={2000}>
             share with love
           </Flip>
         </div>
 
-        <ul className="share-web | flex justify-center gap-10 mb-8">
+        <ul className="share-web | flex justify-center gap-10 mb-8 ">
           {shareWebLinks.map((item, index) => {
             return (
               <Link key={index} to={item.to} target="_blank">
@@ -175,7 +184,7 @@ export default function Footer() {
             );
           })}
         </ul>
-        <nav className="mb-8">
+        <nav>
           <div className="nav-title | text-center mb-3 font-semibold">
             Quick Links
           </div>
@@ -189,27 +198,9 @@ export default function Footer() {
             })}
           </ul>
         </nav>
-        <div className="other-detials | flex justify-between items-center mb-5 max-w-4xl mx-auto">
-          <div className="copy-rigth | text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm 3xl:text-base">
-            &#169;2023.{domainName}.All Rights Reserved.
-          </div>
-          <div className="social-links | flex flex-col justify-center\">
-            <div className="social-link-header | text-center">Get In Touch</div>
-            <div className="flex justify-around gap-1 items-center">
-              {socialLinks.map((item, index) => {
-                return (
-                  <Link key={index} to={item.to}>
-                    <div
-                      className={`social-link-item | transition-opacity grid justify-center items-center h-7 w-7 hover:opacity-80 rounded-lg`}
-                    >
-                      {item.platformIcon}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+      </div>
+      <div className="copyrigth | mx-auto sm:max-w-7xl text-white mb-3 3xl:max-w-[1400px] text-xs hover:text-blue-400 transition cursor-pointer sm:text-sm 3xl:text-base">
+        &#169;2023.{domainName}.All Rights Reserved.
       </div>
     </footer>
   );

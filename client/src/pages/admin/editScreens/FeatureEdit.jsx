@@ -104,6 +104,7 @@ export default function FeatureEdit() {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
         mutiple: false,
+        showUploadMoreButton: false,
         folder: `Imaginex/features`,
         clientAllowedFormats: ['image'],
         sources: ['local', 'url', 'camera', 'google_drive'],
@@ -121,24 +122,24 @@ export default function FeatureEdit() {
 
   return (
     <>
-      <div className="container mx-auto flex justify-center pb-5">
-        <form
-          className="flex flex-col gap-4 mt-5 max-w-md w-full sm:w-[500px] sm:shadow p-4 rounded-lg"
-          onSubmit={submitHandler}
-        >
-          <div className="signin-title | text-xl font-semibold font-serif text-center">
-            Edit Feature
-          </div>
-          {loading ? (
-            <div className="text-center">
-              <Spinner aria-label="Center-aligned spinner example" />
-            </div>
-          ) : error ? (
-            <AlertBox variant="failure">{error}</AlertBox>
-          ) : errorUpdate ? (
-            <AlertBox variant="failure">{errorUpdate}</AlertBox>
-          ) : (
-            <>
+      {loading ? (
+        <div className="text-center">
+          <Spinner aria-label="Center-aligned spinner example" />
+        </div>
+      ) : error ? (
+        <AlertBox variant="failure">{error}</AlertBox>
+      ) : errorUpdate ? (
+        <AlertBox variant="failure">{errorUpdate}</AlertBox>
+      ) : (
+        <>
+          <div className="container mx-auto flex justify-center my-5">
+            <form
+              className="flex flex-col gap-4 max-w-md w-full sm:w-[500px] sm:shadow px-4 rounded-lg"
+              onSubmit={submitHandler}
+            >
+              <div className="title | text-xl font-medium font-serif text-center mb-3">
+                Edit &ldquo;{title}&rdquo;
+              </div>
               <div className="feature-img">
                 <img
                   src={image}
@@ -190,7 +191,6 @@ export default function FeatureEdit() {
                   }}
                 />
               </div>
-
               <Button type="submit" disabled={loadingUpdate}>
                 {loadingUpdate ? (
                   <>
@@ -200,11 +200,11 @@ export default function FeatureEdit() {
                 ) : (
                   'Save'
                 )}
-              </Button>
-            </>
-          )}
-        </form>
-      </div>
+              </Button>{' '}
+            </form>
+          </div>
+        </>
+      )}
     </>
   );
 }

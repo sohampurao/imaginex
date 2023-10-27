@@ -123,6 +123,7 @@ export default function AlbumEdit() {
         cloudName: CLOUDINARY_CLOUD_NAME,
         uploadPreset: CLOUDINARY_UPLOAD_PRESET,
         mutiple: false,
+        showUploadMoreButton: false,
         folder: `Imaginex/albums/${album.title}`,
         clientAllowedFormats: ['image'],
         sources: ['local', 'url', 'camera', 'google_drive'],
@@ -217,9 +218,13 @@ export default function AlbumEdit() {
                 <div className="mb-2 flex justify-between items-center">
                   <Label value="Album Images" />
                   <Link to={`/albumimagesedit/${AlbumId}`}>
-                    <div className="flex justify-between items-center py-1 px-4 rounded-3xl text-xs tracking-wider font-semibold text-neutral-500 cursor-pointer border border-slate-400 hover:opacity-75 transition-opacity">
+                    <div className="relative flex justify-between items-center py-1 px-4 rounded-3xl text-xs tracking-wider font-semibold text-neutral-500 cursor-pointer border border-slate-400 hover:opacity-75 transition-opacity">
                       Edit Images
                       <FcEditImage className="text-3xl"></FcEditImage>
+                      <span className="sr-only">Notifications</span>
+                      <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                        {album.images.length}
+                      </div>
                     </div>
                   </Link>
                 </div>

@@ -163,20 +163,20 @@ export default function OurWorkEdit() {
 
   return (
     <>
-      <div className="work-container | w-full lg:max-w-4xl mx-auto my-8 p-4">
-        <div className="ourwork-title | text-xl font-semibold font-serif text-center">
-          Ourwork Edit
+      {loading ? (
+        <div className="text-center">
+          <Spinner aria-label="Center-aligned spinner example" />
         </div>
-        {loading ? (
-          <div className="text-center">
-            <Spinner aria-label="Center-aligned spinner example" />
-          </div>
-        ) : error ? (
-          <AlertBox variant="failure">{error}</AlertBox>
-        ) : errorUpdate ? (
-          <AlertBox variant="failure">{errorUpdate}</AlertBox>
-        ) : (
-          <>
+      ) : error ? (
+        <AlertBox variant="failure">{error}</AlertBox>
+      ) : errorUpdate ? (
+        <AlertBox variant="failure">{errorUpdate}</AlertBox>
+      ) : (
+        <>
+          <div className="work-container | w-full lg:max-w-4xl mx-auto my-5 px-4">
+            <div className="title | text-xl font-medium font-serif text-center mb-3">
+              Edit &ldquo;{title}&rdquo;
+            </div>
             <form className="flex flex-col gap-4" onSubmit={submitHandler}>
               <div>
                 <div className="mb-2 block">
@@ -301,9 +301,9 @@ export default function OurWorkEdit() {
                 )}
               </Button>
             </form>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

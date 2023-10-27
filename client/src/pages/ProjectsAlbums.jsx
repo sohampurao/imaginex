@@ -61,11 +61,11 @@ function ProjectsAlbums() {
             <AlertBox variant="failure">{error}</AlertBox>
           ) : (
             <>
-              <div className="album-container | grid grid-cols-2 gap-5 md:grid-cols-4">
+              <div className="album-container | grid grid-cols-2 sm:grid-cols-3 gap-5 md:grid-cols-4">
                 {albums.map((item) => {
                   return (
                     <Link key={item._id} to={`/projectgallery/${item._id}`}>
-                      <div className="album | transition-all relative max-w-sm bg-white h-[180px] md:h-[225px] border border-gray-200 rounded-3xl shadow overflow-hidden cursor-pointer">
+                      <div className="album | transition-all relative mx-auto max-w-[200px] md:max-w-sm bg-white h-[180px] md:h-[225px] border border-gray-200 rounded-3xl shadow overflow-hidden cursor-pointer">
                         <div className="album-tumbhnail | h-[calc(100%-40px)] transition-all">
                           <img
                             src={item.thumbnail}
@@ -74,10 +74,10 @@ function ProjectsAlbums() {
                           />
                         </div>
                         <div className="album-info | absolute transition-all w-full h-[40px] left-0 bottom-0 p-3 pb-4 text-sm tracking-tight bg-white flex items-center justify-between">
-                          <div className="album-info-title | font-medium text-neutral-700">
+                          <div className="album-info-title | font-medium text-ellipsis whitespace-nowrap flex-1 overflow-hidden">
                             {item.title}
                           </div>
-                          <div className="album-img-count | text-sm font-medium text-neutral-600">
+                          <div className="album-img-count | text-sm font-medium">
                             {item.images.length}
                           </div>
                         </div>

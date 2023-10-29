@@ -39,7 +39,7 @@ function Home() {
             </h1>
             <div>
               <Fade top delay={1300} duration={1300}>
-                <Link to={'/virtuallanding'}>
+                <Link to={'/virtualtour'}>
                   <button className="explore-btn text-xs sm:text-sm md:text-lg">
                     Explore
                   </button>

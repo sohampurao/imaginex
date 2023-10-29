@@ -55,6 +55,7 @@ export default function AboutUs() {
                         src={item.profileImage}
                         alt=""
                         className="w-full mx-auto block rounded-md max-w-[250px] max-h-[200px] md:w-200px md:h-[120px]"
+                        loading="lazy"
                       />
                     </div>
                     <div className="profile-detials | text-center md:text-start">

@@ -34,19 +34,22 @@ const data = {
   ],
   items: [
     {
-      image: '/images/carousel-image1.jpg',
+      image:
+        'https://res.cloudinary.com/dazvnvkca/image/upload/v1698426962/Imaginex/carousel/carousel-image1_xfez6h.webp',
       title: 'First slide label',
       subtitle:
         'Some Some representative placeholder content for the first slide.',
     },
     {
-      image: '/images/carousel-image2.jpg',
+      image:
+        'https://res.cloudinary.com/dazvnvkca/image/upload/v1698426960/Imaginex/carousel/carousel-image2_mrs4pq.webp',
       title: 'Second slide label',
       subtitle:
         'Some Some representative placeholder content for the Second slide.',
     },
     {
-      image: '/images/carousel-image3.jpg',
+      image:
+        'https://res.cloudinary.com/dazvnvkca/image/upload/v1698426951/Imaginex/carousel/carousel-image3_aiphio.webp',
       title: 'Third slide label',
       subtitle:
         'Some Some representative placeholder content for the Third slide.',
@@ -54,7 +57,7 @@ const data = {
   ],
   blogposts: [
     {
-      path: '/images/house.jpg',
+      path: 'https://res.cloudinary.com/dazvnvkca/image/upload/v1698427003/Imaginex/blog-post/house_q9za78.webp',
       mediaType: 'image',
       title: 'Lorem ipsum dolor sit amet.',
       description:

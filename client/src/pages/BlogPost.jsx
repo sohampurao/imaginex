@@ -110,6 +110,7 @@ export default function BlogPost() {
                 <img
                   src={blogPost.path}
                   alt={blogPost.title}
+                  loading="lazy"
                   className="blogblogPost.image | w-full h-[280px] sm:h-[400px] md:h-[470px] lg:h-[540px] mx-auto"
                 />
               )}

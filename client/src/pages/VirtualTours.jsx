@@ -80,7 +80,7 @@ export default function VirtualTours() {
             {categories.map((c) => (
               <li
                 key={c}
-                className={`tab-item | px-5 py-3 font-medium capitalize text-sm text-center rounded-md flex items-center ${
+                className={`tab-item | px-5 py-3 font-medium capitalize text-sm text-center rounded-md flex items-center  ${
                   c === category ? 'text-[#1c64f2] tab-item-active' : ''
                 }`}
               >

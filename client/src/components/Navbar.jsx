@@ -29,7 +29,7 @@ export default function Navbar() {
       <ToastContainer transition={Slide} />
       <Disclosure
         as="nav"
-        className="bg-[#000000] z-50 shadow-lg sticky top-0 rigth-0 w-full border-b border-b-slate-100"
+        className="bg-[#000000] z-50 shadow-lg sticky top-0 rigth-0 w-full border-b border-b-slate-100 select-none"
       >
         {({ open }) => (
           <>
@@ -100,8 +100,6 @@ export default function Navbar() {
                 {navigation.map((item) => (
                   <NavLink to={item.to} key={item.name} className="header-nav">
                     <Disclosure.Button
-                      as="a"
-                      to={item.to}
                       className={
                         'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
                       }

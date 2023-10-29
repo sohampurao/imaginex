@@ -58,7 +58,7 @@ function App() {
 
           <Route
             index
-            path="/virtuallanding"
+            path="/virtualtour"
             element={<VirtualLanding></VirtualLanding>}
           ></Route>
 

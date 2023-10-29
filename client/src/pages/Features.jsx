@@ -55,15 +55,16 @@ export default function Features() {
         <AlertBox variant="failure">{error}</AlertBox>
       ) : (
         <section className="feature | mx-auto mt-5 px-5 lg:ps-16 xl:ps-0">
-          {features.map((feature) => {
+          {features.map((feature, index) => {
             return (
-              <Fade bottom duration={2000} distance="50%" key={feature._id}>
+              <Fade bottom duration={2000} distance="50%" key={index}>
                 <article className="feature-item | max-w-5xl mx-auto my-8 shadow-md flex bg-slate-50 flex-col md:flex-row-reverse 3xl:max-w-[1400px]">
                   <div className="feature-display | md:w-6/12">
                     <img
                       src={feature.image}
                       alt="feature"
                       className="feature-image | w-full max-w-full object-cover h-[250px] sm:h-[350px] 3xl:h-[430px]"
+                      loading="lazy"
                     />
                   </div>
 

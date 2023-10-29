@@ -16,11 +16,14 @@ const reducer = (state, action) => {
       return { ...state, loading: false, ourwork: action.payload };
     case 'FETCH_FAILED':
       return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
   }
 };
 
 export default function OurWork() {
   const [{ loading, error, ourwork }, dispatch] = useReducer(reducer, {
+    ourwork: [],
     loading: true,
     error: '',
   });
@@ -59,9 +62,9 @@ export default function OurWork() {
           <AlertBox variant="failure">{error}</AlertBox>
         ) : (
           <>
-            {ourwork.map((item) => {
+            {ourwork.map((item, index) => {
               return (
-                <article className="work | w-full my-8" key={item._id}>
+                <article className="work | w-full my-8" key={index}>
                   <h1 className="work-title | text-lg uppercase font-serif font-bold tracking-widest text-neutral-900 text-center mb-5 3xl:text-xl">
                     {item.title}
                   </h1>
@@ -71,13 +74,14 @@ export default function OurWork() {
                   <div className="work-display | mt-5 flex justify-evenly items-center flex-wrap ps-4">
                     {item.work.map((work, index) => {
                       return (
-                        <Zoom key={work._id} delay={index * 250}>
+                        <Zoom key={index} delay={index * 250}>
                           <div className="display-col | w-full sm:w-6/12 lg:w-3/12 pe-4 pb-4 box-border">
                             <div className="work-card | sm:hover:shadow-xl sm:hover:scale-105 transition-all max-w-sm max-h-[300px] min-h-[300px] md:min-h-[330px] md:max-h-[330px] 3xl:min-h-[350px] 3xl:max-h-[350px] bg-white border border-gray-200 rounded-lg shadow mx-auto">
                               <img
                                 className="rounded-t-lg max-h-[180px] min-h-[180px] w-full 3xl:max-h-[190px] 3xl:min-h-[190px]"
                                 src={work.thumbnail}
                                 alt={work.title}
+                                loading="lazy"
                               />
                               <div className="px-5 py-4 flex flex-col items-center justify-between gap-1">
                                 <h5 className="mb-2 text-sm font-bold tracking-tight text-neutral-600 3xl:text-base">

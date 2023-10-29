@@ -3,7 +3,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { MdClose } from 'react-icons/md';
 import { FcPrevious } from 'react-icons/fc';
 import { FcNext } from 'react-icons/fc';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getError } from '../utils';
 import { Spinner } from 'flowbite-react';
@@ -84,86 +84,51 @@ function ProjectGallery() {
         <AlertBox variant="failure">{error}</AlertBox>
       ) : (
         <>
-          {/* <div
-            className={`banner | relative w-full h-80 grid justify-center items-center bg-[url("${album.thumbnail}")] bg-center bg-cover bg-no-repeat mb-5`}
+          <nav
+            className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mx-auto mt-2"
+            aria-label="Breadcrumb"
           >
-            <div className="dark-filter | absolute left-0 top-0 h-full w-full backdrop-brightness-50"></div>
+            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+              <li>
+                <div className="flex items-center">
+                  <Link
+                    to="/projectalbums"
+                    className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white whitespace-nowrap"
+                  >
+                    3D Visualization
+                  </Link>
+                </div>
+              </li>
+              <li aria-current="page">
+                <div className="flex items-center">
+                  <svg
+                    className="w-3 h-3 mx-1 text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 6 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 9 4-4-4-4"
+                    />
+                  </svg>
+                  <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400 cursor-default">
+                    {album.title}
+                  </span>
+                </div>
+              </li>
+            </ol>
+          </nav>
 
-            <div className="z-10">
-              <div className="inner-content | text-3xl text-white font-extrabold tracking-wide mb-5">
-                {album.title}
-              </div>
-
-              <nav
-                className="flex justify-center items-center"
-                aria-label="Breadcrumb"
-              >
-                <ol className="inline-flex items-center space-x-1 md:space-x-3">
-                  <li className="inline-flex items-center">
-                    <Link
-                      to="/"
-                      className="inline-flex items-center text-sm md:text-lg font-medium text-[gold] opacity-80 hover:opacity-100 transition-opacity gap-1"
-                    >
-                      <IoIosHome className="text-2xl" />
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <div className="flex items-center">
-                      <svg
-                        className="w-3 h-3 text-[gold] mx-1"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 6 10"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 9 4-4-4-4"
-                        />
-                      </svg>
-                      <Link
-                        to="/projectalbums"
-                        className="ml-1 text-sm md:text-lg font-medium md:ml-2 text-[gold] opacity-80 hover:opacity-100 transition-opacity"
-                      >
-                        Projects
-                      </Link>
-                    </div>
-                  </li>
-                  <li aria-current="page">
-                    <div className="flex items-center">
-                      <svg
-                        className="w-3 h-3 text-[gold] mx-1"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 6 10"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 9 4-4-4-4"
-                        />
-                      </svg>
-                      <span className="ml-1 text-sm md:text-lg font-medium  md:ml-2 text-[gold] opacity-60">
-                        Flowbite
-                      </span>
-                    </div>
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div> */}
-          <div className="py-5">
+          <div className="p-5">
             <ResponsiveMasonry
               columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
             >
-              <Masonry gutter="20px">
+              <Masonry gutter="1.25rem">
                 {album.images.map((image, i) => (
                   <img
                     key={i}
@@ -185,7 +150,7 @@ function ProjectGallery() {
 
           {/* for viewing image in fullscreen */}
           {data.img && (
-            <div className="w-full h-screen bg-black fixed flex justify-center items-center overflow-hidden z-[70] text-white">
+            <div className="w-full h-screen bg-black fixed flex justify-center items-center overflow-hidden z-[70] text-white select-none">
               <button
                 className="text-3xl md:me-4 hover:opacity-75"
                 onClick={() => imgAction('previous-img')}

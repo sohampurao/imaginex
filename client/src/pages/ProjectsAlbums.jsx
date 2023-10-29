@@ -66,11 +66,12 @@ function ProjectsAlbums() {
                   return (
                     <Link key={item._id} to={`/projectgallery/${item._id}`}>
                       <div className="album | transition-all relative mx-auto max-w-[200px] md:max-w-sm bg-white h-[180px] md:h-[225px] border border-gray-200 rounded-3xl shadow overflow-hidden cursor-pointer">
-                        <div className="album-tumbhnail | h-[calc(100%-40px)] transition-all">
+                        <div className="album-thumbnail | h-[calc(100%-40px)] transition-all">
                           <img
                             src={item.thumbnail}
                             className="h-[180px] md:h-[225px] w-full transition-all"
                             alt={item.title}
+                            loading="lazy"
                           />
                         </div>
                         <div className="album-info | absolute transition-all w-full h-[40px] left-0 bottom-0 p-3 pb-4 text-sm tracking-tight bg-white flex items-center justify-between">

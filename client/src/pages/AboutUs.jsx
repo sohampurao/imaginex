@@ -71,8 +71,16 @@ export default function AboutUs() {
                   <div className="about-info | text-justify text-neutral-600 md:mt-2">
                     {item.description}
                   </div>
+
                   <div className="social-handles | text-center mt-auto pt-3">
-                    <div className="font-serif">Connect with Me</div>
+                    {item.facebookURL ||
+                    item.instagramURL ||
+                    item.whatsappNo ||
+                    item.linkedinURL ? (
+                      <div className="font-serif">Connect with Me</div>
+                    ) : (
+                      ''
+                    )}
                     <ul className="share-web | flex justify-center gap-4 mt-2 mb-4">
                       {item.facebookURL && (
                         <Link to={item.facebookURL} target="_blank">

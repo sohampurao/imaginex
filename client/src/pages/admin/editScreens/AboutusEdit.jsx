@@ -283,6 +283,7 @@ export default function AboutusEdit() {
                   placeholder="Enter your facebook profile URL."
                   value={facebookURL}
                   onChange={(e) => setFacebookURL(e.target.value)}
+                  required="false"
                 />
               </div>
 
@@ -296,6 +297,7 @@ export default function AboutusEdit() {
                   placeholder="Enter your linkedIn profile URL."
                   value={linkedinURL}
                   onChange={(e) => setLinkedinURL(e.target.value)}
+                  required="false"
                 />
               </div>
 
@@ -314,6 +316,7 @@ export default function AboutusEdit() {
                   placeholder="Enter your whatsapp number..."
                   value={whatsappNo}
                   onChange={(e) => setWhatsappNo(e.target.value)}
+                  required="false"
                 />
               </div>
 
@@ -327,6 +330,7 @@ export default function AboutusEdit() {
                   placeholder="Enter your instagram profile URL."
                   value={instagramURL}
                   onChange={(e) => setInstagramURL(e.target.value)}
+                  required="false"
                 />
               </div>
 

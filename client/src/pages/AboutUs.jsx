@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { Spinner } from 'flowbite-react';
 import { useEffect, useReducer } from 'react';
@@ -16,7 +17,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function AboutUs() {
+export default function AboutUs({ setProgress }) {
   const [{ loading, aboutus, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
@@ -25,11 +26,14 @@ export default function AboutUs() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setProgress(Math.floor(Math.random() * 31 + 10));
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get('/api/aboutus');
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        setProgress(100);
       } catch (error) {
         dispatch({ type: 'FETCH_FAILED', payload: error });
+        setProgress(100);
       }
     };
     fetchData();

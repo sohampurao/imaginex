@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { Button } from 'flowbite-react';
 import { useEffect, useReducer } from 'react';
@@ -21,7 +22,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function OurWork() {
+export default function OurWork({ setProgress }) {
   const [{ loading, error, ourwork }, dispatch] = useReducer(reducer, {
     ourwork: [],
     loading: true,
@@ -31,10 +32,13 @@ export default function OurWork() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setProgress(Math.floor(Math.random() * 41 + 10));
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get('/api/ourwork');
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        setProgress(100);
       } catch (error) {
+        setProgress(100);
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
       }
     };

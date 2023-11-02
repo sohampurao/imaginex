@@ -2,27 +2,23 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Slide, ToastContainer } from 'react-toastify';
 import { Link, NavLink } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Store } from '../Store';
 import AdminDropdown from './AdminDropdown';
-
-const navigation = [
-  { name: 'Home', to: '/' },
-  { name: 'Our Work', to: '/ourwork' },
-  { name: 'Features', to: '/features' },
-  { name: 'Virtual Tours', to: '/virtualtours' },
-  { name: 'Contact Us', to: '/contactus' },
-  { name: 'About Us', to: '/aboutus' },
-];
+import { Dropdown } from 'flowbite-react';
 
 export default function Navbar() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { adminInfo } = state;
+  const [service, setService] = useState('Services');
 
   const signOutHandler = () => {
     ctxDispatch({ type: 'ADMIN_SIGNOUT' });
     localStorage.removeItem('adminInfo');
-    console.log('signout!');
+  };
+
+  const serviceOnClick = (name) => {
+    setService(name);
   };
   return (
     <>
@@ -72,13 +68,59 @@ export default function Navbar() {
                           <span className="text-white">|</span>
                         </>
                       )}
-                      {navigation.map((item) => (
-                        <div className="nav-item" key={item.name}>
-                          <NavLink to={item.to} className="header-nav">
-                            {item.name}
+                      <div className="nav-item">
+                        <NavLink to={'/'} className="header-nav">
+                          Home
+                        </NavLink>
+                      </div>
+                      <div className="nav-item">
+                        <NavLink to={'/ourwork'} className="header-nav">
+                          Our Work
+                        </NavLink>
+                      </div>
+                      <div className="nav-item">
+                        <NavLink to={'/features'} className="header-nav">
+                          Features
+                        </NavLink>
+                      </div>
+                      <div className="text-white">
+                        <Dropdown
+                          inline
+                          placement="bottom"
+                          label="Services"
+                          size="lg"
+                          className="text-white"
+                        >
+                          <NavLink
+                            to={'/virtualtours'}
+                            onClick={() => {
+                              serviceOnClick('Virtual Tours');
+                            }}
+                          >
+                            <Dropdown.Item>Virtual Tours</Dropdown.Item>
                           </NavLink>
-                        </div>
-                      ))}
+                          <Dropdown.Divider />
+                          <NavLink
+                            to={'/projectalbums'}
+                            onClick={() => {
+                              serviceOnClick('3D Visualization');
+                            }}
+                          >
+                            <Dropdown.Item>3D Visualization</Dropdown.Item>
+                          </NavLink>
+                        </Dropdown>
+                      </div>
+
+                      <div className="nav-item">
+                        <NavLink to={'/contactus'} className="header-nav">
+                          Contact Us
+                        </NavLink>
+                      </div>
+                      <div className="nav-item">
+                        <NavLink to={'/aboutus'} className="header-nav">
+                          About Us
+                        </NavLink>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -97,17 +139,82 @@ export default function Navbar() {
                     </div>
                   </>
                 )}
-                {navigation.map((item) => (
-                  <NavLink to={item.to} key={item.name} className="header-nav">
-                    <Disclosure.Button
-                      className={
-                        'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
-                      }
+                <NavLink to="/" className="header-nav">
+                  <Disclosure.Button
+                    className={
+                      'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                    }
+                  >
+                    Home
+                  </Disclosure.Button>
+                </NavLink>
+
+                <NavLink to="/ourwork" className="header-nav">
+                  <Disclosure.Button
+                    className={
+                      'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                    }
+                  >
+                    Our Work
+                  </Disclosure.Button>
+                </NavLink>
+
+                <NavLink to="/features" className="header-nav">
+                  <Disclosure.Button
+                    className={
+                      'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                    }
+                  >
+                    Features
+                  </Disclosure.Button>
+                </NavLink>
+
+                <div className="text-white px-3 py-2 text-base font-medium">
+                  <Dropdown
+                    inline
+                    placement="bottom"
+                    label="Services"
+                    size="lg"
+                  >
+                    <NavLink
+                      to={'/virtualtours'}
+                      onClick={() => {
+                        serviceOnClick('Virtual Tours');
+                      }}
                     >
-                      {item.name}
-                    </Disclosure.Button>
-                  </NavLink>
-                ))}
+                      <Dropdown.Item>Virtual Tours</Dropdown.Item>
+                    </NavLink>
+                    <Dropdown.Divider />
+                    <NavLink
+                      to={'/projectalbums'}
+                      onClick={() => {
+                        serviceOnClick('3D Visualization');
+                      }}
+                    >
+                      <Dropdown.Item>3D Visualization</Dropdown.Item>
+                    </NavLink>
+                  </Dropdown>
+                </div>
+
+                <NavLink to="/contactus" className="header-nav">
+                  <Disclosure.Button
+                    className={
+                      'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                    }
+                  >
+                    Contact Us
+                  </Disclosure.Button>
+                </NavLink>
+
+                <NavLink to="/aboutus" className="header-nav">
+                  <Disclosure.Button
+                    className={
+                      'block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-300 hover:text-neutral-800'
+                    }
+                  >
+                    About Us
+                  </Disclosure.Button>
+                </NavLink>
               </div>
             </Disclosure.Panel>
           </>

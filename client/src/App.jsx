@@ -36,13 +36,24 @@ import AlbumsList from './pages/admin/listScreens/AlbumsList';
 import VirtualLanding from './pages/VirtualLanding';
 import AlbumEdit from './pages/admin/editScreens/AlbumEdit';
 import AlbumImagesEdit from './pages/admin/editScreens/AlbumImagesEdit';
+import LoadingBar from 'react-top-loading-bar';
+import { useState } from 'react';
 
 function App() {
+  const [progress, setProgress] = useState(0);
   return (
     <>
       <BrowserRouter>
         <ScrollRestore></ScrollRestore>
 
+        <div>
+          <LoadingBar
+            color="#2998ff"
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+            loaderSpeed={500}
+          />
+        </div>
         <Navbar></Navbar>
 
         {/* Scroll to the top btn */}
@@ -59,40 +70,66 @@ function App() {
           <Route
             index
             path="/virtualtour"
-            element={<VirtualLanding></VirtualLanding>}
+            element={
+              <VirtualLanding setProgress={setProgress}></VirtualLanding>
+            }
           ></Route>
 
           <Route
             path="/projectalbums"
-            element={<ProjectsAlbums></ProjectsAlbums>}
+            element={
+              <ProjectsAlbums setProgress={setProgress}></ProjectsAlbums>
+            }
           ></Route>
 
           <Route
             path="/projectgallery/:id"
-            element={<ProjectGallery></ProjectGallery>}
+            element={
+              <ProjectGallery setProgress={setProgress}></ProjectGallery>
+            }
           ></Route>
 
           {/* Our Work page */}
-          <Route path="/ourwork" element={<OurWork></OurWork>}></Route>
+          <Route
+            path="/ourwork"
+            element={<OurWork setProgress={setProgress}></OurWork>}
+          ></Route>
           <Route
             path="/ourwork/work/:id"
-            element={<OurWorkDetails></OurWorkDetails>}
+            element={
+              <OurWorkDetails setProgress={setProgress}></OurWorkDetails>
+            }
           ></Route>
 
           {/* blogpost page */}
-          <Route path="/blogpost/:slug" element={<BlogPost></BlogPost>}></Route>
+          <Route
+            path="/blogpost/:slug"
+            element={<BlogPost setProgress={setProgress}></BlogPost>}
+          ></Route>
 
           {/* Features */}
-          <Route path="/features" element={<Features></Features>}></Route>
+          <Route
+            path="/features"
+            element={<Features setProgress={setProgress}></Features>}
+          ></Route>
 
           {/* Virtual Tours*/}
-          <Route path="/virtualtours" element={<VirtualTours />}></Route>
+          <Route
+            path="/virtualtours"
+            element={<VirtualTours setProgress={setProgress} />}
+          ></Route>
 
           {/* About Us*/}
-          <Route path="/aboutus" element={<AboutUs />}></Route>
+          <Route
+            path="/aboutus"
+            element={<AboutUs setProgress={setProgress} />}
+          ></Route>
 
           {/* Contact Us*/}
-          <Route path="/contactus" element={<ContactUs />}></Route>
+          <Route
+            path="/contactus"
+            element={<ContactUs setProgress={setProgress} />}
+          ></Route>
 
           {/* Sign-In page */}
           <Route path="/admin" element={<SignIn></SignIn>}></Route>

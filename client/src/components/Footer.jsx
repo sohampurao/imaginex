@@ -54,6 +54,16 @@ export default function Footer() {
       to: 'https://www.instagram.com/imx.studios?igshid=MzRlODBiNWFlZA',
     },
     {
+      icon: <i className="bi bi-facebook"></i>,
+      text: 'Facebook',
+      to: 'https://www.facebook.com/profile.php?id=61552920274675&mibextid=ZbWKwL',
+    },
+    {
+      icon: <i className="fa-brands fa-pinterest"></i>,
+      text: 'Pintrest',
+      to: 'https://www.pinterest.com/imx_studios/',
+    },
+    {
       icon: <i className="bi bi-envelope-at"></i>,
       text: 'imaginex3dstudio@gmail.com',
       to: 'mailto:imaginex3dstudio@gmail.com',

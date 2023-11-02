@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useReducer, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { MdClose } from 'react-icons/md';
@@ -24,7 +25,7 @@ const projectImagesReducer = (state, action) => {
   }
 };
 
-function ProjectGallery() {
+function ProjectGallery({ setProgress }) {
   const params = useParams();
   const { id: projectAlbumId } = params;
 
@@ -39,17 +40,20 @@ function ProjectGallery() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setProgress(Math.floor(Math.random() * 41 + 20));
       imagesDispatch({ type: 'FETCH_REQUEST' });
       try {
         const response = await axios.get(
           `/api/projectalbums/images/${projectAlbumId}`
         );
+        setProgress(100);
         imagesDispatch({
           type: 'FETCH_SUCCESS',
           payload: response.data,
         });
       } catch (error) {
         imagesDispatch({ type: 'FETCH_FAILED', payload: getError(error) });
+        setProgress(100);
       }
     };
     fetchData();
@@ -85,7 +89,7 @@ function ProjectGallery() {
       ) : (
         <>
           <nav
-            className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mx-auto mt-2"
+            className="flex px-5 py-3 3xl:w-[400px] justify-center 3x:py-4 text-gray-700 border border-gray-200 rounded-lg  bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mx-auto mt-2"
             aria-label="Breadcrumb"
           >
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -93,7 +97,7 @@ function ProjectGallery() {
                 <div className="flex items-center">
                   <Link
                     to="/projectalbums"
-                    className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white whitespace-nowrap"
+                    className="ml-1 text-sm 3xl:text-base font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white whitespace-nowrap"
                   >
                     3D Visualization
                   </Link>
@@ -116,7 +120,7 @@ function ProjectGallery() {
                       d="m1 9 4-4-4-4"
                     />
                   </svg>
-                  <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400 cursor-default">
+                  <span className="ml-1 text-sm 3xl:text-base font-medium text-gray-500 md:ml-2 dark:text-gray-400 cursor-default">
                     {album.title}
                   </span>
                 </div>

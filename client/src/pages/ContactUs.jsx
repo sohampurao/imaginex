@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button, Select, Spinner } from 'flowbite-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { toast } from 'react-toastify';
@@ -5,8 +6,15 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Fade } from 'react-reveal';
 
-export default function ContactUs() {
+export default function ContactUs({ setProgress }) {
   const [state, handleSubmit] = useForm('mbjenrkp');
+
+  useEffect(() => {
+    setProgress(Math.floor(Math.random() * 31 + 10));
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const mailConfirmation = () => {
@@ -223,10 +231,10 @@ export default function ContactUs() {
                         <div className="contact label font-semibold pb-2 text-[gold]">
                           Phone:
                         </div>
-                        <div className="contact-content font-medium">
+                        <div className="contact-content font-medium hover:opacity-75 transition-opacity mb-2">
                           <Link to="tel:+91 9527570677">+91 9527570677</Link>
                         </div>
-                        <div className="contact-content font-medium">
+                        <div className="contact-content font-medium hover:opacity-75 transition-opacity">
                           <Link to="tel:+91 9653295270">+91 9653295270</Link>
                         </div>
                       </div>
@@ -241,8 +249,8 @@ export default function ContactUs() {
                         <div className="contact label font-semibold pb-2 text-[gold]">
                           Mail:
                         </div>
-                        <div className="contact-content font-medium">
-                          <Link to="mailto:imaginex3dstudio@gmail.com">
+                        <div className="contact-content font-medium hover:opacity-75 transition-opacity">
+                          <Link to="mailto:imaginex3dstudio@gmail.com ">
                             imaginex3dstudio@gmail.com
                           </Link>
                         </div>

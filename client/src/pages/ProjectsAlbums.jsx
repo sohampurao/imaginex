@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { useEffect, useReducer } from 'react';
 import { getError } from '../utils';
@@ -19,7 +20,7 @@ const projectAlbumsReducer = (state, action) => {
   }
 };
 
-function ProjectsAlbums() {
+function ProjectsAlbums({ setProgress }) {
   const [{ loading, albums, error }, albumsDispatch] = useReducer(
     projectAlbumsReducer,
     {
@@ -31,12 +32,15 @@ function ProjectsAlbums() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setProgress(Math.floor(Math.random() * 41 + 10));
       albumsDispatch({ type: 'FETCH_REQUEST' });
       try {
         const response = await axios.get('/api/projectalbums');
         albumsDispatch({ type: 'FETCH_SUCCESS', payload: response.data });
+        setProgress(100);
       } catch {
         albumsDispatch({ type: 'FETCH_FAILED', payload: getError(error) });
+        setProgress(100);
       }
     };
     fetchData();

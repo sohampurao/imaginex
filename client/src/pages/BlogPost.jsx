@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { useEffect, useReducer, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -23,7 +24,7 @@ const blogPostReducer = (state, action) => {
   }
 };
 
-export default function BlogPost() {
+export default function BlogPost({ setProgress }) {
   const params = useParams();
   const { slug } = params;
   const currentURL = window.location.href;
@@ -40,18 +41,21 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setProgress(Math.floor(Math.random() * 41 + 20));
         blogPostDispatch({ type: 'FETCH_REQUEST' });
         const response = await axios.get(`/api/blogposts/slug/${slug}`);
         blogPostDispatch({
           type: 'FETCH_SUCCESS',
           payload: response.data,
         });
+        setProgress(100);
       } catch (error) {
         toast.error(getError(error));
         blogPostDispatch({
           type: 'FETCH_FAIL',
           payload: getError(error),
         });
+        setProgress(100);
       }
     };
     fetchData();

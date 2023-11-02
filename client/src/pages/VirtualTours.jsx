@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useReducer, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
@@ -23,9 +24,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function VirtualTours() {
+export default function VirtualTours({ setProgress }) {
   const { search } = useLocation();
-  const sp = new URLSearchParams(search); //search?category=postname
+  const sp = new URLSearchParams(search);
   const category = sp.get('category') || 'all';
 
   const [{ loading, error, blogPosts }, dispatch] = useReducer(reducer, {
@@ -36,14 +37,17 @@ export default function VirtualTours() {
   useEffect(() => {
     try {
       const fetchData = async () => {
+        setProgress(Math.floor(Math.random() * 31 + 10));
         const { data } = await axios.get(
           `/api/blogposts/search/virtualtours?&category=${category}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       };
       fetchData();
+      setProgress(100);
     } catch (error) {
       dispatch({ type: 'FETCH_FAIL', payload: getError(error) });
+      setProgress(100);
     }
   }, [category]);
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { useEffect, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -17,7 +18,7 @@ const reducer = (state, action) => {
       return { ...state, loading: false, error: action.payload };
   }
 };
-export default function OurWorkDetails() {
+export default function OurWorkDetails({ setProgress }) {
   const params = useParams();
   const { id: WorkId } = params;
 
@@ -31,11 +32,14 @@ export default function OurWorkDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setProgress(Math.floor(Math.random() * 41 + 10));
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/ourwork/work/${WorkId}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        setProgress(100);
       } catch (error) {
         dispatch({ type: 'FETCH_FAILED', payload: getError(error) });
+        setProgress(100);
       }
     };
     fetchData();

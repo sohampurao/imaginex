@@ -11,9 +11,12 @@ export default function ContactUs({ setProgress }) {
 
   useEffect(() => {
     setProgress(Math.floor(Math.random() * 31 + 10));
-    setTimeout(() => {
-      setProgress(100);
-    }, 1000);
+    switch (setProgress) {
+      case window.onload:
+        return setProgress(100);
+      default:
+        return setProgress(100);
+    }
   }, []);
 
   useEffect(() => {

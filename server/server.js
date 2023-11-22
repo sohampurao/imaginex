@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import seedRouter from './routes/seedRoutes.js';
+// import seedRouter from './routes/seedRoutes.js';
 import BlogPostRouter from './routes/BlogPostRoutes.js';
 import CarouselRouter from './routes/CarouselRoutes.js';
 import AdminRouter from './routes/AdminRoutes.js';
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // this api responds to seed route
-app.use('/api/seed', seedRouter);
+// app.use('/api/seed', seedRouter);
 
 // this connects the application to MongoDB database
 mongoose
